@@ -10,7 +10,7 @@
                 }
             }
 
-            body {
+            main {
                 margin: 15px;
             }
 
@@ -48,70 +48,84 @@
                 background: #00000010;
                 box-shadow: 1px 1px 2px 1px #00000030
             }
+
+            footer {
+                background: #FFFFFF;
+                text-align: center;
+                position: fixed;
+                bottom: 0;
+                width: 100%
+            }
         </style>
         <title>AutoModerator</title>
     </head>
         <body>
+        <main>
             <h1>Full AutoModerator documentation</h1>
+                <hr size=1>
+                <p>This page is a full specification of AutoModerator's capabilities and behavior, and the syntax for utilizing it. If you are new to AutoModerator and are looking for information about how to set it up and write basic rules, please see the <a href="https://www.reddit.com/wiki/automoderator">Introduction page</a> and <a href="https://www.reddit.com/wiki/automoderator/writing-basic-rules">Writing Basic Rules</a>.</p>
+                <h2>General knowledge/behavior</h2>
+                <hr size=1>
+                <ul>
+                    <li>AutoModerator's configuration is kept on a subreddit's wiki, at the "config/automoderator" page.</li>
+                    <li>Rules that may result in an item being removed (action of <code>remove</code>, <code>spam</code>, or <code>filter</code>) are always checked before all other rules.</li>
+                    <li>By default, submissions and comments made by moderators of the subreddit will not be checked against any rules that may cause the post to be removed or reported. You can override this behavior with the <code>moderators_exempt</code> flag.</li>
+                    <li>AutoModerator tries to avoid contradicting other moderators, and will not approve items that have already been removed by another moderator, or remove items that have already been approved by another mod.</li>
+                    <li>AutoModerator will not approve items posted by users that are banned site-wide on reddit unless the approval rule includes a check against author name.</li>
+                    <li>Approval conditions will not re-approve reported items unless the rule includes a <code>reports:</code> check.</li>
+                    <li>Approval actions will only be performed on items that need to be approved to change their state. That is, only items that were automatically removed by reddit's spam-filter, or reported items (as long as the rule includes a <code>reports:</code> check as mentioned above).</li>
+                    <li>AutoModerator will not leave an entry in the moderation log when it sets flair or distinguishes its comments. All other actions (removals, approvals, etc.) will be logged as with any other moderator.</li>
+                    <li>Rules on the body field will always apply to text posts. By default, these rules will not apply to other post types unless some body text is present.</li>
+                </ul>
+                <h2>Syntax</h2>
+                <hr size=1>
+                <p>AutoModerator rules are defined using <a href="https://en.wikipedia.org/wiki/YAML">YAML</a>, so for full details about allowable syntax you can look up examples or <a href="http://www.yaml.org/spec/1.2/spec.html">the YAML specification</a> (kind of a difficult/technical document). Some of the most important things to know for AutoModerator specifically:</p>
+                <p>Rules must be separated by a line starting with exactly 3 hyphens - <code>---</code>.</p>
+                <p>Comments can be added by using the <code>#</code> symbol. Generally everything after a <code>#</code> on a line will be treated as a comment and ignored, unless the <code>#</code> is inside a string or otherwise part of actual syntax.</p>
+                <p>Strings do not generally <i>need</i> to be quoted, but it is usually safest to put either single or double quotes around a string, especially if it includes any special characters at all. For example, the quotes here are unnecessary but encouraged:</p>
+                <code-block>title: ["red", "blue", "green"]</code-block>
+                <p>If you do not use quotes, there are certain types of strings that the YAML parser will try to automatically convert, which can result in unexpected behavior. In general, these include strings of numbers that start with <code>0</code> or <code>0x</code>, strings that consist of only numbers and underscores, and the words <code>true</code>, <code>false</code>, <code>on</code>, <code>off</code>, <code>yes</code>, <code>no</code>. If in doubt, it is always safest to use quotes.</p>
+                <p>When defining regular expressions inside a search check, you should always surround the regular expression with quotes, but <b>single</b> quotes are highly encouraged. This avoids needing to double-escape. For example, this check includes the exact same regex twice, but the double-quoted version requires double-escaping all the special characters:</p>
+                <code-block>title (regex): ["\\[\\w+\\]", '\[\w+\]']</code-block>
+                <p>Note that if you need to include a single quote inside a single-quoted string, the way to do so is by typing two single quotes in a row, not with a backslash. For example: <code>'it''s done like this'</code>.</p>
+                <p>Multi-line strings can be defined as well, this is used almost exclusively for defining multi-line comments to post or messages/modmails to send. The syntax for a multi-line string is to have a single pipe character (<code>|</code>) on the first line, and then indent all lines of the multi-line string below and inside. For example:</p>
+                <code-block>comment: |
+        This is a multi-line comment.
+
+        It has multiple lines.
+
+        You can use **markdown** inside here too.</code-block>
+                <p>Lists of items can be defined in two different ways. The most compact method is inside square brackets, comma-separated:</p>
+                <code-block>title: ["red", "green", "blue"]</code-block>
+                <p>The other method is by indenting the list of items below, with a hyphen at the start of each line. This format is often better for longer or more complex items, or if you want to add a comment on individual items:</p>
+                <code-block>title:
+        - "red" # like apples
+        - "green" # like grapes
+        - "blue" # like raspberries</code-block>
+                <p>Both formats are exactly the same from AutoModerator's perspective, but one can often be far easier to read than the other.</p>
+                <p>You should always avoid defining the same thing twice inside a particular rule. This will just end up with the second definition overwriting the first one. For example, a rule like this will end up only affecting youtube submissions and not imgur:</p>
+                <code-block>domain: imgur.com
+    domain: youtube.com
+    action: remove</code-block>
+            <h2>Top-level-only checks/actions</h2>
             <hr size=1>
-            <p>This page is a full specification of AutoModerator's capabilities and behavior, and the syntax for utilizing it. If you are new to AutoModerator and are looking for information about how to set it up and write basic rules, please see the <a href="https://www.reddit.com/wiki/automoderator">Introduction page</a> and <a href="https://www.reddit.com/wiki/automoderator/writing-basic-rules">Writing Basic Rules</a>.</p>
-            <h2>General knowledge/behavior</h2>
-            <hr size=1>
+            <p>The following checks/actions are only available in the top level of a rule, and cannot be included inside sub-groups:</p>
             <ul>
-                <li>AutoModerator's configuration is kept on a subreddit's wiki, at the "config/automoderator" page.</li>
-                <li>Rules that may result in an item being removed (action of <code>remove</code>, <code>spam</code>, or <code>filter</code>) are always checked before all other rules.</li>
-                <li>By default, submissions and comments made by moderators of the subreddit will not be checked against any rules that may cause the post to be removed or reported. You can override this behavior with the <code>moderators_exempt</code> flag.</li>
-                <li>AutoModerator tries to avoid contradicting other moderators, and will not approve items that have already been removed by another moderator, or remove items that have already been approved by another mod.</li>
-                <li>AutoModerator will not approve items posted by users that are banned site-wide on reddit unless the approval rule includes a check against author name.</li>
-                <li>Approval conditions will not re-approve reported items unless the rule includes a <code>reports:</code> check.</li>
-                <li>Approval actions will only be performed on items that need to be approved to change their state. That is, only items that were automatically removed by reddit's spam-filter, or reported items (as long as the rule includes a <code>reports:</code> check as mentioned above).</li>
-                <li>AutoModerator will not leave an entry in the moderation log when it sets flair or distinguishes its comments. All other actions (removals, approvals, etc.) will be logged as with any other moderator.</li>
-                <li>Rules on the body field will always apply to text posts. By default, these rules will not apply to other post types unless some body text is present.</li>
+                <li><code>type</code> - defines the type of item this rule should be checked against. Valid values are <code>comment</code>, <code>submission</code>, <code>text submission</code>, <code>link submission</code>, <code>crosspost submission</code>, <code>poll submission</code>, <code>gallery submission</code> or <code>any</code> (default).</li>
+                <li><code>priority</code> - must be set to a number. Can be used to define the order that rules should be checked in (though they will still always be checked in two separate groups - rules that might cause any sort of removal first - ones with action of <code>remove</code>, <code>spam</code> or <code>filter</code>, and then all others). Rules with higher priority values will be checked first. If a rule does not have a priority defined, it defaults to zero. Negative priority values can be used as well to specify that certain rules should be checked after ones with no defined priority value.</li>
+                <li><code>moderators_exempt</code> - true/false - Defines whether the rule should be skipped when the author of the item is a moderator of the subreddit. Mods are exempt from rules that can result in a removal or report by default, so set this to false to override that behavior, or set it to true to make them exempt from any other rules.</li>
+                <li><code>comment</code> - Text of a comment to post in response to an item that satisfies the rule's conditions. Supports placeholders.</li>
+                <li><code>comment_locked</code> - true/false - if set to true, the comment automoderator posts in response to an item will be locked from further comment replies.</li>
+                <li><code>comment_stickied</code> - true/false - if set to true, the comment automoderator posts in response to an item will be stickied to the top of the submission (will have no effect on non-submissions, as the comment must be top-level)</li>
+                <li><code>modmail</code> - Text of a modmail to send to the moderators when an item satisfies the rule's conditions. Supports placeholders.</li>
+                <li><code>modmail_subject</code> - If a modmail is sent, the subject of that modmail. Defaults to "AutoModerator notification" if not set. Supports placeholders.</li>
+                <li><code>message</code> - Text of a message to send to the author of an item that satisfies the rule's conditions. Supports placeholders.</li>
+                <li><code>message_subject</code> - If a message is sent, the subject of that message. Defaults to "AutoModerator notification" if not set. Supports placeholders.</li>
             </ul>
-            <h2>Syntax</h2>
+        </main>
+        <footer>
             <hr size=1>
-            <p>AutoModerator rules are defined using <a href="https://en.wikipedia.org/wiki/YAML">YAML</a>, so for full details about allowable syntax you can look up examples or <a href="http://www.yaml.org/spec/1.2/spec.html">the YAML specification</a> (kind of a difficult/technical document). Some of the most important things to know for AutoModerator specifically:</p>
-            <p>Rules must be separated by a line starting with exactly 3 hyphens - <code>---</code>.</p>
-            <p>Comments can be added by using the <code>#</code> symbol. Generally everything after a <code>#</code> on a line will be treated as a comment and ignored, unless the <code>#</code> is inside a string or otherwise part of actual syntax.</p>
-            <p>Strings do not generally <i>need</i> to be quoted, but it is usually safest to put either single or double quotes around a string, especially if it includes any special characters at all. For example, the quotes here are unnecessary but encouraged:</p>
-            <code-block>title: ["red", "blue", "green"]</code-block>
-            <p>If you do not use quotes, there are certain types of strings that the YAML parser will try to automatically convert, which can result in unexpected behavior. In general, these include strings of numbers that start with <code>0</code> or <code>0x</code>, strings that consist of only numbers and underscores, and the words <code>true</code>, <code>false</code>, <code>on</code>, <code>off</code>, <code>yes</code>, <code>no</code>. If in doubt, it is always safest to use quotes.</p>
-            <p>When defining regular expressions inside a search check, you should always surround the regular expression with quotes, but <b>single</b> quotes are highly encouraged. This avoids needing to double-escape. For example, this check includes the exact same regex twice, but the double-quoted version requires double-escaping all the special characters:</p>
-            <code-block>title (regex): ["\\[\\w+\\]", '\[\w+\]']</code-block>
-            <p>Note that if you need to include a single quote inside a single-quoted string, the way to do so is by typing two single quotes in a row, not with a backslash. For example: <code>'it''s done like this'</code>.</p>
-            <p>Multi-line strings can be defined as well, this is used almost exclusively for defining multi-line comments to post or messages/modmails to send. The syntax for a multi-line string is to have a single pipe character (<code>|</code>) on the first line, and then indent all lines of the multi-line string below and inside. For example:</p>
-            <code-block>comment: |
-    This is a multi-line comment.
-
-    It has multiple lines.
-
-    You can use **markdown** inside here too.</code-block>
-            <p>Lists of items can be defined in two different ways. The most compact method is inside square brackets, comma-separated:</p>
-            <code-block>title: ["red", "green", "blue"]</code-block>
-            <p>The other method is by indenting the list of items below, with a hyphen at the start of each line. This format is often better for longer or more complex items, or if you want to add a comment on individual items:</p>
-            <code-block>title:
-    - "red" # like apples
-    - "green" # like grapes
-    - "blue" # like raspberries</code-block>
-            <p>Both formats are exactly the same from AutoModerator's perspective, but one can often be far easier to read than the other.</p>
-            <p>You should always avoid defining the same thing twice inside a particular rule. This will just end up with the second definition overwriting the first one. For example, a rule like this will end up only affecting youtube submissions and not imgur:</p>
-            <code-block>domain: imgur.com
-domain: youtube.com
-action: remove</code-block>
-        <h2>Top-level-only checks/actions</h2>
-        <hr size=1>
-        <p>The following checks/actions are only available in the top level of a rule, and cannot be included inside sub-groups:</p>
-        <ul>
-            <li><code>type</code> - defines the type of item this rule should be checked against. Valid values are <code>comment</code>, <code>submission</code>, <code>text submission</code>, <code>link submission</code>, <code>crosspost submission</code>, <code>poll submission</code>, <code>gallery submission</code> or <code>any</code> (default).</li>
-            <li><code>priority</code> - must be set to a number. Can be used to define the order that rules should be checked in (though they will still always be checked in two separate groups - rules that might cause any sort of removal first - ones with action of <code>remove</code>, <code>spam</code> or <code>filter</code>, and then all others). Rules with higher priority values will be checked first. If a rule does not have a priority defined, it defaults to zero. Negative priority values can be used as well to specify that certain rules should be checked after ones with no defined priority value.</li>
-            <li><code>moderators_exempt</code> - true/false - Defines whether the rule should be skipped when the author of the item is a moderator of the subreddit. Mods are exempt from rules that can result in a removal or report by default, so set this to false to override that behavior, or set it to true to make them exempt from any other rules.</li>
-            <li><code>comment</code> - Text of a comment to post in response to an item that satisfies the rule's conditions. Supports placeholders.</li>
-            <li><code>comment_locked</code> - true/false - if set to true, the comment automoderator posts in response to an item will be locked from further comment replies.</li>
-            <li><code>comment_stickied</code> - true/false - if set to true, the comment automoderator posts in response to an item will be stickied to the top of the submission (will have no effect on non-submissions, as the comment must be top-level)</li>
-            <li><code>modmail</code> - Text of a modmail to send to the moderators when an item satisfies the rule's conditions. Supports placeholders.</li>
-            <li><code>modmail_subject</code> - If a modmail is sent, the subject of that modmail. Defaults to "AutoModerator notification" if not set. Supports placeholders.</li>
-            <li><code>message</code> - Text of a message to send to the author of an item that satisfies the rule's conditions. Supports placeholders.</li>
-            <li><code>message_subject</code> - If a message is sent, the subject of that message. Defaults to "AutoModerator notification" if not set. Supports placeholders.</li>
-        </ul>
+            <p><b>NOTE</b>: This article is taken from Reddit! <a href="https://www.reddit.com/r/reddit.com/wiki/automoderator/full-documentation">Source</a></p>
+        </footer>
         </body>
 </html>
