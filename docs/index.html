@@ -3,28 +3,43 @@
     <head>
         <meta charset="UTF-8">
         <style>
-            body {
+            main {
                 margin: 15px;
             }
+
             h1, h2, h3, h4, h5, h6 {
                 margin-top: 10px;
                 margin-bottom: 0px
             }
+
             caption {
                 margin-bottom: 5px
+            }
+
+            footer {
+                text-align: center;
+                position: fixed;
+                bottom: 0;
+                width: 100%
+            }
+
+            button {
+                margin-top: 5px
             }
         </style>
         <title>My Website</title>
     </head>
     <body>
-        <h2>Welcome to my Github Pages website!</h2>
-        <hr size=1>
-        <p>This is the <b>Homepage</b>.</p>
-        <table border="1px" cellpadding="5px">
-            <caption>Currently existing pages</caption>
-            <tr>
-                <td><a href="https://rumyantsev168.github.io/automoderator/full-documentation">AutoModerator Full Documentation</a></td>
-            </tr>
-        </table>
+        <main>
+            <h2>Welcome to my Github Pages website!</h2>
+            <hr size=1>
+            <p>This is the <b>Homepage</b>.</p>
+            <h3>List of currently existing sub-pages</h3>
+            <hr size=1>
+            <form action="https://rumyantsev168.github.io/automoderator/full-documentation"><button>AutoModerator Full Documentation</button></form>
+        </main>
+        <footer>
+            <p>&copy; rumyantsev168, 2025</p>
+        </footer>
     </body>
 </html>
