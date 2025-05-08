@@ -24,7 +24,7 @@
                 width: 100%
             }
 
-            header {
+            .header {
                 background: #FFFFFF;
                 text-align: center;
                 position: fixed;
@@ -35,22 +35,30 @@
             button {
                 margin-top: 5px
             }
+
+            .me {
+                text-align: center;
+                float: left
+            }
         </style>
         <title>My Website</title>
     </head>
     <body>
-        <header>
+        <main>
+        <div class="header">
             <h2>Welcome to my Github Pages website!</h2>
             <hr size=1>
-        </header>
-        <main>
+        </div>
             <!--
             <p>This is the <b>Homepage</b>.</p>
             <h3>List of currently existing sub-pages</h3>
             <hr size=1>
             <form action="https://rumyantsev168.github.io/automoderator/full-documentation"><button>AutoModerator Full Documentation</button></form>
             -->
-
+            <div class="me">
+                <img src="assets/me.png" width="100px" height="100px">
+                <div class="caption">This is me.</div>
+            </div>
         </main>
         <footer>
             <hr size=1>
