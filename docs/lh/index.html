@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @font-face {
+            font-family: MCRegular;
+            src: url("assets/font/MinecraftRegular-Bmg3.otf");
+        }
+
+        @font-face {
+            font-family: MCBold;
+            src: url("assets/font/MinecraftBold-nMK1.otf");
+        }
+
+        @font-face {
+            font-family: MCItalic;
+            src: url("assets/font/MinecraftItalic-R8Mo.otf");
+        }
+
+        @font-face {
+            font-family: MCBoldItalic;
+            src: url("assets/font/MinecraftBoldItalic-1y1e.otf");
+        }
+
+        html, body {
+            margin: 0;
+            font-family: MCRegular, MCBold, MCItalic, MCBoldItalic;
+            background-size: 120%;
+            background-image: url("assets/background.png");
+            background-position: top center;
+            color: #FFFFFF;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: MCBold;
+            margin-bottom: 5px;
+        }
+
+        a {
+            color: #00AAAA;
+        }
+
+        p {
+            color: #FFFFFF;
+            margin-top: 0px;
+            margin-bottom: 5px;
+        }
+
+        ul, li {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .header {
+            background: #252525;
+            box-shadow: 1px 1px 10px 5px #00000040;
+            display: flex;
+            align-items: center;
+        }
+
+        .header > div {
+            margin: 10px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+        }
+
+        .title-text {
+            font-size: 35px;
+            font-family: MCBold;
+            color: #DADADA;
+        }
+
+        .bold {
+            font-family: MCBold;
+            font-size: 16px;
+        }
+
+        .italic {
+            font-family: MCItalic;
+            font-size: 16px;
+        }
+
+        .bold-italic {
+            font-family: MCBoldItalic;
+            font-size: 16px;
+        }
+
+        .wrapper {
+            width: 50vw;
+            min-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #252525;
+            margin-top: 60px;
+            box-shadow: 1px 1px 10px 5px #00000040;
+            border-radius: 10px;
+        }
+    </style>
+    <title>Localhost SMP</title>
+    <link rel="icon" href="assets/icon.png" />
+</head>
+<body>
+    <header class="header">
+        <div>
+            <a href="https://">
+                <img class="logo" src="assets/icon.png"/>
+            </a>
+        </div>
+        <div>
+            <a style="text-decoration: none;" href="https://rumyantsev168.github.io/lh"><span class="title-text" style="color: #00AAAA">Localhost</span> <span class="title-text" style="color: #AAAAAA">SMP</span></a>
+        </div>
+        <div style="flex-grow:1;"></div>
+    </header>
+    <div class="wrapper">
+        <p>
+            idk, maybe this will become a real MC server at some point...
+        </p>
+
+        <h3>Plugins</h3>
+        <ul>
+            <li>
+                <p>to be done...</p>
+            </li>
+        </ul>
+<!--
+        <h3>Server Map: <span class="italic">no link</span></h3>
+        <h3>Game modes:</h3>
+        <ul>
+            <li>
+                <p>
+                    Vanilla survival with <a href="https://www.youtube.com/watch?v=VDsjXB-BaE0">land claims</a> (no one will ruin your work!)
+                </p>
+            </li>
+        </ul>
+
+        <h3>Random games:</h3>
+        <p class="italic">(credit goes to @marcthird128 on GitHub)</p>
+        <ul>
+            <li><a href="https://maza64.xyz/bounce">Bounce game</a></li>
+        </ul>
+-->
+    </div>
+</body>
+</html>
