@@ -2,10 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <style>
+        @font-face {
+            font-family: MCRegular;
+            src: url("assets/font/MinecraftRegular-Bmg3.otf");
+        }
+
+        @font-face {
+            font-family: MCBold;
+            src: url("assets/font/MinecraftBold-nMK1.otf");
+        }
+
+        @font-face {
+            font-family: MCItalic;
+            src: url("assets/font/MinecraftItalic-R8Mo.otf");
+        }
+
+        @font-face {
+            font-family: MCBoldItalic;
+            src: url("assets/font/MinecraftBoldItalic-1y1e.otf");
+        }
+
+        .regular {
+            font-family: MCRegular;
+        }
+
+        .bold {
+            font-family: MCBold;
+        }
+
+        .italic {
+            font-family: MCItalic;
+        }
+
+        .bold-italic {
+            font-family: MCBoldItalic;
+        }
+    </style>
     <title>Loading...</title>
 </head>
 <body>
-    <p>Loading, please wait...</p>
+    <p class="regular">Loading, please wait...</p>
     <script>
         document.location.pathname = '/lh';
     </script>
