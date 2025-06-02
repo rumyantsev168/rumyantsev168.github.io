@@ -97,6 +97,16 @@
             box-shadow: 1px 1px 10px 5px #00000040;
             border-radius: 10px;
         }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .column {
+            padding: 10px;
+        }
     </style>
     <title>Localhost SMP</title>
     <link rel="icon" href="assets/icon.png" />
@@ -116,21 +126,27 @@
         <p>Default gamemode: survival</p>
         <p class="italic">idk, maybe this will become a real MC server at some point...</p>
         <h3>Plugins</h3>
-        <div>
-            <ul style="list-style-type: square">
-                <li><span style="color: #00AA00">AuthMe</span></li>
-                <li><span style="color: #00AA00">CommandItems</span></li>
-                <li><span style="color: #00AA00">CrackShot</span></li>
-                <li><span style="color: #00AA00">DynMap</span></li>
-                <li><span style="color: #00AA00">Essentials</span></li>
-                <li><span style="color: #00AA00">Graves</span></li>
-                <li><span style="color: #00AA00">GriefPrevention</span></li>
-                <li><span style="color: #00AA00">LuckPerms</span></li>
-                <li><span style="color: #00AA00">SimpleClans</span></li>
-                <li><span style="color: #00AA00">TreeCapitator</span></li>
-                <li><span style="color: #00AA00">WorldEdit</span></li>
-            </ul>
+        <div class="container">
+            <div class="column" style="width: fit-content; height: fit-content">
+                <ul style="list-style-type: square">
+                    <li><span style="color: #00AA00">AuthMe</span></li>
+                    <li><span style="color: #00AA00">CommandItems</span></li>
+                    <li><span style="color: #00AA00">CrackShot</span></li>
+                    <li><span style="color: #00AA00">DynMap</span></li>
+                    <li><span style="color: #00AA00">Essentials</span></li>
+                    <li><span style="color: #00AA00">Graves</span></li>
+                    <li><span style="color: #00AA00">GriefPrevention</span></li>
+                    <li><span style="color: #00AA00">LuckPerms</span></li>
+                    <li><span style="color: #00AA00">SimpleClans</span></li>
+                    <li><span style="color: #00AA00">TreeCapitator</span></li>
+                    <li><span style="color: #00AA00">WorldEdit</span></li>
+                </ul>
+            </div>
+            <div class="column">
+                <img src="assets/owner_pose.png" style="float: right" width="130px"/>
+            </div>
         </div>
+
 
 <!--
         <h3>Server Map: <span class="italic">no link</span></h3>
