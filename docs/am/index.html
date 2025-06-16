@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <style>
         html, body {
             margin: 0px 0px;
@@ -32,7 +34,6 @@
             padding: 12px 16px;
             background: #181C1F;
             border-radius: 15px;
-            width: calc(100vw - 72px);
             height: fit-content;
             font-family: Segoe UI;
             font-size: 15px;
@@ -43,12 +44,18 @@
             margin: 0px 12px 0px 0px;
         }
 
-        .main {
+        .container {
+            display: grid;
+            grid-template-columns: calc(50vw + 26px) auto;
+            gap: 0px;
+        }
 
+        .column {
+            padding: 0px;
         }
 
         .code {
-            margin: 0px 20px;
+            margin: 0px 10px 0px 20px;
             padding: 10px 16px;
             background: #2A3236;
             border: none;
@@ -56,11 +63,25 @@
             radius: 20px;
             height: fit-content;
             min-height: 500px;
-            width: calc(100vw - 72px);
+            width: calc(50vw - 36px);
             resize: vertical;
             font-family: monospace;
             font-size: 16px;
             color: #EEF1F3;
+        }
+
+        .result {
+            margin: 0px 20px 0px 10px;
+            padding: 10px 16px;
+            background: #2A3236;
+            border: none;
+            border-radius: 20px;
+            height: fit-content;
+            min-height: 500px;
+            width: calc(50vw - 88px);
+            font-family: monospace;
+            font-size: 16px;
+            color: #FF0000;
         }
 
         .code:hover {
@@ -86,8 +107,8 @@
         }
 
         .footer {
-            padding: 0px -10px;
-            background: transparent;
+            padding: 0px 0px;
+            background: #0E1113;
             width: 100vw;
             position: fixed;
             bottom: 0;
@@ -113,16 +134,25 @@
             This page is used to test AutoModerator code, see the <a href="https://www.reddit.com/r/reddit.com/wiki/automoderator/full-documentation/" class="a cursor-pointer underline no-visited">full documentation</a>. Made by <a href="https://www.reddit.com/u/rumyantsev">u/rumyantsev</a>!
         </span>
     </div>
-    <div class="main">
-        <textarea class="code"></textarea>
+    <div class="container">
+        <div class="column">
+            <textarea class="code"></textarea>
+            <div style="width: calc(50vw + 36px); text-align: right">
+                <button class="button-save" type="submit" onclick="alert('Button clicked!')">Save</button>
+            </div>
+        </div>
+        <div class="column">
+            <div class="result">
+                placeholder
+            </div>
+        </div>
     </div>
-    <div style="text-align: right">
-        <button class="button-save" type="submit" onclick="alert('Button clicked!')">Save</button>
-    </div>
+<!--
     <footer class="footer">
         <div>
             <span>Light theme coming soon!</span>
         </div>
     </footer>
+-->
 </body>
 </html>
