@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <style>
         html, body {
             margin: 0px 0px;
@@ -54,7 +52,7 @@
             padding: 0px;
         }
 
-        .code {
+        #area-code {
             margin: 0px 10px 0px 20px;
             padding: 10px 16px;
             background: #2A3236;
@@ -64,13 +62,13 @@
             height: fit-content;
             min-height: 500px;
             width: calc(50vw - 36px);
-            resize: vertical;
+            resize: none;
             font-family: monospace;
             font-size: 16px;
             color: #EEF1F3;
         }
 
-        .result {
+        #result {
             margin: 0px 20px 0px 10px;
             padding: 10px 16px;
             background: #2A3236;
@@ -88,7 +86,7 @@
             background: #333D42;
         }
 
-        .button-save {
+        #button-save {
             margin: 5px 20px;
             padding: 12px 14px 14px 14px;
             align-items: center;
@@ -101,7 +99,7 @@
             color: #FFFFFF;
         }
 
-        .button-save:hover {
+        #button-save:hover {
             background: #1870F4;
             cursor: pointer;
         }
@@ -119,10 +117,26 @@
         .footer > div {
             margin: 10px;
         }
+
+        pre {
+            margin: 0px;
+            text-wrap: wrap;
+        }
     </style>
     <title>AutoModerator</title>
 </head>
 <body>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const input = document.getElementById("area-code");
+            const saveButton = document.getElementById("button-save");
+            saveButton.addEventListener("click", () => func(input));
+        });
+
+        function func(input) {
+            result.innerHTML = `<pre>${input.value}</pre>`;
+        }
+    </script>
     <div class="title">
         <strong>Automoderator</strong>
     </div>
@@ -136,15 +150,13 @@
     </div>
     <div class="container">
         <div class="column">
-            <textarea class="code"></textarea>
-            <div style="width: calc(50vw + 36px); text-align: right">
-                <button class="button-save" type="submit" onclick="alert('Button clicked!')">Save</button>
+            <textarea id="area-code"></textarea>
+            <div style="width: calc(50vw + 36px); text-align: left">
+                <button id="button-save">Save</button>
             </div>
         </div>
         <div class="column">
-            <div class="result">
-                placeholder
-            </div>
+            <div id="result"></div>
         </div>
     </div>
 <!--
