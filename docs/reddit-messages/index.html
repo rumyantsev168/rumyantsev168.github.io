@@ -33,8 +33,13 @@
             font-weight: 600;
         }
 
+        a {
+            color: #54A1FE;
+            text-decoration: none;
+        }
+
         main {
-            width: 80vw;
+            width: 90vw;
             max-width: 600px;
             display: flex;
             flex-direction: column;
@@ -79,7 +84,7 @@
             border-radius: 20px;
             radius: 1.25rem;
             height: 2.5rem;
-            width: calc(80vw - 2rem);
+            width: calc(90vw - 2rem);
             max-width: calc(600px - 2rem);
             resize: none;
             font-family: Arial;
@@ -98,6 +103,28 @@
 
         textarea:hover {
             background: #333D42;
+        }
+
+        ::placeholder {
+            font-family: Segoe UI;
+            color: #8BA2AD;
+        }
+
+        label {
+            position: relative;
+            box-sizing: border-box;
+            cursor: text;
+        }
+
+        label::after {
+            content: attr(content);
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 1rem;
+            font-size: 1rem;
+            font-family: Segoe UI;
+            color: #8BA2AD;
         }
 
         .character-count {
@@ -202,7 +229,18 @@
         });
 
         function generate(recipient, subject, message) {
-            if (!recipient.value || !subject.value || !message.value) return;
+            if (!recipient.value) {
+                document.getElementById("missing-recipient").innerHTML = ``;
+                return;
+            };
+            if (!subject.value) {
+                document.getElementById("missing-subject").innerHTML = ``;
+                return;
+            };
+            if (!message.value) {
+                document.getElementById("missing-message").innerHTML = ``;
+                return;
+            };
 
             let fullURL = `https://reddit.com/message/compose?to=${recipient.value}&subject=${encodeURIComponent(subject.value)}&message=${encodeURIComponent(message.value)}`;
 
@@ -234,18 +272,21 @@
 
             <!--Send to-->
             <div>
-                <input required type="text" class="form-control" id="recipient-input" />
+                <!-- <label content="Send to"></label> -->
+                <input required placeholder="/u/username or /r/subreddit" type="text" class="form-control" id="recipient-input" />
             </div>
 
             <!--Title-->
             <div>
-                <input required type="text" class="form-control" id="title-input" maxlength="100" />
+                <!-- <label content="Title"></label> -->
+                <input required placeholder="Title" type="text" class="form-control" id="title-input" maxlength="100" />
                 <span class="character-count" id="title-character-count">100</span>
             </div>
 
             <!--Message-->
             <div>
-                <textarea required class="form-control" id="message-content" maxlength="10000"></textarea>
+                <!-- <label content="Message"></label> -->
+                <textarea required placeholder="Message" class="form-control" id="message-content" maxlength="10000"></textarea>
                 <span class="character-count" id="message-character-count">10000</span>
             </div>
 
@@ -264,7 +305,7 @@
         </div>
     </main>
     <footer>
-        <i>Style taken from here: <a href="https://www.reddit.com/message/compose">https://www.reddit.com/message/compose</a>.</i>
+        <i>Made by <a href="https://www.github.com/rumyantsev168">@rumyantsev168</a>!</i>
     </footer>
 </body>
 </html>
