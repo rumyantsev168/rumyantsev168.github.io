@@ -2,56 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+    <link rel="icon" href="">
     <style>
-        @font-face {
-            font-family: MCRegular;
-            src: url("lh/assets/font/MinecraftRegular-Bmg3.otf");
-        }
-
-        @font-face {
-            font-family: MCBold;
-            src: url("lh/assets/font/MinecraftBold-nMK1.otf");
-        }
-
-        @font-face {
-            font-family: MCItalic;
-            src: url("lh/assets/font/MinecraftItalic-R8Mo.otf");
-        }
-
-        @font-face {
-            font-family: MCBoldItalic;
-            src: url("lh/assets/font/MinecraftBoldItalic-1y1e.otf");
-        }
-
-        html, body {
+        html {
             margin: 0px;
-            padding: 10px
+            padding: 0px;
+            height: 100%;
+            font-size: 1.25rem;
         }
 
-        .regular {
-            font-family: MCRegular;
+        h1 {
+            margin: 0px;
         }
 
-        .bold {
-            font-family: MCBold;
-        }
-
-        .italic {
-            font-family: MCItalic;
-        }
-
-        .bold-italic {
-            font-family: MCBoldItalic;
+        main {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            padding: 15px;
+            width: calc(100% - 60px);
+            max-width: 350px;
+            height: fit-content;
+            align-items: center;
+            border: 1px solid gray;
         }
     </style>
-    <title>Loading...</title>
+    <title>index</title>
 </head>
 <body>
-    <p style="margin: 0px" class="regular">Nothing here...</p>
-    <!--
-    <script>
-        document.location.pathname = '/lh';
-    </script>
-    -->
+    <main>
+        <center><h1>My Projects</h1></center>
+        <hr>
+        <ul>
+            <li><a href="reddit-messages.html">Reddit Message Link Generator</a></li>
+            <li><a>placeholder</a></li>
+            <li><a>placeholder</a></li>
+            <li><a>placeholder</a></li>
+            <li><a>placeholder</a></li>
+        </ul>
+    </main>
 </body>
 </html>
