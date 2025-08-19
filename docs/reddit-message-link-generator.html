@@ -36,6 +36,7 @@
     <title>reddit messages</title>
 </head>
 <body>
+    <script src="assets/js/script.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const recipient = document.getElementById("recipient-input");
@@ -43,33 +44,28 @@
             const message = document.getElementById("message-content");
             const generate_btn = document.getElementById("generate-btn");
             const clear_btn = document.getElementById("clear-btn");
+            const copy_btn = document.getElementById("copy-btn");
             const title_char_count = document.getElementById("title-character-count");
             const message_char_count = document.getElementById("message-character-count");
-            generate_btn.addEventListener("click", () => generate(recipient, subject, message));
-            clear_btn.addEventListener("click", () => clear());
-            document.addEventListener("keydown", () => count_title(subject));
-            document.addEventListener("keydown", () => count_message(message));
+            generate_btn.addEventListener("click", () => generate(recipient, subject, message, copy_btn));
+            clear_btn.addEventListener("click", () => clear(recipient, subject, message, copy_btn));
         });
 
-        function generate(recipient, subject, message) {
+        function generate(recipient, subject, message, copy_btn) {
             if (!recipient.value || !subject.value || !message.value) return;
             let fullURL = `https://reddit.com/message/compose?to=${recipient.value}&subject=${encodeURIComponent(subject.value)}&message=${encodeURIComponent(message.value)}`;
             document.getElementById("results-field").innerText = `${fullURL.replace(/%7B/g, '{').replace(/%7D/g, '}')}`;
+            copy_btn.disabled = false;
+            copy_btn.title = ``;
         };
 
-        function clear() {
-            document.getElementById("recipient-input").value = ``;
-            document.getElementById("title-input").value = ``;
-            document.getElementById("message-content").value = ``;
+        function clear(recipient, subject, message, copy_btn) {
+            recipient.value = ``;
+            subject.value = ``;
+            message.value = ``;
             document.getElementById("results-field").innerText = `Your link will appear here once you click "Generate"!`;
-        };
-
-        function count_title(subject) {
-            document.getElementById("title-character-count").innerText = `${100 - subject.value.length}`;
-        };
-
-        function count_message(message) {
-            document.getElementById("message-character-count").innerText = `${10000 - message.value.length}`;
+            copy_btn.disabled = true;
+            copy_btn.title = `Nothing to copy!`;
         };
     </script>
     <main style="max-width: 600px">
@@ -86,14 +82,14 @@
             <div>
                 <small>Title</small>
                 <input required type="text" id="title-input" maxlength="100" />
-                <span class="character-count" id="title-character-count">100</span>
+                <!--<span class="character-count" id="title-character-count">100</span>-->
             </div>
 
             <!--Message-->
             <div>
                 <small>Message</small>
                 <textarea required id="message-content" maxlength="10000"></textarea>
-                <span class="character-count" id="message-character-count">10000</span>
+                <!--<span class="character-count" id="message-character-count">10000</span>-->
             </div>
 
             <!--Buttons-->
@@ -106,8 +102,7 @@
             <h2>Result</h2>
             <p class="results-field" id="results-field">Your link will appear here once you click "Generate"!</p>
             <div class="buttons">
-                <button type="button" disabled title="this feature has not been implemented yet!" id="copy-btn" data-clipboard-target="#results-field">Copy</button>
-                <!--<button onclick="document.location = `index.html`">Back to Homepage</button>-->
+                <button type="button" disabled title="Nothing to copy!" id="copy-btn" onclick="select(document.getElementById('results-field'))">Copy</button>
             </div>
         </div>
         <center><a href="index.html">Back to Homepage</a></center>

@@ -31,26 +31,34 @@
             const encoded_text = document.getElementById("encoded-input");
             const encode_btn = document.getElementById("encode-btn");
             const decode_btn = document.getElementById("decode-btn");
+            const copy_regular_btn = document.getElementById("regular-copy-btn");
+            const copy_encoded_btn = document.getElementById("encoded-copy-btn");
             const clear_regular_btn = document.getElementById("regular-input-clear-btn");
             const clear_encoded_btn = document.getElementById("encoded-input-clear-btn");
-            encode_btn.addEventListener("click", () => encode(regular_text));
-            decode_btn.addEventListener("click", () => decode(encoded_text));
-            clear_regular_btn.addEventListener("click", () => clear_field("regular-input"));
-            clear_encoded_btn.addEventListener("click", () => clear_field("encoded-input"));
+            encode_btn.addEventListener("click", () => encode(regular_text, copy_encoded_btn));
+            decode_btn.addEventListener("click", () => decode(encoded_text, copy_regular_btn));
+            clear_regular_btn.addEventListener("click", () => clear_field("regular-input", "regular-copy-btn"));
+            clear_encoded_btn.addEventListener("click", () => clear_field("encoded-input", "encoded-copy-btn"));
         });
 
-        function encode(regular_text) {
+        function encode(regular_text, copy_encoded_btn) {
             if (!regular_text.value) return;
             document.getElementById("encoded-input").value = `${encodeURIComponent(regular_text.value)}`;
+            copy_encoded_btn.disabled = false;
+            copy_encoded_btn.title = ``;
         };
 
-        function decode(encoded_text) {
+        function decode(encoded_text, copy_regular_btn) {
             if (!encoded_text.value) return;
             document.getElementById("regular-input").value = `${decodeURIComponent(encoded_text.value)}`;
+            copy_regular_btn.disabled = false;
+            copy_regular_btn.title = ``;
         };
 
-        function clear_field(field_id) {
+        function clear_field(field_id, copy_btn_id) {
             document.getElementById(field_id).value = ``;
+            document.getElementById(copy_btn_id).disabled = true;
+            document.getElementById(copy_btn_id).title = `Nothing to copy!`;
         };
     </script>
     <main style="max-width: 600px">
@@ -64,7 +72,7 @@
                 <div class="buttons">
                     <button type="button" id="encode-btn">Encode</button>
                     <button type="button" id="regular-input-clear-btn">Clear</button>
-                    <button type="button" disabled title="this feature has not been implemented yet!" id="regular-copy-btn">Copy</button>
+                    <button type="button" disabled title="Nothing to copy!" id="regular-copy-btn" onclick="alert('Sorry, but this feature is still in development!')">Copy</button>
                 </div>
             </div>
 
@@ -75,7 +83,7 @@
                 <div class="buttons">
                     <button type="button" id="decode-btn">Decode</button>
                     <button type="button" id="encoded-input-clear-btn">Clear</button>
-                    <button type="button" disabled title="this feature has not been implemented yet!" id="encoded-copy-btn">Copy</button>
+                    <button type="button" disabled title="Nothing to copy!" id="encoded-copy-btn" onclick="alert('Sorry, but this feature is still in development!')">Copy</button>
                 </div>
             </div>
         </form>
