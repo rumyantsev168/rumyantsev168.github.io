@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="URL special characters encoder.">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <style>
+        .results {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .results-field {
+            margin: 5px 0px;
+            padding: 2px;
+            font-family: Arial;
+            font-size: 1rem;
+            word-break: break-all;
+            border: 1px solid gray;
+        }
+    </style>
+    <title>url encoder</title>
+</head>
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const regular_text = document.getElementById("regular-input");
+            const encoded_text = document.getElementById("encoded-input");
+            const encode_btn = document.getElementById("encode-btn");
+            const decode_btn = document.getElementById("decode-btn");
+            const clear_regular_btn = document.getElementById("regular-input-clear-btn");
+            const clear_encoded_btn = document.getElementById("encoded-input-clear-btn");
+            encode_btn.addEventListener("click", () => encode(regular_text));
+            decode_btn.addEventListener("click", () => decode(encoded_text));
+            clear_regular_btn.addEventListener("click", () => clear_field("regular-input"));
+            clear_encoded_btn.addEventListener("click", () => clear_field("encoded-input"));
+        });
+
+        function encode(regular_text) {
+            if (!regular_text.value) return;
+            document.getElementById("encoded-input").value = `${encodeURIComponent(regular_text.value)}`;
+        };
+
+        function decode(encoded_text) {
+            if (!encoded_text.value) return;
+            document.getElementById("regular-input").value = `${decodeURIComponent(encoded_text.value)}`;
+        };
+
+        function clear_field(field_id) {
+            document.getElementById(field_id).value = ``;
+        };
+    </script>
+    <main style="max-width: 600px">
+        <center><h1>URI Component Encoder/Decoder</h1></center>
+        <hr size="1px">
+        <form>
+            <!--Encode-->
+            <div>
+                <small>Regular text</small>
+                <textarea id="regular-input"></textarea>
+                <div class="buttons">
+                    <button type="button" id="encode-btn">Encode</button>
+                    <button type="button" id="regular-input-clear-btn">Clear</button>
+                    <button type="button" disabled title="this feature has not been implemented yet!" id="regular-copy-btn">Copy</button>
+                </div>
+            </div>
+
+            <!--Decode-->
+            <div>
+                <small>Encoded text</small>
+                <textarea id="encoded-input"></textarea>
+                <div class="buttons">
+                    <button type="button" id="decode-btn">Decode</button>
+                    <button type="button" id="encoded-input-clear-btn">Clear</button>
+                    <button type="button" disabled title="this feature has not been implemented yet!" id="encoded-copy-btn">Copy</button>
+                </div>
+            </div>
+        </form>
+        <center><a href="index.html">Back to Homepage</a></center>
+    </main>
+</body>
+</html>

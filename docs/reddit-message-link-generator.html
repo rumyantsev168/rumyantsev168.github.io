@@ -4,58 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta name="description" content="A tool to help create prefilled message links for Reddit.">
+    <link rel="stylesheet" href="css/stylesheet.css">
     <style>
-        html {
-            margin: 0px;
-            padding: 0px;
-            height: 100%;
-            font-size: 1rem;
-        }
-
-        main {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            padding: 15px;
-            width: calc(100% - 60px);
-            max-width: 600px;
-            height: fit-content;
-            align-items: center;
-            border: 1px solid gray;
-        }
-
-        h1 {
-            margin: 0px;
-        }
-
-        form {
-            margin: 1rem 0px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        form > div {
-            width: 100%;
-        }
-
-        input, textarea {
-            margin: 0px;
-            width: calc(100% - 8px);
-            resize: none;
-            font-family: Arial;
-            font-size: 1rem;
-        }
-
-        textarea {
-            min-height: 5rem;
-            resize: vertical;
-        }
-
         .character-count {
             margin: 0px;
             padding: 0px;
@@ -64,13 +14,6 @@
             flex-direction: row-reverse;
             align-items: right;
             font-size: 0.75rem;
-        }
-
-        .buttons {
-            display: flex;
-            flex-direction: row-reverse;
-            align-items: right;
-            gap: 0.5rem;
         }
 
         .results {
@@ -82,13 +25,14 @@
         .results-field {
             margin: 5px 0px;
             padding: 5px;
+            width: calc(100% - 11px);
             font-family: monospace;
             font-size: 1rem;
             word-break: break-all;
             border: 1px solid gray;
         }
     </style>
-    <title>Reddit Message Link Generator</title>
+    <title>reddit messages</title>
 </head>
 <body>
     <script>
@@ -108,9 +52,7 @@
 
         function generate(recipient, subject, message) {
             if (!recipient.value || !subject.value || !message.value) return;
-
             let fullURL = `https://reddit.com/message/compose?to=${recipient.value}&subject=${encodeURIComponent(subject.value)}&message=${encodeURIComponent(message.value)}`;
-
             document.getElementById("results-field").innerText = `${fullURL.replace(/%7B/g, '{').replace(/%7D/g, '}')}`;
         };
 
@@ -129,40 +71,45 @@
             document.getElementById("message-character-count").innerText = `${10000 - message.value.length}`;
         };
     </script>
-    <main>
-        <h1>Send a message</h1>
+    <main style="max-width: 600px">
+        <center><h1>Reddit Message Link Generator</h1></center>
+        <hr size="1px">
         <form>
             <!--Send to-->
             <div>
-                <input required placeholder="/u/username or /r/subreddit" type="text" class="form-control" id="recipient-input" />
+                <small>Send to</small>
+                <input required placeholder="/u/username or /r/subreddit" type="text" id="recipient-input" />
             </div>
 
             <!--Title-->
             <div>
-                <input required placeholder="Title" type="text" class="form-control" id="title-input" maxlength="100" />
+                <small>Title</small>
+                <input required type="text" id="title-input" maxlength="100" />
                 <span class="character-count" id="title-character-count">100</span>
             </div>
 
             <!--Message-->
             <div>
-                <textarea required placeholder="Message" class="form-control" id="message-content" maxlength="10000"></textarea>
+                <small>Message</small>
+                <textarea required id="message-content" maxlength="10000"></textarea>
                 <span class="character-count" id="message-character-count">10000</span>
             </div>
 
             <!--Buttons-->
             <div class="buttons">
-                <button id="generate-btn" type="button">Generate</button>
-                <button id="clear-btn" type="button">Clear</button>
+                <button type="button" id="generate-btn">Generate</button>
+                <button type="button" id="clear-btn">Clear</button>
             </div>
         </form>
         <div class="results">
-            <h1>Results</h1>
+            <h2>Result</h2>
             <p class="results-field" id="results-field">Your link will appear here once you click "Generate"!</p>
             <div class="buttons">
-                <button disabled title="this feature has not been implemented yet!" id="copy-btn" type="button" data-clipboard-target="#results-field">Copy</button>
-                <button type="button" onclick="document.location = `index.html`">Back to Homepage</button>
+                <button type="button" disabled title="this feature has not been implemented yet!" id="copy-btn" data-clipboard-target="#results-field">Copy</button>
+                <!--<button onclick="document.location = `index.html`">Back to Homepage</button>-->
             </div>
         </div>
+        <center><a href="index.html">Back to Homepage</a></center>
     </main>
 </body>
 </html>
