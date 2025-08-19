@@ -1,0 +1,57 @@
+html {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    font-size: 1rem;
+}
+
+main {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 15px;
+    width: calc(100% - 60px);
+    height: fit-content;
+    align-items: center;
+    border: 1px solid gray;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+}
+
+input, textarea {
+    margin: 0px;
+    width: calc(100% - 8px);
+    resize: none;
+    font-family: Arial;
+    font-size: 1rem;
+}
+
+textarea {
+    width: calc(100% - 6px);
+    min-height: 5rem;
+    resize: vertical;
+}
+
+form {
+    margin: 1rem 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+form > div {
+    width: 100%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: right;
+    gap: 0.5rem;
+}
