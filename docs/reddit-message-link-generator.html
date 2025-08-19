@@ -79,7 +79,7 @@
             if (!subject.value) {
                 if (!message.value) {
                     let generatedURL = `https://reddit.com/message/compose?to=${encodeURIComponent(recipient.value)}`;
-                    document.getElementById("results-field").innerText = `${generatedURL.replace(/%7B/g, '{').replace(/%7D/g, '}')}`;
+                    document.getElementById("results-field").innerText = `${generatedURL}`;
                     copy_btn.disabled = false;
                     copy_btn.title = ``;
                     return;
