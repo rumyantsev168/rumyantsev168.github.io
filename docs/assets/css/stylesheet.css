@@ -18,6 +18,7 @@ main {
     align-items: center;
     border: 1px solid gray;
     border-radius: 2px;
+    box-shadow: 2px 2px 5px #00000020;
 }
 
 h1, h2, h3, h4, h5, h6 {
