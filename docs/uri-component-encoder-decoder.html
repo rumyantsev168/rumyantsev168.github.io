@@ -25,6 +25,7 @@
     <title>url encoder</title>
 </head>
 <body>
+    <script src="assets/js/select_and_copy.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const regular_text = document.getElementById("regular-input");
@@ -62,8 +63,10 @@
         };
     </script>
     <main style="max-width: 600px">
-        <center><h1>URI Component Encoder/Decoder</h1></center>
-        <hr size="1px">
+        <header>
+            <h1>URI Component Encoder/Decoder</h1>
+            <hr size="1px">
+        </header>
         <form>
             <!--Encode-->
             <div>
@@ -72,7 +75,7 @@
                 <div class="buttons">
                     <button type="button" id="encode-btn">Encode</button>
                     <button type="button" id="regular-input-clear-btn">Clear</button>
-                    <button type="button" disabled title="Nothing to copy!" id="regular-copy-btn" onclick="alert('Sorry, but this feature is still in development!')">Copy</button>
+                    <button type="button" disabled title="Nothing to copy!" id="regular-copy-btn" onclick="selectTextarea('regular-input')">Copy</button>
                 </div>
             </div>
 
@@ -83,11 +86,13 @@
                 <div class="buttons">
                     <button type="button" id="decode-btn">Decode</button>
                     <button type="button" id="encoded-input-clear-btn">Clear</button>
-                    <button type="button" disabled title="Nothing to copy!" id="encoded-copy-btn" onclick="alert('Sorry, but this feature is still in development!')">Copy</button>
+                    <button type="button" disabled title="Nothing to copy!" id="encoded-copy-btn" onclick="selectTextarea('encoded-input')">Copy</button>
                 </div>
             </div>
         </form>
-        <center><small><a href="index.html">Back to Homepage</a></small></center>
+        <footer>
+            <center><small><a href="index.html">Back to Homepage</a></small></center>
+        </footer>
     </main>
 </body>
 </html>

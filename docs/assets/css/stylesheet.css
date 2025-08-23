@@ -33,6 +33,26 @@ ul, ol {
     margin: 5px 0px;
 }
 
+header {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+header > hr {
+    size: 1px;
+    width: 100%;
+}
+
+footer {
+    margin: 10px 0px 0px 0px;
+    padding: 0px;
+    width: 100%;
+}
+
 input, textarea {
     margin: 0px;
     width: calc(100% - 8px);
@@ -72,4 +92,23 @@ button:disabled {
     flex-direction: row-reverse;
     align-items: right;
     gap: 0.5rem;
+}
+
+.copied {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    margin: auto;
+    padding: 20px;
+    width: calc(100% - 60px);
+    max-width: fit-content;
+    height: fit-content;
+    background: #FFFFFF60;
+    backdrop-filter: blur(5px);
+    border: 1px solid gray;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px #00000020;
 }
