@@ -79,26 +79,26 @@
             };
             if (!subject.value) {
                 if (!message.value) {
-                    let generatedURL = `https://reddit.com/message/compose?to=${recipient.value}`;
+                    let generatedURL = `https://reddit.com/message/compose?to=${encodeURIComponent(recipient.value)}`;
                     document.getElementById("results-field").innerText = `${generatedURL}`;
                     copy_btn.disabled = false;
                     copy_btn.title = ``;
                     return;
                 };
-                let generatedURL = `https://reddit.com/message/compose?to=${recipient.value}&message=${encodeURIComponent(message.value)}`;
+                let generatedURL = `https://reddit.com/message/compose?to=${encodeURIComponent(recipient.value)}&message=${encodeURIComponent(message.value)}`;
                 document.getElementById("results-field").innerText = `${generatedURL.replace(/%7B/g, '{').replace(/%7D/g, '}')}`;
                 copy_btn.disabled = false;
                 copy_btn.title = ``;
                 return;
             };
             if (!message.value) {
-                let generatedURL = `https://reddit.com/message/compose?to=${recipient.value}&subject=${encodeURIComponent(subject.value)}`;
+                let generatedURL = `https://reddit.com/message/compose?to=${encodeURIComponent(recipient.value)}&subject=${encodeURIComponent(subject.value)}`;
                 document.getElementById("results-field").innerText = `${generatedURL.replace(/%7B/g, '{').replace(/%7D/g, '}')}`;
                 copy_btn.disabled = false;
                 copy_btn.title = ``;
                 return;
             };
-            let generatedURL = `https://reddit.com/message/compose?to=${recipient.value}&subject=${encodeURIComponent(subject.value)}&message=${encodeURIComponent(message.value)}`;
+            let generatedURL = `https://reddit.com/message/compose?to=${encodeURIComponent(recipient.value)}&subject=${encodeURIComponent(subject.value)}&message=${encodeURIComponent(message.value)}`;
             document.getElementById("results-field").innerText = `${generatedURL.replace(/%7B/g, '{').replace(/%7D/g, '}')}`;
             copy_btn.disabled = false;
             copy_btn.title = ``;
@@ -116,8 +116,10 @@
     </script>
     <main style="max-width: 600px">
         <header>
-            <h1>Reddit Message Link Generator</h1>
-            <hr size="1px">
+            <center>
+                <h1>Reddit Message Link Generator</h1>
+                <hr size="1px">
+            </center>
         </header>
         <form>
             <!--Send to-->
