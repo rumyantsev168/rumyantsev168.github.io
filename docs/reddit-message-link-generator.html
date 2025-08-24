@@ -114,12 +114,18 @@
             copy_btn.title = `Nothing to copy!`;
         };
     </script>
+    <noscript>
+        <div class="warning">
+            <img src="assets/icons/Warning.png" height="20px">
+            <p>
+                Sorry but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
     <main style="max-width: 600px">
         <header>
-            <center>
-                <h1>Reddit Message Link Generator</h1>
-                <hr size="1px">
-            </center>
+            <h1>Reddit Message Link Generator</h1>
+            <hr size="1px">
         </header>
         <form>
             <!--Send to-->
@@ -155,8 +161,8 @@
                 <button type="button" disabled title="Nothing to copy!" id="copy-btn" onclick="selectText('results-field')">Copy</button>
             </div>
         </div>
-        <footer>
-            <center><small><a href="index.html">Back to Homepage</a></small></center>
+        <footer style="text-align: center">
+            <small><a href="index.html">Back to Homepage</a></small>
         </footer>
     </main>
 </body>

@@ -6,7 +6,6 @@ html {
 }
 
 main {
-    zoom: 150%;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -38,6 +37,7 @@ header {
     margin: 0px;
     padding: 0px;
     width: 100%;
+    text-align: center;
 }
 
 footer {
@@ -65,7 +65,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 10px;
 }
 
 form > div {
@@ -84,11 +84,10 @@ button:disabled {
     display: flex;
     flex-direction: row-reverse;
     align-items: right;
-    gap: 0.5rem;
+    gap: 10px;
 }
 
 .copied {
-    zoom: 150%;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -107,8 +106,21 @@ button:disabled {
     box-shadow: 2px 2px 5px #00000020;
 }
 
-@media (min-device-width:320px) and (max-device-width:768px) {
-    main, .copied {
-        zoom: 100%;
-    }
+.warning {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 15px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    height: fit-content;
+    background: #FFFFFF;
+    border: 1px solid gray;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px #00000020;
 }
