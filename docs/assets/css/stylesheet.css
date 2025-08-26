@@ -125,3 +125,17 @@ button:disabled {
     border-radius: 3px;
     box-shadow: 2px 2px 5px #00000020;
 }
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.chat {
+    margin: 0px;
+    height: 15rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}

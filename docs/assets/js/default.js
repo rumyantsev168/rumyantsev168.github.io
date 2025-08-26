@@ -1,5 +1,5 @@
 // added to every page
 
 function test() {
-    document.location = "test.html"
+    document.location = "tests/index.html"
 }

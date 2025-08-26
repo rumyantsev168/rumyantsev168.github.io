@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta name="description" content="A test page (cuz why not?).">
-    <link rel="icon" href="assets/icons/Page.png">
-    <link rel="stylesheet" href="assets/css/stylesheet.css">
+    <link rel="icon" href="../assets/icons/Page.png">
+    <link rel="stylesheet" href="../assets/css/stylesheet.css">
     <title>test</title>
 </head>
 <body>
-    <script src="assets/js/default.js"></script>
+    <script src="../assets/js/default.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const test_input = document.getElementById("test-input");
@@ -25,19 +25,17 @@
                 let outputLine = document.createElement("p");
                 outputLine.style.margin = "0px";
                 var newDate = new Date();
-                // For todays date;
-                Date.prototype.today = function () {
+                Date.prototype.today = function() {
                     return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
                 };
-                // For the time now
-                Date.prototype.timeNow = function () {
+                Date.prototype.timeNow = function() {
                      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
                 };
                 outputLine.title = `Sent on ${newDate.today()} at ${newDate.timeNow()}`;
                 outputLine.innerText = test_input.value;
                 test_output.insertBefore(outputLine, test_output.childNodes[0]);
                 test_input.value = "";
-            }
+            };
         };
 
         function clear(test_input, test_output) {
@@ -55,24 +53,18 @@
     </noscript>
     <main style="max-width: 300px">
         <header>
-            <h1>Test</h1>
+            <h1>Chat Simulator</h1>
             <hr size="1px">
         </header>
-        <!--
-        <div style="display: flex; flex-direction: column; align-items: center">
-            <p>What are you doing here?</p>
-            <img src="https://en.meming.world/images/en/c/c7/Confused_Nick_Young.jpg" width="250px">
-        </div>
-        -->
-        <div style="display: flex; flex-direction: column; gap: 3px;">
-            <div id="test-output" style="margin: 0px; height: 15rem; overflow-y: auto; display: flex; flex-direction: column-reverse;"></div>
-            <div style="display: grid; grid-template-columns: calc(75% - 1px) calc(25% - 1px); gap: 2px;">
+        <div class="chat-container">
+            <div id="test-output" class="chat"></div>
+            <div style="display: flex; gap: 3px;">
                 <input type="text" id="test-input" placeholder="Enter something..." maxlength="25">
-                <button type="button" id="test-clear-all">Clear All</button>
+                <button type="button" id="test-clear-all" style="width: 30%;">Clear all</button>
             </div>
         </div>
         <footer style="text-align: center">
-            <small><a href="index.html">Back to Homepage</a></small>
+            <small><a href="index.html">Back to Tests</a></small>
         </footer>
     </main>
 </body>
