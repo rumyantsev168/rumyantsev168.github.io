@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta name="description" content="a simple key logger">
-    <link rel="icon" href="../assets/icons/keyboardClassic.png">
-    <link rel="stylesheet" href="../assets/css/stylesheet.css">
+    <link rel="icon" href="assets/icons/keyboardClassic.png">
+    <link rel="stylesheet" href="assets/css/stylesheet.css">
     <title>key logger</title>
 </head>
 <body onkeydown="getKey(event)">
-    <script src="../assets/js/default.js"></script>
+    <script src="assets/js/default.js"></script>
     <script>
         function getKey(event) {
             const keylogger_output = document.getElementById("keylogger-output")
@@ -28,15 +28,18 @@
             <h1>Key Logger</h1>
             <hr size="1px">
         </header>
-        <p class="centered">Refresh the page to clear.</p>
+        <p class="centered">
+            Only works with a physical keyboard<br>
+            Refresh the page to clear.
+        </p>
         <div id="keylogger-output" class="key-logger" style="padding: 2px; border: 1px solid gray"></div>
         <footer style="text-align: center">
-            <small><a href="index.html">Back to Tests</a></small>
+            <small><a href="index.html">Back to Homepage</a></small>
         </footer>
     </main>
     <noscript>
         <div class="warning">
-            <img src="../assets/icons/Warning.png" height="20px">
+            <img src="gfassets/icons/Warning.png" height="20px">
             <p>
                 Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
             </p>
