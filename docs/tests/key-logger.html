@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="a simple key logger">
+    <link rel="icon" href="../assets/icons/keyboardClassic.png">
+    <link rel="stylesheet" href="../assets/css/stylesheet.css">
+    <title>key logger</title>
+</head>
+<body onkeydown="getKey(event)">
+    <script src="../assets/js/default.js"></script>
+    <script>
+        function getKey(event) {
+            const keylogger_output = document.getElementById("keylogger-output")
+            let outputLine = document.createElement("p");
+            outputLine.style.margin = "0px";
+            var newDate = new Date();
+            Date.prototype.timeNow = function() {
+                 return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+            };
+            outputLine.innerText = `[${newDate.timeNow()}] Pressed ${event.code}`;
+            keylogger_output.insertBefore(outputLine, keylogger_output.childNodes[0]);
+        }
+    </script>
+    <main style="max-width: 300px">
+        <header>
+            <h1>Key Logger</h1>
+            <hr size="1px">
+        </header>
+        <p class="centered">Refresh the page to clear.</p>
+        <div id="keylogger-output" class="key-logger" style="padding: 2px; border: 1px solid gray"></div>
+        <footer style="text-align: center">
+            <small><a href="index.html">Back to Tests</a></small>
+        </footer>
+    </main>
+    <noscript>
+        <div class="warning">
+            <img src="../assets/icons/Warning.png" height="20px">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
+</body>
+</html>

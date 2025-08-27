@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-    <meta name="description" content="A test page (cuz why not?).">
+    <meta name="description" content="a chat sim cuz why not">
     <link rel="icon" href="../assets/icons/CannedChat.png">
     <link rel="stylesheet" href="../assets/css/stylesheet.css">
     <title>chat simulator</title>
@@ -12,16 +12,16 @@
     <script src="../assets/js/default.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const test_input = document.getElementById("test-input");
-            const test_output = document.getElementById("test-output");
+            const chat_input = document.getElementById("chat-input");
+            const chat_output = document.getElementById("chat-output");
             const test_clear_all = document.getElementById("test-clear-all");
-            document.addEventListener("keydown", () => enter(event, test_input, test_output));
-            test_clear_all.addEventListener("click", () => clear(test_input, test_output));
+            document.addEventListener("keydown", () => enter(event, chat_input, chat_output));
+            test_clear_all.addEventListener("click", () => clear(chat_input, chat_output));
         });
 
-        function enter(event, test_input, test_output) {
+        function enter(event, chat_input, chat_output) {
             if (event.keyCode == 13) {
-                if (!test_input) return;
+                if (!chat_input) return;
                 let outputLine = document.createElement("p");
                 outputLine.style.margin = "0px";
                 var newDate = new Date();
@@ -32,15 +32,15 @@
                      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
                 };
                 outputLine.title = `Sent on ${newDate.today()} at ${newDate.timeNow()}`;
-                outputLine.innerText = test_input.value;
-                test_output.insertBefore(outputLine, test_output.childNodes[0]);
-                test_input.value = "";
+                outputLine.innerText = chat_input.value;
+                chat_output.insertBefore(outputLine, chat_output.childNodes[0]);
+                chat_input.value = "";
             };
         };
 
-        function clear(test_input, test_output) {
-            test_input.value = "";
-            test_output.innerHTML = "";
+        function clear(chat_input, chat_output) {
+            chat_input.value = "";
+            chat_output.innerHTML = "";
         };
     </script>
     <main style="max-width: 300px">
@@ -49,9 +49,9 @@
             <hr size="1px">
         </header>
         <div class="chat-container">
-            <div id="test-output" class="chat"></div>
+            <div id="chat-output" class="chat"></div>
             <div style="display: flex; gap: 3px;">
-                <input type="text" id="test-input" placeholder="Enter something..." maxlength="25">
+                <input type="text" id="chat-input" placeholder="Enter something..." maxlength="25">
                 <button type="button" id="test-clear-all" style="width: 30%;">Clear all</button>
             </div>
         </div>

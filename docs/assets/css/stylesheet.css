@@ -87,6 +87,10 @@ button:disabled {
     gap: 10px;
 }
 
+.centered {
+    text-align: center;
+}
+
 .copied {
     position: absolute;
     top: 0;
@@ -132,10 +136,15 @@ button:disabled {
     gap: 3px;
 }
 
-.chat {
+.chat, .key-logger {
     margin: 0px;
     height: 15rem;
     overflow-y: auto;
     display: flex;
     flex-direction: column-reverse;
+}
+
+.key-logger {
+    flex-direction: column;
+    font-family: monospace;
 }
