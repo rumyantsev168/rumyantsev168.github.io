@@ -1,2 +1,3 @@
 /.idea/
-/docs/assets/js/get_time_date_formatted.js
+/docs/source/js/get_time_date_formatted.js
+/docs/tests/canvas-test.html
