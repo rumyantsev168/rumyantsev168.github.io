@@ -3,8 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-    <meta name="description" content="Index page for my website.">
-    <style></style>
+    <meta name="description" content="A custom 404 page for my website.">
+    <style>
+        html {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            font-size: 1rem;
+        }
+
+        main {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            padding: 15px;
+            width: calc(100% - 60px);
+            height: fit-content;
+            align-items: center;
+            border: 1px solid gray;
+            border-radius: 3px;
+            box-shadow: 2px 2px 5px #00000020;
+        }
+
+        h1, p {
+            margin: 0px;
+        }
+
+        header {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .centered {
+            text-align: center;
+        }
+    </style>
     <title>oops!</title>
 </head>
 <body>
@@ -17,17 +55,6 @@
             This is not what you're looking for.<br>
             Go back.
         </p>
-        <footer class="centered">
-            <small><a href="index.html">Back to Homepage</a></small>
-        </footer>
     </main>
-    <noscript>
-        <div class="warning">
-            <img src="source/icons/Warning.png" height="20px">
-            <p>
-                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
-            </p>
-        </div>
-    </noscript>
 </body>
 </html>
