@@ -10,6 +10,15 @@
 </head>
 <body>
     <script src="source/js/default.js"></script>
+    <script>
+        fetch("source/data/version.json")
+        .then(obj => obj.text())
+        .then(ver => getVersion(JSON.parse(ver)));
+
+        function getVersion(ver) {
+            document.getElementById("version").innerText = `v${ver.version}`;
+        };
+    </script>
     <main style="max-width: 300px">
         <header>
             <h1><a href="tests/index.html" style="text-decoration: none; color: black">Welcome!</a></h1>
@@ -27,7 +36,7 @@
         </ul>
         <footer>
             <div style="margin-top: 5px; display: flex; flex-direction: row">
-                <small style="justify-self: left">v0.3.7</small>
+                <small style="justify-self: left" id="version"></small>
                 <div style="flex-grow: 1"></div>
                 <small style="justify-self: right"><a href="https://www.github.com/rumyantsev168/rumyantsev168.github.io">View the GitHub repo</a></small>
             </div>
