@@ -61,11 +61,11 @@ textarea {
 }
 
 form {
-    margin: 1rem 0px;
+    margin: 10px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 }
 
 form > div {
@@ -85,10 +85,6 @@ button:disabled {
     flex-direction: row-reverse;
     align-items: right;
     gap: 10px;
-}
-
-.centered {
-    text-align: center;
 }
 
 .copied {
@@ -148,3 +144,8 @@ button:disabled {
     flex-direction: column;
     font-family: monospace;
 }
+
+.no-margin { margin: 0px }
+.text-left { text-align: left }
+.text-center { text-align: center }
+.text-right { text-align: right }

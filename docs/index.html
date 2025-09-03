@@ -9,15 +9,6 @@
     <title>index</title>
 </head>
 <body>
-    <script>
-        fetch("source/data/version.json")
-        .then(obj => obj.text())
-        .then(ver => getVersion(JSON.parse(ver)));
-
-        function getVersion(ver) {
-            document.getElementById("version").innerText = `v${ver.version}`;
-        };
-    </script>
     <main style="max-width: 300px">
         <header>
             <h1><a href="tests/index.html" style="text-decoration: none; color: black">Welcome!</a></h1>
@@ -27,6 +18,7 @@
         <ul>
             <li><a href="reddit-message-link-generator.html">Reddit Message Link Generator</a></li>
             <li><a href="uri-component-encoder-decoder.html">URI Component Encoder/Decoder</a></li>
+            <li><a href="character-counter.html">Character Counter</a></li>
         </ul>
         <h3>Other Stuff</h3>
         <ul>
@@ -41,6 +33,12 @@
             </div>
         </footer>
     </main>
+    <script>
+        fetch("source/data/version.json")
+        .then(obj => obj.text())
+        .then(res => displayVersion(JSON.parse(res)));
+        function displayVersion(ver) { document.getElementById("version").innerText = `v${ver.version}` };
+    </script>
     <noscript>
         <div class="warning">
             <img src="source/icons/Warning.png" height="20px">

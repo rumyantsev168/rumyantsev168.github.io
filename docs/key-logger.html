@@ -9,6 +9,20 @@
     <title>key logger</title>
 </head>
 <body onkeydown="getKey(event)">
+    <main style="max-width: 300px">
+        <header>
+            <h1>Key Logger</h1>
+            <hr size="1px">
+        </header>
+        <p class="text-center">
+            Only works with a physical keyboard.<br>
+            Refresh the page to clear.
+        </p>
+        <div id="keylogger-output" class="key-logger" style="padding: 2px; border: 1px solid gray"></div>
+        <footer class="text-center">
+            <small><a href="index.html">Back to Homepage</a></small>
+        </footer>
+    </main>
     <script>
         function getKey(event) {
             const keylogger_output = document.getElementById("keylogger-output")
@@ -20,22 +34,8 @@
             };
             outputLine.innerText = `[${newDate.timeNow()}] Pressed ${event.code}`;
             keylogger_output.insertBefore(outputLine, keylogger_output.childNodes[0]);
-        }
+        };
     </script>
-    <main style="max-width: 300px">
-        <header>
-            <h1>Key Logger</h1>
-            <hr size="1px">
-        </header>
-        <p class="centered">
-            Only works with a physical keyboard.<br>
-            Refresh the page to clear.
-        </p>
-        <div id="keylogger-output" class="key-logger" style="padding: 2px; border: 1px solid gray"></div>
-        <footer class="centered">
-            <small><a href="index.html">Back to Homepage</a></small>
-        </footer>
-    </main>
     <noscript>
         <div class="warning">
             <img src="source/icons/Warning.png" height="20px">

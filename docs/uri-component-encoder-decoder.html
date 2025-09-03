@@ -25,43 +25,6 @@
     <title>uri encoder</title>
 </head>
 <body>
-    <script src="source/js/select_and_copy.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const regular_text = document.getElementById("regular-input");
-            const encoded_text = document.getElementById("encoded-input");
-            const encode_btn = document.getElementById("encode-btn");
-            const decode_btn = document.getElementById("decode-btn");
-            const copy_regular_btn = document.getElementById("regular-copy-btn");
-            const copy_encoded_btn = document.getElementById("encoded-copy-btn");
-            const clear_regular_btn = document.getElementById("regular-input-clear-btn");
-            const clear_encoded_btn = document.getElementById("encoded-input-clear-btn");
-            encode_btn.addEventListener("click", () => encode(regular_text, copy_encoded_btn));
-            decode_btn.addEventListener("click", () => decode(encoded_text, copy_regular_btn));
-            clear_regular_btn.addEventListener("click", () => clear_field("regular-input", "regular-copy-btn"));
-            clear_encoded_btn.addEventListener("click", () => clear_field("encoded-input", "encoded-copy-btn"));
-        });
-
-        function encode(regular_text, copy_encoded_btn) {
-            if (!regular_text.value) return;
-            document.getElementById("encoded-input").value = `${encodeURIComponent(regular_text.value)}`;
-            copy_encoded_btn.disabled = false;
-            copy_encoded_btn.title = ``;
-        };
-
-        function decode(encoded_text, copy_regular_btn) {
-            if (!encoded_text.value) return;
-            document.getElementById("regular-input").value = `${decodeURIComponent(encoded_text.value)}`;
-            copy_regular_btn.disabled = false;
-            copy_regular_btn.title = ``;
-        };
-
-        function clear_field(field_id, copy_btn_id) {
-            document.getElementById(field_id).value = ``;
-            document.getElementById(copy_btn_id).disabled = true;
-            document.getElementById(copy_btn_id).title = `Nothing to copy!`;
-        };
-    </script>
     <main style="max-width: 600px">
         <header>
             <h1>URI Component Encoder/Decoder</h1>
@@ -90,10 +53,46 @@
                 </div>
             </div>
         </form>
-        <footer class="centered">
+        <footer class="text-center">
             <small><a href="index.html">Back to Homepage</a></small>
         </footer>
     </main>
+    <script src="source/js/select_and_copy.js"></script>
+    <script>
+        const regular_text = document.getElementById("regular-input");
+        const encoded_text = document.getElementById("encoded-input");
+        const encode_btn = document.getElementById("encode-btn");
+        const decode_btn = document.getElementById("decode-btn");
+        const copy_regular_btn = document.getElementById("regular-copy-btn");
+        const copy_encoded_btn = document.getElementById("encoded-copy-btn");
+        const clear_regular_btn = document.getElementById("regular-input-clear-btn");
+        const clear_encoded_btn = document.getElementById("encoded-input-clear-btn");
+
+        encode_btn.addEventListener("click", () => encode(regular_text, copy_encoded_btn));
+        decode_btn.addEventListener("click", () => decode(encoded_text, copy_regular_btn));
+        clear_regular_btn.addEventListener("click", () => clear_field("regular-input", "regular-copy-btn"));
+        clear_encoded_btn.addEventListener("click", () => clear_field("encoded-input", "encoded-copy-btn"));
+
+        function encode(regular_text, copy_encoded_btn) {
+            if (!regular_text.value) return;
+            document.getElementById("encoded-input").value = `${encodeURIComponent(regular_text.value)}`;
+            copy_encoded_btn.disabled = false;
+            copy_encoded_btn.title = ``;
+        };
+
+        function decode(encoded_text, copy_regular_btn) {
+            if (!encoded_text.value) return;
+            document.getElementById("regular-input").value = `${decodeURIComponent(encoded_text.value)}`;
+            copy_regular_btn.disabled = false;
+            copy_regular_btn.title = ``;
+        };
+
+        function clear_field(field_id, copy_btn_id) {
+            document.getElementById(field_id).value = ``;
+            document.getElementById(copy_btn_id).disabled = true;
+            document.getElementById(copy_btn_id).title = `Nothing to copy!`;
+        };
+    </script>
     <noscript>
         <div class="warning">
             <img src="source/icons/Warning.png" height="20px">

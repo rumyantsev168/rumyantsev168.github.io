@@ -9,14 +9,29 @@
     <title>chat simulator</title>
 </head>
 <body>
+    <main style="max-width: 300px">
+        <header>
+            <h1>Chat Simulator</h1>
+            <hr size="1px">
+        </header>
+        <div class="chat-container">
+            <div id="chat-output" class="chat"></div>
+            <div style="display: flex; gap: 3px;">
+                <input type="text" id="chat-input" placeholder="Enter something..." maxlength="25">
+                <button type="button" id="test-clear-all" style="width: 30%;">Clear all</button>
+            </div>
+        </div>
+        <footer class="text-center">
+            <small><a href="index.html">Back to Homepage</a></small>
+        </footer>
+    </main>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const chat_input = document.getElementById("chat-input");
-            const chat_output = document.getElementById("chat-output");
-            const test_clear_all = document.getElementById("test-clear-all");
-            document.addEventListener("keydown", () => enter(event, chat_input, chat_output));
-            test_clear_all.addEventListener("click", () => clear(chat_input, chat_output));
-        });
+        const chat_input = document.getElementById("chat-input");
+        const chat_output = document.getElementById("chat-output");
+        const test_clear_all = document.getElementById("test-clear-all");
+
+        document.addEventListener("keydown", () => enter(event, chat_input, chat_output));
+        test_clear_all.addEventListener("click", () => clear(chat_input, chat_output));
 
         function enter(event, chat_input, chat_output) {
             if (event.keyCode == 13) {
@@ -42,22 +57,6 @@
             chat_output.innerHTML = "";
         };
     </script>
-    <main style="max-width: 300px">
-        <header>
-            <h1>Chat Simulator</h1>
-            <hr size="1px">
-        </header>
-        <div class="chat-container">
-            <div id="chat-output" class="chat"></div>
-            <div style="display: flex; gap: 3px;">
-                <input type="text" id="chat-input" placeholder="Enter something..." maxlength="25">
-                <button type="button" id="test-clear-all" style="width: 30%;">Clear all</button>
-            </div>
-        </div>
-        <footer class="centered">
-            <small><a href="index.html">Back to Homepage</a></small>
-        </footer>
-    </main>
     <noscript>
         <div class="warning">
             <img src="source/icons/Warning.png" height="20px">
