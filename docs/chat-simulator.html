@@ -18,7 +18,15 @@
             <div id="chat-output" class="chat"></div>
             <div style="display: flex; gap: 3px;">
                 <input type="text" id="chat-input" placeholder="Enter something..." maxlength="25">
-                <button type="button" id="test-clear-all" style="width: 30%;">Clear all</button>
+                <button type="button" id="chat-clear-all" style="width: 30%;">Clear all</button>
+            </div>
+            <div style="display: flex; align-items: center; gap: 3px;">
+                <input type="checkbox" id="admin" style="width: fit-content">
+                <label for="admin"><small>Admin Mode</small></label><!---->
+                <div style="cursor: pointer" class="info">
+                    &#128712;
+                    <small class="hover-plate">Highlights your message in red</small>
+                </div>
             </div>
         </div>
         <footer class="text-center">
@@ -26,18 +34,22 @@
         </footer>
     </main>
     <script>
-        const chat_input = document.getElementById("chat-input");
-        const chat_output = document.getElementById("chat-output");
-        const test_clear_all = document.getElementById("test-clear-all");
+        const chatInput = document.getElementById("chat-input");
+        const chatOutput = document.getElementById("chat-output");
+        const chatClearAll = document.getElementById("chat-clear-all");
+        const adminCheck = document.querySelector("input[type='checkbox']");
 
-        document.addEventListener("keydown", () => enter(event, chat_input, chat_output));
-        test_clear_all.addEventListener("click", () => clear(chat_input, chat_output));
+        document.addEventListener("keydown", () => enter(event, chatInput, chatOutput));
+        chatClearAll.addEventListener("click", () => clear(chatInput, chatOutput));
 
-        function enter(event, chat_input, chat_output) {
+        function enter(event, chatInput, chatOutput) {
             if (event.keyCode == 13) {
-                if (!chat_input) return;
+                if (!chatInput) return;
                 let outputLine = document.createElement("p");
                 outputLine.style.margin = "0px";
+                if (adminCheck.checked) {
+                    outputLine.style.color = "#dd0000";
+                    outputLine.style.background = "#00000020"};
                 var newDate = new Date();
                 Date.prototype.today = function() {
                     return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
@@ -46,15 +58,15 @@
                      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
                 };
                 outputLine.title = `Sent on ${newDate.today()} at ${newDate.timeNow()}`;
-                outputLine.innerText = chat_input.value;
-                chat_output.insertBefore(outputLine, chat_output.childNodes[0]);
-                chat_input.value = "";
+                outputLine.innerText = chatInput.value;
+                chatOutput.insertBefore(outputLine, chatOutput.childNodes[0]);
+                chatInput.value = "";
             };
         };
 
-        function clear(chat_input, chat_output) {
-            chat_input.value = "";
-            chat_output.innerHTML = "";
+        function clear(chatInput, chatOutput) {
+            chatInput.value = "";
+            chatOutput.innerHTML = "";
         };
     </script>
     <noscript>

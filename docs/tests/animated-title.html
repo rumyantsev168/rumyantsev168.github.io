@@ -4,31 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta name="description" content="secret page lol">
-    <link rel="icon" href="../source/icons/TestPlan.png">
+    <link rel="icon" href="../source/icons/Page.png">
     <link rel="stylesheet" href="../source/css/stylesheet.css">
-    <title>tests</title>
+    <title></title>
 </head>
 <body>
     <main style="max-width: 300px">
         <header>
-            <h1>Tests</h1>
+            <h1>Animated Title</h1>
             <hr size="1px">
         </header>
-        <div style=" margin: 5px 0px; display: flex; flex-direction: column; align-items: center">
-            <p>What are you doing here?</p>
-            <img src="https://en.meming.world/images/en/c/c7/Confused_Nick_Young.jpg" width="250px">
-        </div>
-        <h3>Test pages</h3>
-        <ul>
-            <li><del><a href="../chat-simulator.html">Chat Simulator</a></del></li>
-            <li><del><a href="../key-logger.html">Key Logger</a></del></li>
-            <li><a href="animated-title.html">Animated Title</a></li>
-        </ul>
+        <p class="text-center">Look, this page has animated title!</p>
         <footer class="text-center">
-            <small><a href="../index.html">Back to Homepage</a></small>
+            <small><a href="index.html">Back to Tests</a></small>
         </footer>
     </main>
     <script src="../source/js/default.js"></script>
+    <script>
+        const pageTitle = document.getElementsByTagName("title")[0];
+        const titleFrames = ["░░░░░", "▒▒▒▒▒", "▒▒▒▒▒", "░░░░░"];
+        const alwaysText = "Isn't that cool?";
+        let i = 0;
+
+        setInterval(() => {
+            pageTitle.innerText = titleFrames[i%titleFrames.length] + (alwaysText ? ` | ${alwaysText}` : ""); i++;
+        }, 300);
+    </script>
     <noscript>
         <div class="warning">
             <img src="../source/icons/Warning.png" height="20px">

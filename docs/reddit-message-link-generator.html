@@ -45,20 +45,20 @@
         <form>
             <!--Send to-->
             <div>
-                <small>Send to</small>
+                <label for="recipient-input"><small>Send to</small></label>
                 <input required placeholder="/u/username or /r/subreddit" type="text" id="recipient-input" />
             </div>
 
             <!--Title-->
             <div>
-                <small>Title</small>
+                <label for="title-input"><small>Title</small></label>
                 <input required type="text" id="title-input" maxlength="100" />
                 <span class="character-count" id="title-character-count">100</span>
             </div>
 
             <!--Message-->
             <div>
-                <small>Message</small>
+                <label for="message-content"><small>Message</small></label>
                 <textarea required id="message-content" maxlength="10000"></textarea>
                 <span class="character-count" id="message-character-count">10000</span>
             </div>
