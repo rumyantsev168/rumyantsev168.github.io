@@ -150,15 +150,3 @@ button:disabled {
 .text-left { text-align: left }
 .text-center { text-align: center }
 .text-right { text-align: right }
-
-.hover-plate {
-    padding: 3px;
-    display: none;
-    position: absolute;
-    border: none;
-    border-radius: 3px;
-    background: #dddddd30;
-    backdrop-filter: blur(5px);
-}
-
-.info:hover .hover-plate { display: block }

@@ -22,11 +22,7 @@
             </div>
             <div style="display: flex; align-items: center; gap: 3px;">
                 <input type="checkbox" id="admin" style="width: fit-content">
-                <label for="admin"><small>Admin Mode</small></label><!---->
-                <div style="cursor: pointer" class="info">
-                    &#128712;
-                    <small class="hover-plate">Highlights your message in red</small>
-                </div>
+                <label for="admin"><small>Admin Mode</small></label>
             </div>
         </div>
         <footer class="text-center">
@@ -47,9 +43,7 @@
                 if (!chatInput) return;
                 let outputLine = document.createElement("p");
                 outputLine.style.margin = "0px";
-                if (adminCheck.checked) {
-                    outputLine.style.color = "#dd0000";
-                    outputLine.style.background = "#00000020"};
+                if (adminCheck.checked) { outputLine.style.color = "#dd0000" };
                 var newDate = new Date();
                 Date.prototype.today = function() {
                     return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
