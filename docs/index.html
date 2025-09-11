@@ -26,18 +26,22 @@
             <li><a href="key-logger.html">Key Logger</a></li>
         </ul>
         <footer>
-            <div style="margin-top: 5px; display: flex; flex-direction: row">
-                <small style="justify-self: left" id="version"></small>
+            <div style="margin-top: 5px; display: flex; flex-direction: row; align-items: center">
+                <img src="" alt="v" id="version">
                 <div style="flex-grow: 1"></div>
-                <small style="justify-self: right"><a href="https://www.github.com/rumyantsev168/rumyantsev168.github.io">View the GitHub repo</a></small>
+                <small><a href="https://www.github.com/rumyantsev168/rumyantsev168.github.io">View the GitHub repo</a></small>
             </div>
         </footer>
     </main>
+    <script src="source/js/cursor_trail.js"></script>
     <script>
         fetch("source/data/version.json")
         .then(obj => obj.text())
         .then(res => displayVersion(JSON.parse(res)));
-        function displayVersion(ver) { document.getElementById("version").innerText = `v${ver.version}` };
+        function displayVersion(ver) {
+            document.getElementById("version").setAttribute("src", `https://img.shields.io/badge/version-${ver.version}-green`);
+            document.getElementById("version").setAttribute("alt", `v${ver.version}`);
+        };
     </script>
     <noscript>
         <div class="warning">

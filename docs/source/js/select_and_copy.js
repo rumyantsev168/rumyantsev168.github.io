@@ -8,7 +8,7 @@ function safe_copy() {
     message(res ? 'Copied!' : 'Could not copy!');
 };
 
-function selectText(element_id) {
+function selectInput(element_id) {
     let node = document.getElementById(element_id).childNodes[0]
     if (document.body.createTextRange) {
         const range = document.body.createTextRange();

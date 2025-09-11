@@ -73,7 +73,7 @@
             <h3>Result</h3>
             <p class="results-field" id="results-field">Your link will appear here once you click "Generate"!</p>
             <div class="buttons">
-                <button type="button" disabled title="Nothing to copy!" id="copy-btn" onclick="selectText('results-field')">Copy</button>
+                <button type="button" disabled title="Nothing to copy!" id="copy-btn" onclick="selectInput('results-field')">Copy</button>
             </div>
         </div>
         <footer class="text-center">
@@ -81,6 +81,7 @@
         </footer>
     </main>
     <script src="source/js/select_and_copy.js"></script>
+    <script src="source/js/cursor_trail.js"></script>
     <script>
         const recipient = document.getElementById("recipient-input");
         const titleContent = document.getElementById("title-input");
