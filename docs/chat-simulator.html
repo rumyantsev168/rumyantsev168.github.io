@@ -10,10 +10,7 @@
 </head>
 <body>
     <main style="max-width: 300px">
-        <header>
-            <h1>Chat Simulator</h1>
-            <hr size="1px">
-        </header>
+        <header><h1>Chat Simulator</h1></header>
         <div class="chat-container">
             <div id="chat-output" class="chat"></div>
             <div style="display: flex; gap: 3px;">
@@ -21,49 +18,13 @@
                 <button type="button" id="chat-clear-all" style="width: 30%;">Clear all</button>
             </div>
             <div style="display: flex; align-items: center; gap: 3px;">
-                <input type="checkbox" id="admin" style="width: fit-content">
-                <label for="admin"><small>Admin Mode</small></label>
+                <input type="checkbox" id="adminChk" style="width: fit-content">
+                <label for="adminChk"><small>Admin Mode</small></label>
             </div>
         </div>
-        <footer class="text-center">
-            <small><a href="index.html">Back to Homepage</a></small>
-        </footer>
     </main>
-    <script src="source/js/cursor_trail.js"></script>
-    <script>
-        const chatInput = document.getElementById("chat-input");
-        const chatOutput = document.getElementById("chat-output");
-        const chatClearAll = document.getElementById("chat-clear-all");
-        const adminCheck = document.querySelector("input[type='checkbox']");
-
-        document.addEventListener("keydown", () => enter(event, chatInput, chatOutput));
-        chatClearAll.addEventListener("click", () => clear(chatInput, chatOutput));
-
-        function enter(event, chatInput, chatOutput) {
-            if (event.keyCode == 13) {
-                if (!chatInput) return;
-                let outputLine = document.createElement("p");
-                outputLine.style.margin = "0px";
-                if (adminCheck.checked) { outputLine.style.color = "#dd0000" };
-                var newDate = new Date();
-                Date.prototype.today = function() {
-                    return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
-                };
-                Date.prototype.timeNow = function() {
-                     return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
-                };
-                outputLine.title = `Sent on ${newDate.today()} at ${newDate.timeNow()}`;
-                outputLine.innerText = chatInput.value;
-                chatOutput.insertBefore(outputLine, chatOutput.childNodes[0]);
-                chatInput.value = "";
-            };
-        };
-
-        function clear(chatInput, chatOutput) {
-            chatInput.value = "";
-            chatOutput.innerHTML = "";
-        };
-    </script>
+    <script src="source/js/main.js"></script>
+    <script src="source/js/chat.js"></script>
     <noscript>
         <div class="warning">
             <img src="source/icons/Warning.png" height="20px">

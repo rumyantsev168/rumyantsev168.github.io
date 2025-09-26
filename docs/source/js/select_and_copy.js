@@ -4,7 +4,7 @@ function safe_copy() {
     let res = false;
     try {
         res = document.execCommand('copy');
-    } catch (e) {};
+    } catch (e) { console.warn("Failed to copy selected text!", e)};
     message(res ? 'Copied!' : 'Could not copy!');
 };
 

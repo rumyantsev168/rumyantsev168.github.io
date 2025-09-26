@@ -38,10 +38,7 @@
 </head>
 <body>
     <main style="max-width: 600px">
-        <header>
-            <h1>Reddit Message Link Generator</h1>
-            <hr size="1px">
-        </header>
+        <header><h1>Reddit Message Link Generator</h1></header>
         <form>
             <!--Send to-->
             <div>
@@ -76,12 +73,9 @@
                 <button type="button" disabled title="Nothing to copy!" id="copy-btn" onclick="selectInput('results-field')">Copy</button>
             </div>
         </div>
-        <footer class="text-center">
-            <small><a href="index.html">Back to Homepage</a></small>
-        </footer>
     </main>
+    <script src="source/js/main.js"></script>
     <script src="source/js/select_and_copy.js"></script>
-    <script src="source/js/cursor_trail.js"></script>
     <script>
         const recipient = document.getElementById("recipient-input");
         const titleContent = document.getElementById("title-input");

@@ -10,20 +10,14 @@
 </head>
 <body onkeydown="getKey(event)">
     <main style="max-width: 300px">
-        <header>
-            <h1>Key Logger</h1>
-            <hr size="1px">
-        </header>
+        <header><h1>Key Logger</h1></header>
         <p class="text-center">
             Only works with a physical keyboard.<br>
             Refresh the page to clear.
         </p>
         <div id="keylogger-output" class="key-logger" style="padding: 2px; border: 1px solid gray"></div>
-        <footer class="text-center">
-            <small><a href="index.html">Back to Homepage</a></small>
-        </footer>
     </main>
-    <script src="source/js/cursor_trail.js"></script>
+    <script src="source/js/main.js"></script>
     <script>
         function getKey(event) {
             const keylogger_output = document.getElementById("keylogger-output")
