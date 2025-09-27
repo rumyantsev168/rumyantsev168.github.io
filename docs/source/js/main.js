@@ -15,7 +15,7 @@ if (folder == "test") {
     if (file == "index.html") { footer.innerHTML = '<small><a href="../index.html">Back to Homepage</a></small>' }
     else { footer.innerHTML = '<small><a href="index.html">Back to Tests</a></small>'}
 } else {
-    if (file == "index.html") { footer.innerHTML = '' } // has custom footer
+    if (file == "index.html" || file == "") { footer.innerHTML = '' } // has custom footer
     else { footer.innerHTML = '<small><a href="index.html">Back to Homepage</a></small>' }
 }
 if (footer.innerHTML)  { main.appendChild(footer) }
