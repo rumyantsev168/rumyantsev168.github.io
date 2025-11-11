@@ -18,7 +18,7 @@ if (folder == "test") {
         footer.innerHTML = '<small><a href="index.html">Back to Tests</a></small>';
     };
 } else {
-    if (file !== "index.html" || file !== "") {
+    if (file !== "index.html" && file !== "") {
         footer.innerHTML = '<small><a href="index.html">Back to Homepage</a></small>';
     };
 };
