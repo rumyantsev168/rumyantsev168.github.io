@@ -22,6 +22,10 @@
             <li><a href="chat-simulator.html">Chat Simulator</a></li>
             <li><a href="key-logger.html">Key Logger</a></li>
         </ul>
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" tooltip="Golden Apple"></item-slot>
+            <p><= gapple</p>
+        </div>
         <footer>
             <div style="margin-top: 5px; display: flex; flex-direction: row; align-items: center">
                 <img src="" alt="v" id="version">
@@ -31,6 +35,7 @@
         </footer>
     </main>
     <script src="source/js/main.js"></script>
+    <script src="source/js/customElements.js"></script>
     <script>
         fetch("source/data/version.json")
         .then(obj => obj.text())

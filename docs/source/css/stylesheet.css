@@ -4,6 +4,7 @@ html {
     height: 100%;
     font-size: 1rem;
     background: #dadada;
+    zoom: 110%;
 }
 
 main {
@@ -153,3 +154,63 @@ button:disabled {
 
 .chat > p.admin::before { content: "[ADM]:"; font-family: monospace }
 .chat > p.user::before { content: "[USR]:"; font-family: monospace }
+
+.item-slot {
+    position: relative;
+    background: #8B8B8B no-repeat center center / 32px 32px;
+    border: 2px solid;
+    border-color: #373737 #FFF #FFF #373737;
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+.item-slot::before, .item-slot::after {
+    content: "";
+    position: absolute;
+    background-color: #8B8B8B;
+    height: 2px;
+    width: 2px;
+    pointer-events: none;
+}
+
+.item-slot::before {  bottom: -2px; left: -2px }
+.item-slot::after { top: -2px; right: -2px }
+
+.mcui {
+    position: relative;
+    background-color: #C6C6C6;
+    border: 2px solid;
+    border-color: #DBDBDB #5B5B5B #5B5B5B #DBDBDB;
+    padding: 6px;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: bottom;
+    height: fit-content;
+}
+
+.crafting-ui {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+}
+
+.slot-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+}
+
+.slot-row {
+    display: flex;
+    align-items: center;
+}
+
+.crafting-arrow {
+    display: inline-block;
+    background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
+    min-width: 32px;
+    height: 26px;
+}

@@ -12,10 +12,16 @@ let file = path.at(-1);
 let footer = document.createElement("footer");
 footer.className = "text-center";
 if (folder == "test") {
-    if (file == "index.html") { footer.innerHTML = '<small><a href="../index.html">Back to Homepage</a></small>' }
-    else { footer.innerHTML = '<small><a href="index.html">Back to Tests</a></small>'}
+    if (file == "index.html") {
+        footer.innerHTML = '<small><a href="../index.html">Back to Homepage</a></small>';
+    } else {
+        footer.innerHTML = '<small><a href="index.html">Back to Tests</a></small>';
+    };
 } else {
-    if (file == "index.html") { footer.innerHTML = '' } // has custom footer
-    else { footer.innerHTML = '<small><a href="index.html">Back to Homepage</a></small>' }
-}
-if (footer.innerHTML)  { main.appendChild(footer) }
+    if (file !== "index.html") {
+        footer.innerHTML = '<small><a href="index.html">Back to Homepage</a></small>';
+    };
+};
+if (footer.innerHTML) {
+    main.appendChild(footer);
+};
