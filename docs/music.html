@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="Simplest music player.">
+    <link rel="icon" href="source/icons/Page.png">
+    <link rel="stylesheet" href="source/css/stylesheet.css">
+    <title>music</title>
+</head>
+<body>
+    <main style="max-width: 300px">
+        <header><h1>Music Player</h1></header>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; gap: 5px;">
+                <input required id="music-url" placeholder="domain.com/song.mp3">
+                <button onclick="fetchMusic()">Search</button>
+            </div>
+            <audio id="music-display" controls src=""></audio>
+        </div>
+    </main>
+    <script src="source/js/main.js"></script>
+    <script>
+        const musicURL = document.getElementById("music-url");
+        const musicDisplay = document.getElementById("music-display");
+        function fetchMusic() {
+            if (musicURL) {
+                musicDisplay.setAttribute("src", "https://"+musicURL.value);
+            };
+        };
+    </script>
+    <noscript>
+        <div class="warning">
+            <img src="source/icons/Warning.png" height="20px">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
+</body>
+</html>
