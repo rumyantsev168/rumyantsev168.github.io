@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="Get info about Minecraft servers using WebSocket!">
+    <link rel="icon" href="source/icons/Page.png">
+    <link rel="stylesheet" href="source/css/stylesheet.css">
+    <title>index</title>
+</head>
+<body>
+    <main style="max-width: 300px">
+        <header><h1>Minecraft WebSocket</h1></header>
+        <form class="form" onsubmit="ping(event)" autocomplete="off">
+            <div>
+                <label for="ws-address">Server address</label>
+                <input id="ws-address" style="font-family: monospace; width: calc(100% - 7px);" value="wss://" placeholder="wss://">
+            </div>
+        </form>
+        <div>
+            <p><b>Status:</b> <span id="server-status">-</span></p>
+            <p><b>Name:</b> <span id="server-name">-</span></p>
+            <p><b>Players:</b> <span id="player-count">-/-</span></p>
+            <small id="players-container"></small>
+        </div>
+    </main>
+    <script src="source/js/main.js"></script>
+    <script src="source/js/minecraftColors.js"></script>
+    <script>
+        const address = document.getElementById("ws-address");
+        const serverStatus = document.getElementById("server-status");
+        const serverName = document.getElementById("server-name");
+        const playerCount = document.getElementById("player-count");
+        const playersContainer = document.getElementById("players-container");
+
+        function ping(e) {
+            e.preventDefault();
+            const addr = address.value ? address.value : "wss://";
+            try {
+                let ws = new WebSocket(addr);
+                ws.onopen = () => {
+                    console.log("Connected to", addr);
+                    ws.send("Accept: MOTD");
+                };
+                ws.onmessage = (event) => {
+                    ws.close();
+                    try {
+                        let data = JSON.parse(event.data);
+                        console.log("Received JSON data:", data);
+                        serverStatus.style.color = "darkgreen";
+                        serverStatus.innerText = "online";
+                        serverName.innerText = data.name;
+                        playerCount.innerText = `${data.data.online}/${data.data.max}`;
+                        let players = [];
+                        let more = "";
+                        data.data.players.forEach(player => {
+                            if (!player.startsWith("§")) {
+                                players.push(player);
+                            } else {
+                                more = player.match(/(\d+ more)/g);
+                            };
+                        });
+                        playersContainer.innerText = data.data.players.length ? `${players.join(", ")} and ${more}` : "";
+                    } catch (err) {
+                        console.error("Failed to parse as JSON!", err);
+                        alert("Error while parsing received data!", err);
+                    };
+                };
+                ws.onerror = (err) => {
+                    console.error("WebSocket error!", err);
+                    serverStatus.style.color = "darkred";
+                    serverStatus.innerText = "offline/error";
+                };
+                ws.onclose = () => {
+                    console.log("Connection to", addr, "closed");
+                };
+            } catch (err) {
+                console.error("WebSocket error!", err);
+            };
+        };
+
+        address.addEventListener("input", () => {
+            serverStatus.style.color = "unset";
+            serverStatus.innerText = "-";
+            serverName.innerText = "-";
+            playerCount.innerText = "-/-";
+            playersContainer.innerText = "";
+        });
+    </script>
+    <noscript>
+        <div class="warning">
+            <img src="source/icons/Warning.png" height="20px">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
+</body>
+</html>
