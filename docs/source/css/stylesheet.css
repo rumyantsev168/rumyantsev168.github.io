@@ -49,7 +49,7 @@ footer {
     width: 100%;
 }
 
-input, textarea {
+.form input, textarea {
     margin: 0px;
     width: calc(100% - 8px);
     resize: none;
@@ -57,13 +57,13 @@ input, textarea {
     font-size: 1rem;
 }
 
-textarea {
+.form textarea {
     width: calc(100% - 6px);
     min-height: 5rem;
     resize: vertical;
 }
 
-form {
+.form {
     margin: 10px 0px;
     display: flex;
     flex-direction: column;
@@ -71,7 +71,7 @@ form {
     gap: 5px;
 }
 
-form > div {
+.form > div {
     width: 100%;
 }
 
@@ -80,7 +80,7 @@ button {
 }
 
 button:disabled {
-    cursor: default;
+    cursor: not-allowed;
 }
 
 .buttons {
@@ -88,6 +88,10 @@ button:disabled {
     flex-direction: row-reverse;
     align-items: right;
     gap: 10px;
+}
+
+label {
+    font-size: 12px;
 }
 
 .copied {

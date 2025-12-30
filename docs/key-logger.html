@@ -19,7 +19,8 @@
     </main>
     <script src="source/js/main.js"></script>
     <script>
-        function getKey(event) {
+        function getKey(e) {
+            e.preventDefault();
             const keylogger_output = document.getElementById("keylogger-output")
             let outputLine = document.createElement("p");
             outputLine.style.margin = "0px";
@@ -27,7 +28,7 @@
             Date.prototype.timeNow = function() {
                  return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
             };
-            outputLine.innerText = `[${newDate.timeNow()}] Pressed ${event.code}`;
+            outputLine.innerText = `[${newDate.timeNow()}] Pressed ${e.code}`;
             keylogger_output.insertBefore(outputLine, keylogger_output.childNodes[0]);
         };
     </script>
