@@ -19,8 +19,8 @@
             Refresh the page to clear.
         </p>
         <div id="keylogger-output" class="key-logger" style="padding: 2px; border: 1px solid gray"></div>
-        <!--#include file="source/html/footer.html"-->
     </main>
+    <script src="source/js/main.js"></script>
     <script>
         function getKey(e) {
             e.preventDefault();
@@ -35,6 +35,13 @@
             keylogger_output.insertBefore(outputLine, keylogger_output.childNodes[0]);
         };
     </script>
-    <!--#include file="source/html/noscript.html"-->
+    <noscript>
+        <div class="warning">
+            <img src="source/icons/Warning.png" height="5rem">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
 </body>
 </html>

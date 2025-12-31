@@ -76,8 +76,8 @@
                 <button type="button" disabled title="Nothing to copy!" id="copy-btn" onclick="selectInput('results-field')">Copy</button>
             </div>
         </div>
-        <!--#include file="source/html/footer.html"-->
     </main>
+    <script src="source/js/main.js"></script>
     <script src="source/js/selection.js"></script>
     <script>
         const recipient = document.getElementById("recipient-input");
@@ -161,6 +161,13 @@
             copyBtn.title = `Nothing to copy!`;
         };
     </script>
-    <!--#include file="source/html/noscript.html"-->
+    <noscript>
+        <div class="warning">
+            <img src="source/icons/Warning.png" height="5rem">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
 </body>
 </html>
