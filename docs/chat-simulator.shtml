@@ -6,12 +6,15 @@
     <meta name="description" content="a chat sim cuz why not">
     <link rel="icon" href="source/icons/CannedChat.png">
     <link rel="stylesheet" href="source/css/stylesheet.css">
-    <title>chat simulator</title>
+    <title>Chat Simulator</title>
 </head>
 <body>
     <main style="max-width: 300px">
-        <header><h1>Chat Simulator</h1></header>
-        <div class="chat-container">
+        <header>
+            <h1>Chat Simulator</h1>
+            <hr size="1px">
+        </header>
+        <div class="form chat-container">
             <div id="chat-output" class="chat"></div>
             <div style="display: flex; gap: 3px;">
                 <input type="text" id="chat-input" placeholder="Enter something..." maxlength="25">
@@ -22,16 +25,9 @@
                 <label for="adminChk"><small>Admin Mode</small></label>
             </div>
         </div>
+        <!--#include file="source/html/footer.html"-->
     </main>
-    <script src="source/js/main.js"></script>
     <script src="source/js/chat.js"></script>
-    <noscript>
-        <div class="warning">
-            <img src="source/icons/Warning.png" height="20px">
-            <p>
-                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
-            </p>
-        </div>
-    </noscript>
+    <!--#include file="source/html/noscript.html"-->
 </body>
 </html>

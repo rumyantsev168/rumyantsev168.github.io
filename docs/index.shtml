@@ -6,23 +6,26 @@
     <meta name="description" content="Index page for my website.">
     <link rel="icon" href="source/icons/PageList.png">
     <link rel="stylesheet" href="source/css/stylesheet.css">
-    <title>index</title>
+    <title>Index Page</title>
 </head>
 <body>
     <main style="max-width: 300px">
-        <header><h1><a href="test/index.html" style="text-decoration: none; color: black">Welcome!</a></h1></header>
+        <header>
+            <h1>Welcome!</h1>
+            <hr size="1px">
+        </header>
         <h3>Useful Tools</h3>
         <ul>
-            <li><a href="reddit-message-link-generator.html">Reddit Message Link Generator</a></li>
-            <li><a href="uri-component-encoder-decoder.html">URI Component Encoder/Decoder</a></li>
-            <li><a href="character-counter.html">Character Counter</a></li>
+            <li><a href="reddit-message-link-generator.shtml">Reddit Message Link Generator</a></li>
+            <li><a href="uri-component-encoder-decoder.shtml">URI Component Encoder/Decoder</a></li>
+            <li><a href="character-counter.shtml">Character Counter</a></li>
         </ul>
         <h3>Other Stuff</h3>
         <ul>
-            <li><a href="chat-simulator.html">Chat Simulator</a></li>
-            <li><a href="key-logger.html">Key Logger</a></li>
-            <li><a href="music.html">Music Player</a></li>
-            <li><a href="eaglercraft-websocket.html">Minecraft WebSocket</a></li>
+            <li><a href="chat-simulator.shtml">Chat Simulator</a></li>
+            <li><a href="key-logger.shtml">Key Logger</a></li>
+            <li><a href="music.shtml">Music Player</a></li>
+            <li><a href="eaglercraft-websocket.shtml">Minecraft WebSocket</a></li>
         </ul>
         <div style="display: flex; align-items: center; gap: 5px;">
             <item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" tooltip="Enchanted Golden Apple"></item-slot>
@@ -36,7 +39,6 @@
             </div>
         </footer>
     </main>
-    <script src="source/js/main.js"></script>
     <script src="source/js/customElements.js"></script>
     <script>
         fetch("source/data/version.json")
@@ -47,13 +49,6 @@
             document.getElementById("version").setAttribute("alt", `v${ver.version}`);
         };
     </script>
-    <noscript>
-        <div class="warning">
-            <img src="source/icons/Warning.png" height="20px">
-            <p>
-                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
-            </p>
-        </div>
-    </noscript>
+    <!--#include file="source/html/noscript.html"-->
 </body>
 </html>

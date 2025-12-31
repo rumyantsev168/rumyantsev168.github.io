@@ -22,15 +22,18 @@
             border: 1px solid gray;
         }
     </style>
-    <title>uri encoder</title>
+    <title>URI Encoder</title>
 </head>
 <body>
     <main style="max-width: 600px">
-        <header><h1>URI Component Encoder/Decoder</h1></header>
+        <header>
+            <h1>URI Component Encoder/Decoder</h1>
+            <hr size="1px">
+        </header>
         <form class="form">
             <!--Encode-->
             <div>
-                <label for="regular-input"><small>Regular text</small></label>
+                <label for="regular-input">Regular text</label>
                 <textarea id="regular-input"></textarea>
                 <div class="buttons">
                     <button type="button" id="encode-btn">Encode</button>
@@ -41,7 +44,7 @@
 
             <!--Decode-->
             <div>
-                <label for="encoded-input"><small>Encoded text</small></label>
+                <label for="encoded-input">Encoded text</label>
                 <textarea id="encoded-input"></textarea>
                 <div class="buttons">
                     <button type="button" id="decode-btn">Decode</button>
@@ -50,10 +53,11 @@
                 </div>
             </div>
         </form>
+        <!--#include file="source/html/footer.html"-->
     </main>
-    <script src="source/js/main.js"></script>
     <script src="source/js/selection.js"></script>
     <script>
+        // IK this code is awful lol
         const regular_text = document.getElementById("regular-input");
         const encoded_text = document.getElementById("encoded-input");
         const encode_btn = document.getElementById("encode-btn");
@@ -88,13 +92,6 @@
             document.getElementById(copy_btn_id).title = `Nothing to copy!`;
         };
     </script>
-    <noscript>
-        <div class="warning">
-            <img src="source/icons/Warning.png" height="20px">
-            <p>
-                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
-            </p>
-        </div>
-    </noscript>
+    <!--#include file="source/html/noscript.html"-->
 </body>
 </html>

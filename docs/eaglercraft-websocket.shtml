@@ -6,11 +6,14 @@
     <meta name="description" content="Get info about Minecraft servers using WebSocket!">
     <link rel="icon" href="source/icons/Page.png">
     <link rel="stylesheet" href="source/css/stylesheet.css">
-    <title>index</title>
+    <title>Minecraft WebSocket</title>
 </head>
 <body>
     <main style="max-width: 300px">
-        <header><h1>Minecraft WebSocket</h1></header>
+        <header>
+            <h1>Minecraft WebSocket</h1>
+            <hr size="1px">
+        </header>
         <form class="form" onsubmit="ping(event)" autocomplete="off">
             <div>
                 <label for="ws-address">Server address</label>
@@ -60,7 +63,7 @@
                                 more = player.match(/(\d+ more)/g);
                             };
                         });
-                        playersContainer.innerText = data.data.players.length ? `${players.join(", ")} and ${more}` : "";
+                        playersContainer.innerText = data.data.players.length ? `${players.join(", ")}${more ? " and "+more : ""}` : "";
                     } catch (err) {
                         console.error("Failed to parse as JSON!", err);
                         alert("Error while parsing received data!", err);
@@ -87,13 +90,6 @@
             playersContainer.innerText = "";
         });
     </script>
-    <noscript>
-        <div class="warning">
-            <img src="source/icons/Warning.png" height="20px">
-            <p>
-                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
-            </p>
-        </div>
-    </noscript>
+    <!--#include file="source/html/noscript.html"-->
 </body>
 </html>

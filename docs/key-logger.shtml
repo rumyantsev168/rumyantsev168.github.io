@@ -6,18 +6,21 @@
     <meta name="description" content="a simple key logger">
     <link rel="icon" href="source/icons/keyboardClassic.png">
     <link rel="stylesheet" href="source/css/stylesheet.css">
-    <title>key logger</title>
+    <title>Key Logger</title>
 </head>
 <body onkeydown="getKey(event)">
     <main style="max-width: 300px">
-        <header><h1>Key Logger</h1></header>
+        <header>
+            <h1>Key Logger</h1>
+            <hr size="1px">
+        </header>
         <p class="text-center">
             Only works with a physical keyboard.<br>
             Refresh the page to clear.
         </p>
         <div id="keylogger-output" class="key-logger" style="padding: 2px; border: 1px solid gray"></div>
+        <!--#include file="source/html/footer.html"-->
     </main>
-    <script src="source/js/main.js"></script>
     <script>
         function getKey(e) {
             e.preventDefault();
@@ -32,13 +35,6 @@
             keylogger_output.insertBefore(outputLine, keylogger_output.childNodes[0]);
         };
     </script>
-    <noscript>
-        <div class="warning">
-            <img src="source/icons/Warning.png" height="20px">
-            <p>
-                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
-            </p>
-        </div>
-    </noscript>
+    <!--#include file="source/html/noscript.html"-->
 </body>
 </html>

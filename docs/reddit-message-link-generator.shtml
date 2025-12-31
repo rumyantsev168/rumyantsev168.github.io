@@ -34,28 +34,31 @@
             border-radius: 3px;
         }
     </style>
-    <title>reddit messages</title>
+    <title>Reddit Messages</title>
 </head>
 <body>
     <main style="max-width: 600px">
-        <header><h1>Reddit Message Link Generator</h1></header>
+        <header>
+            <h1>Reddit Message Link Generator</h1>
+            <hr size="1px">
+        </header>
         <form class="form">
             <!--Send to-->
             <div>
-                <label for="recipient-input"><small>Send to</small></label>
+                <label for="recipient-input">Send to</label>
                 <input required placeholder="/u/username or /r/subreddit" type="text" id="recipient-input" />
             </div>
 
             <!--Title-->
             <div>
-                <label for="title-input"><small>Title</small></label>
+                <label for="title-input">Title</label>
                 <input required type="text" id="title-input" maxlength="100" />
                 <span class="character-count" id="title-character-count">100</span>
             </div>
 
             <!--Message-->
             <div>
-                <label for="message-content"><small>Message</small></label>
+                <label for="message-content">Message</label>
                 <textarea required id="message-content" maxlength="10000"></textarea>
                 <span class="character-count" id="message-character-count">10000</span>
             </div>
@@ -73,8 +76,8 @@
                 <button type="button" disabled title="Nothing to copy!" id="copy-btn" onclick="selectInput('results-field')">Copy</button>
             </div>
         </div>
+        <!--#include file="source/html/footer.html"-->
     </main>
-    <script src="source/js/main.js"></script>
     <script src="source/js/selection.js"></script>
     <script>
         const recipient = document.getElementById("recipient-input");
@@ -158,13 +161,6 @@
             copyBtn.title = `Nothing to copy!`;
         };
     </script>
-    <noscript>
-        <div class="warning">
-            <img src="source/icons/Warning.png" height="20px">
-            <p>
-                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
-            </p>
-        </div>
-    </noscript>
+    <!--#include file="source/html/noscript.html"-->
 </body>
 </html>
