@@ -53,10 +53,11 @@
                 </div>
             </div>
         </form>
+        <!--#include file="source/html/footer.html"-->
     </main>
-    <script src="source/js/main.js"></script>
     <script src="source/js/selection.js"></script>
     <script>
+        // IK this code is awful lol
         const regular_text = document.getElementById("regular-input");
         const encoded_text = document.getElementById("encoded-input");
         const encode_btn = document.getElementById("encode-btn");
@@ -91,13 +92,6 @@
             document.getElementById(copy_btn_id).title = `Nothing to copy!`;
         };
     </script>
-    <noscript>
-        <div class="warning">
-            <img src="source/icons/Warning.png" height="20px">
-            <p>
-                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
-            </p>
-        </div>
-    </noscript>
+    <!--#include file="source/html/noscript.html"-->
 </body>
 </html>

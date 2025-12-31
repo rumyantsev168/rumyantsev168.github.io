@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="Just a character counter.">
+    <link rel="icon" href="source/icons/Settings.png">
+    <link rel="stylesheet" href="source/css/stylesheet.css">
+    <title>Character Counter</title>
+</head>
+<body>
+    <main style="max-width: 300px">
+        <header>
+            <h1>Character Counter</h1>
+            <hr size="1px">
+        </header>
+        <form class="form no-margin">
+            <div>
+                <label for="input">Your text</label>
+                <textarea required id="input"></textarea>
+            </div>
+        </form>
+        <div>
+            <p class="no-margin">Total characters: <span id="chars">0</span></p>
+            <p class="no-margin">Total spaces: <span id="spaces">0</span></p>
+        </div>
+        <!--#include file="source/html/footer.html"-->
+    </main>
+    <script>
+        const inputField = document.getElementById("input");
+        const charsField = document.getElementById("chars");
+        const spacesField = document.getElementById("spaces");
+
+        inputField.addEventListener("input", () => {
+            charsField.innerText = inputField.value.length;
+            spacesField.innerText = inputField.value.split(' ').length - 1;
+        });
+    </script>
+    <!--#include file="source/html/noscript.html"-->
+</body>
+</html>

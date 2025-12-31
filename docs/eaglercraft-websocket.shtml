@@ -67,7 +67,7 @@
                                 more = player.match(/(\d+ more)/g);
                             };
                         });
-                        playersContainer.innerText = data.data.players.length ? `${players.join(", ")} and ${more}` : "";
+                        playersContainer.innerText = data.data.players.length ? `${players.join(", ")}${more ? " and "+more : ""}` : "";
                     } catch (err) {
                         console.error("Failed to parse as JSON!", err);
                         alert("Error while parsing received data!", err);
@@ -94,13 +94,6 @@
             playersContainer.innerText = "";
         });
     </script>
-    <noscript>
-        <div class="warning">
-            <img src="source/icons/Warning.png" height="20px">
-            <p>
-                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
-            </p>
-        </div>
-    </noscript>
+    <!--#include file="source/html/noscript.html"-->
 </body>
 </html>
