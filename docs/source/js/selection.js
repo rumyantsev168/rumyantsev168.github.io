@@ -1,5 +1,4 @@
-// original source: https://www.github.com/marcthird128/marcthird128.github.io/blob/main/docs/mazarca/assets/js/select_and_copy.js
-
+// Source: https://www.github.com/marcthird128/marcthird128.github.io/blob/main/docs/mazarca/assets/js/select_and_copy.js
 function safe_copy() {
     let res = false;
     try {

@@ -6,31 +6,35 @@
     <meta name="description" content="Just a character counter.">
     <link rel="icon" href="source/icons/Settings.png">
     <link rel="stylesheet" href="source/css/stylesheet.css">
-    <title>character counter</title>
+    <title>Character Counter</title>
 </head>
 <body>
     <main style="max-width: 300px">
-        <header><h1>Character Counter</h1></header>
+        <header>
+            <h1>Character Counter</h1>
+            <hr size="1px">
+        </header>
         <form class="form no-margin">
             <div>
-                <label for="input"><small>Your text</small></label>
+                <label for="input">Your text</label>
                 <textarea required id="input"></textarea>
             </div>
         </form>
-        <div class="no-margin" id="output">
-            <p class="no-margin">Total characters:</p>
-            <p class="no-margin">Total spaces:</p>
+        <div>
+            <p class="no-margin">Total characters: <span id="chars">0</span></p>
+            <p class="no-margin">Total spaces: <span id="spaces">0</span></p>
         </div>
     </main>
     <script src="source/js/main.js"></script>
     <script>
         const inputField = document.getElementById("input");
-        const resultsField = document.getElementById("output").childNodes;
+        const charsField = document.getElementById("chars");
+        const spacesField = document.getElementById("spaces");
 
-        setInterval(() => {
-            resultsField[1].innerText = "Total characters: " + inputField.value.length;
-            resultsField[3].innerText = "Total spaces: " + (inputField.value.split(' ').length - 1);
-        }, 100);
+        inputField.addEventListener("input", () => {
+            charsField.innerText = inputField.value.length;
+            spacesField.innerText = inputField.value.split(' ').length - 1;
+        });
     </script>
     <noscript>
         <div class="warning">

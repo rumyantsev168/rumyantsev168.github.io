@@ -6,11 +6,14 @@
     <meta name="description" content="Get info about Minecraft servers using WebSocket!">
     <link rel="icon" href="source/icons/Page.png">
     <link rel="stylesheet" href="source/css/stylesheet.css">
-    <title>index</title>
+    <title>Minecraft WebSocket</title>
 </head>
 <body>
     <main style="max-width: 300px">
-        <header><h1>Minecraft WebSocket</h1></header>
+        <header>
+            <h1>Minecraft WebSocket</h1>
+            <hr size="1px">
+        </header>
         <form class="form" onsubmit="ping(event)" autocomplete="off">
             <div>
                 <label for="ws-address">Server address</label>
@@ -35,7 +38,11 @@
 
         function ping(e) {
             e.preventDefault();
-            const addr = address.value ? address.value : "wss://";
+            let addr = address.value;
+            if (!addr || !addr.startsWith("wss://") || addr == "wss://") {
+                alert("Server address must start with 'wss://' and be a valid WebSocket address!");
+                return;
+            };
             try {
                 let ws = new WebSocket(addr);
                 ws.onopen = () => {
