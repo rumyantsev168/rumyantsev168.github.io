@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "MC-Regular";
+    src: url("../font/MinecraftRegular.otf");
+}
+
 html {
     margin: 0px;
     padding: 0px;
@@ -156,8 +161,8 @@ label {
 .text-center { text-align: center }
 .text-right { text-align: right }
 
-.chat > p.admin::before { content: "[ADM]:"; font-family: monospace }
-.chat > p.user::before { content: "[USR]:"; font-family: monospace }
+.chat > p.admin::before { content: "[A]: "; font-family: monospace; font-size: 12px; line-height: 16px; }
+.chat > p.user::before { content: "[U]: "; font-family: monospace; font-size: 12px; line-height: 16px; }
 
 .item-slot {
     position: relative;
@@ -178,8 +183,26 @@ label {
     pointer-events: none;
 }
 
-.item-slot::before {  bottom: -2px; left: -2px }
-.item-slot::after { top: -2px; right: -2px }
+.item-slot::before {
+    bottom: -2px;
+    left: -2px;
+}
+
+.item-slot::after {
+    top: -2px;
+    right: -2px;
+}
+
+.item-slot > img ~ span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    line-height: 1em;
+    font-size: 16px;
+    font-family: MC-Regular;
+    color: #ffffff;
+    text-shadow: 0.1em 0.1em 0px black;
+}
 
 .mcui {
     position: relative;

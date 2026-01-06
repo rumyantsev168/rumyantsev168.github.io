@@ -14,17 +14,17 @@
             <h1>Chat Simulator</h1>
             <hr size="1px">
         </header>
-        <div class="form chat-container">
+        <form class="form chat-container" onsubmit="enter(event)" autocomplete="off">
             <div id="chat-output" class="chat"></div>
             <div style="display: flex; gap: 3px;">
                 <input type="text" id="chat-input" placeholder="Enter something..." maxlength="25">
-                <button type="button" id="chat-clear-all" style="width: 30%;">Clear all</button>
+                <button type="button" style="width: fit-content; white-space: nowrap" onclick="clear()">Clear all</button>
             </div>
             <div style="display: flex; align-items: center; gap: 3px;">
-                <input type="checkbox" id="adminChk" style="width: fit-content">
-                <label for="adminChk">Admin Mode</label>
+                <input type="checkbox" id="admin-chk" style="width: fit-content">
+                <label for="admin-chk">Admin Mode</label>
             </div>
-        </div>
+        </form>
     </main>
     <script src="source/js/main.js"></script>
     <script src="source/js/chat.js"></script>
