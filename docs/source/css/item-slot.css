@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "MC-Regular";
+    src: url("../font/MinecraftRegular.otf");
+}
+
+.item-slot {
+    position: relative;
+    background: #8B8B8B no-repeat center center / 32px 32px;
+    border: 2px solid;
+    border-color: #373737 #FFF #FFF #373737;
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+.item-slot::before, .item-slot::after {
+    content: "";
+    position: absolute;
+    background-color: #8B8B8B;
+    height: 2px;
+    width: 2px;
+    pointer-events: none;
+}
+
+.item-slot::before {
+    bottom: -2px;
+    left: -2px;
+}
+
+.item-slot::after {
+    top: -2px;
+    right: -2px;
+}
+
+.item-slot > img ~ span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    line-height: 1em;
+    font-size: 16px;
+    font-family: MC-Regular;
+    color: #ffffff;
+    text-shadow: 0.1em 0.1em 0px black;
+}

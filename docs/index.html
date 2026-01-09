@@ -28,7 +28,7 @@
             <li><a href="eaglercraft-websocket.html">Minecraft WebSocket</a></li>
         </ul>
         <div style="display: flex; align-items: center; gap: 5px;">
-            <item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" tooltip="Enchanted Golden Apple" count="999"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" count="999" tooltip="Enchanted Golden Apple" id="gapple"></item-slot>
             <p><= take some gapples</p>
         </div>
         <footer>
@@ -40,7 +40,7 @@
         </footer>
     </main>
     <script src="source/js/main.js"></script>
-    <script src="source/js/customElements.js"></script>
+    <script src="source/js/ItemSlot.js"></script>
     <script>
         fetch("source/data/version.json")
         .then(obj => obj.text())
