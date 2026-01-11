@@ -11,6 +11,7 @@
     width: 32px;
     height: 32px;
     image-rendering: pixelated;
+    cursor: default;
 }
 
 .item-slot::before, .item-slot::after {
@@ -32,7 +33,7 @@
     right: -2px;
 }
 
-.item-slot > img ~ span {
+.item-slot > span {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -41,4 +42,37 @@
     font-family: MC-Regular;
     color: #ffffff;
     text-shadow: 0.1em 0.1em 0px black;
+}
+
+.item-tooltip {
+    display: none;
+    position: relative;
+    padding: 4px;
+    background: #1E0F1E;
+    color: #ffffff;
+    font-family: MC-Regular;
+    width: fit-content;
+    z-index: 9999;
+    white-space: nowrap;
+}
+
+.item-tooltip::after {
+    content: "";
+    position: absolute;
+    left: 0.1em;
+    right: 0.1em;
+    top: 0.1em;
+    bottom: 0.1em;
+    border: 0.1em solid #2B0A5E;
+}
+
+.item-tooltip .item-tooltip-text-shadow {
+    position: absolute;
+    top: calc(4px + 0.1em);
+    left: calc(4px + 0.1em);
+    opacity: 25%;
+}
+
+.item-slot:hover .item-tooltip {
+    display: block;
 }

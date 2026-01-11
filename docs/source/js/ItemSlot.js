@@ -5,12 +5,21 @@ class ItemSlot extends HTMLElement {
         const stylesheet = document.createElement("link");
         stylesheet.rel = "stylesheet";
         stylesheet.href = "source/css/item-slot.css";
+        const minecraftColors = document.createElement("script");
+        minecraftColors.src = "source/js/min/minecraftColors.min.js";
 
-        new Promise((resolve, reject) => {
-            stylesheet.onload = resolve;
-            stylesheet.onerror = () => reject(new Error("Failed to load item-slot.css"));
-            document.head.appendChild(stylesheet);
-        }).then(() => {
+        Promise.all([
+            new Promise((resolve, reject) => {
+                stylesheet.onload = resolve;
+                stylesheet.onerror = () => reject(new Error("Failed to load item-slot.css"));
+                document.head.appendChild(stylesheet);
+            }),
+            new Promise((resolve, reject) => {
+                minecraftColors.onload = resolve;
+                minecraftColors.onerror = () => reject(new Error("Failed to load minecraftColors.min.js"));
+                document.head.appendChild(minecraftColors);
+            })
+        ]).then(() => {
             const itemSlot = document.createElement("div");
             itemSlot.className = "item-slot";
 
@@ -38,14 +47,49 @@ class ItemSlot extends HTMLElement {
             };
 
             if (itemTooltip) {
-                itemSlot.title = itemTooltip;
+                const itemTooltipDiv = document.createElement("div");
+                const itemTooltipTextShadow = document.createElement("div");
+                itemTooltipDiv.className = "item-tooltip";
+                itemTooltipTextShadow.className = "item-tooltip-text-shadow";
+                let itemTooltipText = itemTooltip.replaceColorCodes();
+                itemTooltipDiv.appendChild(itemTooltipText.cloneNode(true));
+                itemTooltipTextShadow.appendChild(itemTooltipText.cloneNode(true));
+
+                itemTooltipDiv.appendChild(itemTooltipTextShadow);
+                itemSlot.appendChild(itemTooltipDiv);
+
+                document.addEventListener("mousemove", (event) => {
+                    move(event, itemTooltipDiv, itemSlot);
+                });
+
+                document.addEventListener("touchmove", (event) => {
+                    move(event, itemTooltipDiv, itemSlot);
+                });
             };
 
             this.appendChild(itemSlot);
-        }).catch(err => {
-            console.error("Failed to load <item-slot> element!", err);
+            console.log("Added new <item-slot> element");
         });
     };
 };
 
 customElements.define("item-slot", ItemSlot);
+
+function isTouchDevice() {
+    try {
+        document.createEvent("TouchEvent");
+        return true;
+    } catch (err) {
+        return false;
+    };
+};
+
+const move = (e, el, i) => {
+    try {
+        var x = !isTouchDevice() ? e.pageX : e.touches[0].pageX;
+        var y = !isTouchDevice() ? e.pageY : e.touches[0].pageY;
+    } catch (err) {}
+    let rect = i.getBoundingClientRect();
+    el.style.left = x - rect.left + 15 + "px";
+    el.style.top = y - rect.top - 37 + "px";
+};
