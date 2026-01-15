@@ -61,10 +61,6 @@ class ItemSlot extends HTMLElement {
                 document.addEventListener("mousemove", (event) => {
                     move(event, itemTooltipDiv, itemSlot);
                 });
-
-                document.addEventListener("touchmove", (event) => {
-                    move(event, itemTooltipDiv, itemSlot);
-                });
             };
 
             this.appendChild(itemSlot);
@@ -75,21 +71,10 @@ class ItemSlot extends HTMLElement {
 
 customElements.define("item-slot", ItemSlot);
 
-function isTouchDevice() {
-    try {
-        document.createEvent("TouchEvent");
-        return true;
-    } catch (err) {
-        return false;
-    };
-};
-
 const move = (e, el, i) => {
     try {
-        var x = !isTouchDevice() ? e.pageX : e.touches[0].pageX;
-        var y = !isTouchDevice() ? e.pageY : e.touches[0].pageY;
-    } catch (err) {}
-    let rect = i.getBoundingClientRect();
-    el.style.left = x - rect.left + 15 + "px";
-    el.style.top = y - rect.top - 37 + "px";
+        let rect = i.getBoundingClientRect();
+        el.style.left = e.pageX - rect.left + 15 + "px";
+        el.style.top = e.pageY - rect.top - 37 + "px";
+    } catch (err) {};
 };
