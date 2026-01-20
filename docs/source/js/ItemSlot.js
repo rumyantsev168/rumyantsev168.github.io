@@ -74,7 +74,7 @@ customElements.define("item-slot", ItemSlot);
 const move = (e, el, i) => {
     try {
         let rect = i.getBoundingClientRect();
-        el.style.left = e.pageX - rect.left + 15 + "px";
+        el.style.left = e.pageX - rect.left + 25 + "px";
         el.style.top = e.pageY - rect.top - 37 + "px";
     } catch (err) {};
 };

@@ -1,0 +1,7 @@
+* {
+    cursor: url("../cursors/cursor-default.cur"), default;
+}
+
+a, button:not([disabled]) {
+    cursor: url("../cursors/cursor-pointer.cur"), pointer;
+}

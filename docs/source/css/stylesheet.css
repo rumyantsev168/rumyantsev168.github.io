@@ -74,7 +74,7 @@ footer {
 .form > div {
     width: 100%;
 }
-
+/*
 button {
     cursor: pointer;
 }
@@ -82,7 +82,7 @@ button {
 button:disabled {
     cursor: not-allowed;
 }
-
+*/
 .buttons {
     display: flex;
     flex-direction: row-reverse;
