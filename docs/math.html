@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="Index page for my website.">
+    <link rel="icon" href="source/icons/PageList.png">
+    <link rel="stylesheet" href="source/css/stylesheet.css">
+<!--    <link rel="stylesheet" href="source/css/custom-cursor.css">-->
+    <title>Index Page</title>
+    <script src="https://polyfill.io"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <main style="max-width: fit-content">
+        <header>
+            <h1>Math Rendering</h1>
+            <hr size="1px">
+        </header>
+        <p>
+            If given \( a \ne 0 \), an equation \( ax^2 + bx + c = 0 \) has a solution in the form of
+            $$ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+        </p>
+        <hr>
+        <p>
+            $$\int \frac{dx}{ \sqrt{x^2 \pm a^2}} = ln \vert x + \sqrt{x^2 \pm a^2} \vert + C \ \ \ (a > 0)$$
+
+            \[\int (3x+1)^9dx=\frac{1}{3}\int(3x+1)^9d(3x+1)=\frac{1}{3}\frac{(3x+1)^{10}}{10}+C\]
+        </p>
+        <hr>
+        <p>
+            \begin{equation*}
+                \begin{pmatrix}
+                    a_{11} \ \ a_{12} \ \ a_{13}\\
+                    a_{21} \ \ a_{22} \ \ a_{23}
+                \end{pmatrix}
+                +
+                \begin{pmatrix}
+                    b_{11} \ \ b_{12} \ \ b_{13}\\
+                    b_{21} \ \ b_{22} \ \ b_{23}
+                \end{pmatrix}
+            \end{equation*}
+        </p>
+    </main>
+    <script src="source/js/main.js"></script>
+    <noscript>
+        <div class="warning">
+            <img src="source/icons/Warning.png" height="20px">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
+</body>
+</html>
