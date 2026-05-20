@@ -4,9 +4,9 @@ class ItemSlot extends HTMLElement {
 
         const stylesheet = document.createElement("link");
         stylesheet.rel = "stylesheet";
-        stylesheet.href = "source/css/item-slot.css";
+        stylesheet.href = "static/css/item-slot.css";
         const minecraftColors = document.createElement("script");
-        minecraftColors.src = "source/js/min/minecraftColors.min.js";
+        minecraftColors.src = "static/js/min/minecraftColors.min.js";
 
         Promise.all([
             new Promise((resolve, reject) => {
