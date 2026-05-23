@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="URL special characters encoder.">
+    <link rel="icon" href="static/icons/Settings.png">
+    <link rel="stylesheet" href="static/css/stylesheet.css">
+    <!-- <link rel="stylesheet" href="static/css/custom-cursor.css"> -->
+    <title>Text to Binary converter</title>
+</head>
+<body>
+    <main style="max-width: 600px">
+        <header>
+            <h1>Text to Binary converter</h1>
+            <hr size="1px">
+        </header>
+        <form class="form">
+            <!--Encode-->
+            <div>
+                <label for="regular-input">Regular text</label>
+                <textarea id="regular-input"></textarea>
+                <div class="buttons">
+                    <button type="button" id="encode-btn">Encode</button>
+                    <button type="button" id="regular-input-clear-btn">Clear</button>
+                    <button type="button" disabled title="Nothing to copy!" id="regular-copy-btn" onclick="selectTextarea('regular-input')">Copy</button>
+                </div>
+            </div>
+
+            <!--Decode-->
+            <div>
+                <label for="encoded-input">Binary bytes</label>
+                <textarea id="encoded-input"></textarea>
+                <div class="buttons">
+                    <button type="button" id="decode-btn">Decode</button>
+                    <button type="button" id="encoded-input-clear-btn">Clear</button>
+                    <button type="button" disabled title="Nothing to copy!" id="encoded-copy-btn" onclick="selectTextarea('encoded-input')">Copy</button>
+                </div>
+            </div>
+        </form>
+    </main>
+    <script src="static/js/main.js"></script>
+    <script src="static/js/selection.js"></script>
+    <script>
+        const regularText = document.getElementById("regular-input");
+        const encodedText = document.getElementById("encoded-input");
+        const textToBinaryBtn = document.getElementById("encode-btn");
+        const binaryToTextBtn = document.getElementById("decode-btn");
+
+        const copyRegularBtn = document.getElementById("regular-copy-btn");
+        const copyEncodedBtn = document.getElementById("encoded-copy-btn");
+        const clearRegularBtn = document.getElementById("regular-input-clear-btn");
+        const clearEncodedBtn = document.getElementById("encoded-input-clear-btn");
+
+        function toBinary(text) {
+            return Array.from(text)
+                .map(char => char.charCodeAt(0).toString(2).padStart(8, '0'))
+                .join(' ');
+        }
+
+        function fromBinary(binaryStr) {
+            return binaryStr.split(' ')
+                .map(byte => String.fromCharCode(parseInt(byte, 2)))
+                .join('');
+        }
+
+        clearRegularBtn.addEventListener("click", () => clearField("regular-input", "regular-copy-btn"));
+        clearEncodedBtn.addEventListener("click", () => clearField("encoded-input", "encoded-copy-btn"));
+
+        textToBinaryBtn.addEventListener("click", () => {
+            if (!regularText.value) return;
+            encodedText.value = toBinary(regularText.value);
+            copyEncodedBtn.disabled = false;
+            copyEncodedBtn.title = "";
+        });
+
+        binaryToTextBtn.addEventListener("click", () => {
+            if (!encodedText.value) return;
+            try {
+                regularText.value = fromBinary(encodedText.value);
+                copyRegularBtn.disabled = false;
+                copyRegularBtn.title = "";
+            } catch (e) {
+                alert("Invalid binary input! Please enter space-separated 8-bit bytes.");
+            }
+        });
+
+        function clearField(fieldId, copyBtnId) {
+            const field = document.getElementById(fieldId);
+            const copyBtn = document.getElementById(copyBtnId);
+            field.value = "";
+            copyBtn.disabled = true;
+            copyBtn.title = "Nothing to copy!";
+        }
+    </script>
+    </script>
+    <noscript>
+        <div class="warning">
+            <img src="static/icons/Warning.png" height="5rem">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
+</body>
+</html>
