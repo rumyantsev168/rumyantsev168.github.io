@@ -7,7 +7,6 @@ class ItemSlot extends HTMLElement {
     }
 
     connectedCallback() {
-        // If assets are already loaded, proceed immediately
         if (ItemSlot.assetsLoaded) {
             this.render();
             return;
@@ -24,14 +23,14 @@ class ItemSlot extends HTMLElement {
         loadPromise.then(() => {
             ItemSlot.assetsLoaded = true;
             ItemSlot.loadingPromises.forEach(resolve => resolve());
-            ItemSlot.loadingPromises = []; // Clear queue
+            ItemSlot.loadingPromises = [];
         }).catch(console.error);
     }
 
     loadAssets() {
         return new Promise((resolve, reject) => {
-            const cssHref = "static/css/item-slot.css";
-            const jsSrc = "static/js/min/minecraftColors.min.js";
+            const cssHref = "https://rumyantsev168.github.io/static/css/item-slot.css";
+            const jsSrc = "https://rumyantsev168.github.io/static/js/min/minecraftColors.min.js";
 
             let stylesheet = document.head.querySelector(`link[href="${cssHref}"]`);
             if (!stylesheet) {
@@ -50,7 +49,7 @@ class ItemSlot extends HTMLElement {
 
             Promise.all([
                 new Promise((res, rej) => {
-                    if (stylesheet.sheet) res(); // Already loaded
+                    if (stylesheet.sheet) res();
                     stylesheet.onload = res;
                     stylesheet.onerror = () => rej(new Error("Failed to load item-slot.css"));
                 }),
