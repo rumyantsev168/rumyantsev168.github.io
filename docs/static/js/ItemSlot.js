@@ -76,12 +76,19 @@ class ItemSlot extends HTMLElement {
         }
 
         if (itemSrc) {
-            const itemImg = document.createElement("img");
-            itemImg.src = itemSrc;
-            itemImg.width = 32;
-            itemImg.height = 32;
-            itemSlot.appendChild(itemImg);
-        }
+            const img = new Image();            
+            img.onload = function() {
+                const itemImg = document.createElement("img");
+                itemImg.src = itemSrc;
+                if (this.width >= this.height) {
+                    itemImg.width = 32;
+                } else {
+                    itemImg.height = 32;
+                };
+                itemSlot.appendChild(itemImg);
+            };
+            img.src = itemSrc;
+        };
 
         if (itemCount) {
             const itemCountSpan = document.createElement("span");
