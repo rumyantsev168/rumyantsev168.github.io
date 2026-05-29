@@ -18,7 +18,7 @@ function getFullTemplate(theme) {
     }
     return `
     <div class="rumyantsev168-widget">
-        <div style="display: grid; grid-template-columns: auto 100px; gap: 0px;">
+        <div style="display: flex; gap: 0px;">
             <div class="rumyantsev168-widget-text">
                 <div class="rumyantsev168-widget-center">
                     <a href="https://rumyantsev168.github.io" class="disguised-a">
