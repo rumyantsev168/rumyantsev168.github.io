@@ -97,7 +97,9 @@
         count(messageContent, messageCharCount, 10000);
 
         function count(field, fieldCharCount, maxLength) {
-            setInterval(() => { fieldCharCount.innerText = maxLength - field.value.length }, 100);
+            field.addEventListener("input", () => {
+                fieldCharCount.innerText = maxLength - field.value.length;
+            });
         };
 
         function generate(recipient, subject, message, copyBtn) {
