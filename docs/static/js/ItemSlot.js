@@ -22,7 +22,7 @@ class ItemSlot extends HTMLElement {
             return;
         }
 
-        const loadingIndicator = document.createElement("span");
+        const loadingIndicator = document.createElement("div");
         loadingIndicator.id = "item-slot-loading";
         loadingIndicator.innerText = "Loading <item-slot> elements...";
         document.body.appendChild(loadingIndicator);
