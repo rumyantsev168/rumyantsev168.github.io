@@ -46,7 +46,7 @@
     text-shadow: 0.1em 0.1em 0px black;
 }
 
-.item-tooltip {
+.item-slot-tooltip {
     display: none;
     position: absolute;
     padding: 4px;
@@ -60,7 +60,7 @@
     white-space: nowrap;
 }
 
-.item-tooltip::after {
+.item-slot-tooltip::after {
     content: "";
     position: absolute;
     left: 0.1em;
@@ -70,27 +70,18 @@
     border: 0.1em solid #2B0A5E;
 }
 
-.item-tooltip .item-tooltip-text-shadow {
+.item-slot-tooltip .item-slot-tooltip-text-shadow {
     position: absolute;
     top: calc(4px + 0.1em);
     left: calc(4px + 0.1em);
     opacity: 25%;
 }
 
-.item-slot:hover .item-tooltip {
+.item-slot:hover .item-slot-tooltip {
     display: block;
 }
 
-.recipes {
-    margin: 5px 0px 0px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    justify-items: center;
-    text-align: left;
-}
-
-.mcui {
+.item-slot-mcui {
     background-color: #C6C6C6;
     border: 2px solid;
     border-color: #DBDBDB #5B5B5B #5B5B5B #DBDBDB;
@@ -101,28 +92,40 @@
     height: fit-content;
 }
 
-.crafting-ui {
+.item-slot-crafting-ui {
     display: flex;
     align-items: center;
     gap: 8px;
     width: fit-content;
 }
 
-.slot-grid {
+.item-slot-grid {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0px;
 }
 
-.slot-row {
+.item-slot-row {
     display: flex;
     align-items: center;
 }
 
-.crafting-arrow {
+.item-slot-crafting-arrow {
     display: inline-block;
     background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
     min-width: 32px;
     height: 26px;
+}
+
+#item-slot-loading {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #ccc;
+    border: 1px solid black;
+    border-radius: none;
+    width: fit-content;
+    height: fit-content;
+    font-size: 0.75rem;
 }

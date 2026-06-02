@@ -1,3 +1,8 @@
+/*
+TODO:
+  - Add <crafting-grid> custom element
+*/
+
 class ItemSlot extends HTMLElement {
     static assetsLoaded = false;
     static loadingPromises = [];
@@ -17,6 +22,11 @@ class ItemSlot extends HTMLElement {
             return;
         }
 
+        const loadingIndicator = document.createElement("span");
+        loadingIndicator.id = "item-slot-loading";
+        loadingIndicator.innerText = "Loading <item-slot> elements...";
+        document.body.appendChild(loadingIndicator);
+
         const loadPromise = this.loadAssets();
         ItemSlot.loadingPromises.push(this.render.bind(this));
 
@@ -24,7 +34,12 @@ class ItemSlot extends HTMLElement {
             ItemSlot.assetsLoaded = true;
             ItemSlot.loadingPromises.forEach(resolve => resolve());
             ItemSlot.loadingPromises = [];
-        }).catch(console.error);
+        }).catch(err => {
+            console.error("Failed to load assets:", err);
+        }).finally(() => {
+            const loader = document.getElementById("item-slot-loading");
+            if (loader) loader.remove();
+        });
     }
 
     loadAssets() {
@@ -99,8 +114,8 @@ class ItemSlot extends HTMLElement {
         if (itemTooltip) {
             const itemTooltipDiv = document.createElement("div");
             const itemTooltipTextShadow = document.createElement("div");
-            itemTooltipDiv.className = "item-tooltip";
-            itemTooltipTextShadow.className = "item-tooltip-text-shadow";
+            itemTooltipDiv.className = "item-slot-tooltip";
+            itemTooltipTextShadow.className = "item-slot-tooltip-text-shadow";
             let itemTooltipText = itemTooltip.replaceColorCodes();
             itemTooltipDiv.appendChild(itemTooltipText.cloneNode(true));
             itemTooltipTextShadow.appendChild(itemTooltipText.cloneNode(true));
