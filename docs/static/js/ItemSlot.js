@@ -1,6 +1,10 @@
 /*
 TODO:
-  - Add <crafting-grid> custom element
+  - Add <crafting-grid> custom element -> Added ItemSlotGrid instead
+  - Add comments where necessary -> Done (mostly)
+  - Make the <item-slot-grid> have a "continue" attribute,
+    which makes it fill in if there are lt width*height <item-slot>'s inside
+  - Remove mouseover listener on disconnectedCallback() in ItemSlot
 */
 
 class ItemSlot extends HTMLElement {
@@ -9,6 +13,7 @@ class ItemSlot extends HTMLElement {
 
     constructor() {
         super();
+        this._rendered = false;
     }
 
     connectedCallback() {
@@ -42,6 +47,8 @@ class ItemSlot extends HTMLElement {
         });
     }
 
+    // Ensures the necessary files are only loaded once
+    // I originally had it append a <link> and <script> for every <item-slot> on the page lol
     loadAssets() {
         return new Promise((resolve, reject) => {
             const cssHref = "https://rumyantsev168.github.io/static/css/item-slot.css";
@@ -78,6 +85,8 @@ class ItemSlot extends HTMLElement {
     }
 
     render() {
+        if (this._rendered) return;
+
         const itemSlot = document.createElement("div");
         itemSlot.className = "item-slot";
 
@@ -90,6 +99,7 @@ class ItemSlot extends HTMLElement {
             itemSlot.style.padding = "4px";
         }
 
+        // Makes sure the image is not stretched
         if (itemSrc) {
             const img = new Image();            
             img.onload = function() {
@@ -123,17 +133,99 @@ class ItemSlot extends HTMLElement {
             itemTooltipDiv.appendChild(itemTooltipTextShadow);
             itemSlot.appendChild(itemTooltipDiv);
 
-            document.addEventListener("mousemove", (event) => {
-                move(event, itemTooltipDiv, itemSlot);
-            });
+            const moveHandler = (event) => { move(event, itemTooltipDiv, itemSlot) };
+            this._tooltipMoveHandler = moveHandler;
+
+            document.addEventListener("mousemove", moveHandler);
         }
 
         this.appendChild(itemSlot);
+        this._rendered = true;
         console.log("Added new <item-slot> element");
+    }
+
+    disconnectedCallback() {
+        if (this._tooltipMoveHandler) {
+            document.removeEventListener("mousemove", this._tooltipMoveHandler);
+        }
+    }
+}
+
+class ItemSlotGrid extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        const size = this.getAttribute("size") || "3x3";
+        let [width, height] = size.split("x").map(Number);
+        if (isNaN(width) || isNaN(height)) {
+            console.warn("Invalid size for <crafting-grid>! Using 3x3 as default");
+            width = 3; height = 3;
+        }
+        const doContinue = this.hasAttribute("continue");
+
+        const rawHTML = this.innerHTML.trim();
+        const rows = document.createDocumentFragment();
+
+        let result;
+        if (rawHTML) {
+            const allSlots = [...this.children].filter(el => el.tagName.toLowerCase() === "item-slot");
+
+            const resultIndex = allSlots.findIndex(el => el.hasAttribute("result"));
+            if (resultIndex !== -1) {
+                result = allSlots.splice(resultIndex, 1)[0];
+            }
+
+            const slots = [...allSlots]
+            const totalSlots = width * height
+
+            for (let i = 0; i < height; i++) {
+                let rowContainer = document.createElement("div");
+                rowContainer.className = "item-slot-row";
+                for (let j = 0; j < width; j++) {
+                    const idx = i*width + j;
+                    if (idx < slots.length) {
+                        rowContainer.appendChild(slots[idx]);
+                    } else if (doContinue) {
+                        rowContainer.appendChild(document.createElement("item-slot"));
+                    }
+                }
+                rows.appendChild(rowContainer);
+            }
+        } else {
+            for (let i = 0; i < height; i++) {
+                let rowContainer = document.createElement("div");
+                rowContainer.className = "item-slot-row";
+                rowContainer.innerHTML = "<item-slot></item-slot>".repeat(width);
+                rows.appendChild(rowContainer);
+            }
+        }
+
+        const grid = document.createElement("div");
+        grid.className = "item-slot-grid";
+        grid.appendChild(rows);
+
+        const mainContainer = document.createElement("div");
+        mainContainer.classList.add("item-slot-mcui", "item-slot-crafting-ui");
+        mainContainer.appendChild(grid);
+
+        if (result) {
+            result.setAttribute("large", "");
+            const arrow = document.createElement("div");
+            arrow.className = "item-slot-crafting-arrow";
+            mainContainer.appendChild(arrow);
+            mainContainer.appendChild(result);
+        }
+
+        console.log(mainContainer);
+        this.replaceChildren(mainContainer);
+        console.log("Added new <item-slot-grid> element");
     }
 }
 
 customElements.define("item-slot", ItemSlot);
+customElements.define("item-slot-grid", ItemSlotGrid);
 
 const move = (e, el, i) => {
     try {
