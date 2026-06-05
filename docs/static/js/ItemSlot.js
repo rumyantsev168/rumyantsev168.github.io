@@ -122,6 +122,7 @@ class ItemSlot extends HTMLElement {
             itemSlot.appendChild(itemCountSpan);
         }
 
+/*
         if (itemTooltip) {
             const tooltipDiv = document.createElement("div");
             const tooltipTextShadow = document.createElement("div");
@@ -138,6 +139,7 @@ class ItemSlot extends HTMLElement {
 
             // Tooltip mousemove event listener here
         }
+*/
 
         this.appendChild(itemSlot);
         this._rendered = true;
