@@ -8,11 +8,6 @@ html {
 }
 
 main {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     margin: auto;
     padding: 15px;
     width: calc(100% - 60px);
@@ -30,6 +25,12 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     margin: 3px 0px;
+}
+
+code {
+    background: #ccc;
+    border-radius: 5px;
+    padding: 0px 3px;
 }
 
 ul, ol {

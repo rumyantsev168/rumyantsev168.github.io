@@ -3,8 +3,9 @@ TODO:
   - Add <crafting-grid> custom element -> Added ItemSlotGrid instead
   - Add comments where necessary -> Done (mostly)
   - Make the <item-slot-grid> have a "continue" attribute,
-    which makes it fill in if there are lt width*height <item-slot>'s inside
-  - Remove mouseover listener on disconnectedCallback() in ItemSlot
+    which makes it fill in if there are lt width*height <item-slot>'s inside -> Done
+  - Remove mouseover listener on disconnectedCallback() in ItemSlot -> Tooltip isn't implemented yet
+  - FIX THE TOOLTIP!!!
 */
 
 class ItemSlot extends HTMLElement {
@@ -122,21 +123,20 @@ class ItemSlot extends HTMLElement {
         }
 
         if (itemTooltip) {
-            const itemTooltipDiv = document.createElement("div");
-            const itemTooltipTextShadow = document.createElement("div");
-            itemTooltipDiv.className = "item-slot-tooltip";
-            itemTooltipTextShadow.className = "item-slot-tooltip-text-shadow";
+            const tooltipDiv = document.createElement("div");
+            const tooltipTextShadow = document.createElement("div");
+            tooltipDiv.className = "item-slot-tooltip";
+            tooltipTextShadow.className = "item-slot-tooltip-text-shadow";
+
             let itemTooltipText = itemTooltip.replaceColorCodes();
-            itemTooltipDiv.appendChild(itemTooltipText.cloneNode(true));
-            itemTooltipTextShadow.appendChild(itemTooltipText.cloneNode(true));
+            tooltipDiv.appendChild(itemTooltipText.cloneNode(true));
+            tooltipTextShadow.appendChild(itemTooltipText.cloneNode(true));
 
-            itemTooltipDiv.appendChild(itemTooltipTextShadow);
-            itemSlot.appendChild(itemTooltipDiv);
+            tooltipDiv.appendChild(tooltipTextShadow);
+            this.appendChild(tooltipDiv);
+            this._tooltipElement = tooltipDiv;
 
-            const moveHandler = (event) => { move(event, itemTooltipDiv, itemSlot) };
-            this._tooltipMoveHandler = moveHandler;
-
-            document.addEventListener("mousemove", moveHandler);
+            // Tooltip mousemove event listener here
         }
 
         this.appendChild(itemSlot);
@@ -145,9 +145,7 @@ class ItemSlot extends HTMLElement {
     }
 
     disconnectedCallback() {
-        if (this._tooltipMoveHandler) {
-            document.removeEventListener("mousemove", this._tooltipMoveHandler);
-        }
+        // Cleanup tooltip event listeners here
     }
 }
 
@@ -218,7 +216,6 @@ class ItemSlotGrid extends HTMLElement {
             mainContainer.appendChild(result);
         }
 
-        console.log(mainContainer);
         this.replaceChildren(mainContainer);
         console.log("Added new <item-slot-grid> element");
     }
@@ -226,11 +223,3 @@ class ItemSlotGrid extends HTMLElement {
 
 customElements.define("item-slot", ItemSlot);
 customElements.define("item-slot-grid", ItemSlotGrid);
-
-const move = (e, el, i) => {
-    try {
-        let rect = i.getBoundingClientRect();
-        el.style.left = e.pageX - rect.left + 25 + "px";
-        el.style.top = e.pageY - rect.top - 37 + "px";
-    } catch (err) {}
-};

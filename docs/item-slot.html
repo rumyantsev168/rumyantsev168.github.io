@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="secret page lol">
+    <link rel="icon" href="static/icons/Page.png">
+    <link rel="stylesheet" href="static/css/stylesheet.css">
+    <style>
+        main > item-slot,
+        item-slot-grid {
+            margin: 5px 0px;
+        }
+    </style>
+    <title>ItemSlot.js Showcase</title>
+</head>
+<body>
+    <main style="max-width: 800px">
+        <header>
+            <h1>Minecraft-style custom HTML elements showcase!</h1>
+            <hr>
+        </header>
+
+        <p>Here's a simple <code>&lt;item-slot&gt;</code> element.</p>
+
+        <item-slot></item-slot>
+
+        <p>
+            You can specify the item, <del>tooltip</del> and item count using attributes:
+            <ul>
+                <li><code>item</code>: Image link</li>
+                <li><del><code>tooltip</code>: Text, supports Minecraft color codes</del> - currently not supported, being worked on</li>
+                <li><code>count</code>: You can put here any text you want, lol</li>
+            </ul>
+        </p>
+
+        <item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" count="999" tooltip="&bEnchanted Golden Apple"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" count="xyz" tooltip="&casdf"></item-slot>
+
+        <p>
+            Also there's a <code>&lt;item-slot-grid&gt;</code> element. You can set it's size using <code>size</code> attribute in format "WxH" where W is width and H is height. Default size is "3x3". I.e. using <code>&lt;item-slot-grid size="4x3"&gt;&lt;item-slot-grid&gt;</code> will generate this:
+        </p>
+
+        <item-slot-grid size="4x3"></item-slot-grid>
+
+        <p>
+            <code>&lt;item-slot-grid&gt;</code> can have <code>&lt;item-slot&gt;</code> elements as children. It will split them in groups of W elements and display those groups as rows. First W children will be in the first row, second W children - in the second row and so on.
+        </p>
+        <p>
+            If there are less than W*H <code>&lt;item-slot&gt;</code> elements inside, you can add a <code>continue</code> attribute, which makes it fill in to W*H slots.
+        </p>
+        <p>
+            Here's an example (use Inspect Element to see structure). The first one won't add new slots.
+        </p>
+
+        <item-slot-grid size="3x2">
+            <item-slot item="static/preani.gif" tooltip="preani"></item-slot>
+            <item-slot item="static/preani.gif" tooltip="preani"></item-slot>
+            <item-slot></item-slot>
+            <item-slot></item-slot>
+            <item-slot></item-slot>
+        </item-slot-grid>
+
+        <p>
+            But this one has a <code>continue</code> attribute.
+        </p>
+
+        <item-slot-grid size="3x2" continue>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" count="2"></item-slot>
+        </item-slot-grid>
+
+        <p>
+            Finally, you can easily display a crafting recipe with this! Just add an <code>&lt;item-slot&gt;</code> element with a <code>result</code> attribute inside <code>&lt;item-slot-grid&gt;</code>.
+        </p>
+
+        <item-slot-grid>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
+            <item-slot></item-slot>
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
+            <item-slot></item-slot>
+            <item-slot result item="https://minecraft.wiki/images/Invicon_Diamond_Pickaxe.png" tooltip="Diamond Pickaxe"></item-slot>
+        </item-slot-grid>
+
+        <p>
+            Everything gets added with one JS script - <a href="static/js/ItemSlot.js">ItemSlot.js</a>. Just add it to your page and use all of the above features!
+        </p>
+
+        <code>&lt;script src="https://rumyantsev168.github.io/static/js/ItemSlot.js"&gt;&lt;script&gt;</code>
+    </main>
+    <script src="static/js/main.js"></script>
+    <script src="static/js/ItemSlot.js"></script>
+    <noscript>
+        <div class="warning">
+            <img src="static/icons/Warning.png" height="20px">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
+</body>
+</html>

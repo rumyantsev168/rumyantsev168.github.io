@@ -3,6 +3,10 @@
     src: url("https://rumyantsev168.github.io/static/font/MinecraftRegular.otf");
 }
 
+item-slot, item-slot-grid {
+    display: inline-block;
+}
+
 .item-slot {
     position: relative;
     background: #8B8B8B no-repeat center center / 32px 32px;
@@ -48,7 +52,7 @@
 
 .item-slot-tooltip {
     display: none;
-    position: absolute;
+    position: fixed;
     padding: 4px;
     background: #1E0F1E;
     color: #ffffff;
@@ -58,6 +62,8 @@
     width: fit-content;
     z-index: 9999;
     white-space: nowrap;
+    pointer-events: none;
+    box-sizing: border-box;
 }
 
 .item-slot-tooltip::after {
