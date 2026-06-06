@@ -252,10 +252,6 @@ const move = (e, t) => {
             x = maxX;
         }
 
-        if (x < 5) {
-            x = 5;
-        }
-
         t.style.left = x + "px";
         t.style.top = y + "px";
     } catch (err) {}
