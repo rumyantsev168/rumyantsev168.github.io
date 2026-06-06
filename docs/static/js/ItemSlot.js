@@ -231,7 +231,24 @@ customElements.define("item-slot-grid", ItemSlotGrid);
 
 const move = (e, t) => {
     try {
-        t.style.left = e.clientX + 25 + "px";
-        t.style.top = Math.max(0, e.clientY - 37) + "px";
+        const offsetX = 25;
+        const offsetY = -37;
+        let x = e.clientX + offsetX;
+        let y = Math.max(0, e.clientY + offsetY);
+
+        const tooltipRect = t.getBoundingClientRect();
+        const tooltipWidth = tooltipRect.width;
+
+        const maxX = window.innerWidth - tooltipWidth;
+        if (x > maxX) {
+            x = maxX;
+        }
+
+        if (x < 5) {
+            x = 5;
+        }
+
+        t.style.left = x + "px";
+        t.style.top = y + "px";
     } catch (err) {}
 };

@@ -17,6 +17,7 @@ item-slot, item-slot-grid {
     image-rendering: pixelated;
     cursor: default;
     text-align: center;
+    box-sizing: content-box;
 }
 
 .item-slot::before, .item-slot::after {
@@ -63,7 +64,7 @@ item-slot, item-slot-grid {
     z-index: 9999;
     white-space: nowrap;
     pointer-events: none;
-    box-sizing: border-box;
+    line-height: initial;
 }
 
 .item-slot-tooltip::after {
@@ -81,6 +82,7 @@ item-slot, item-slot-grid {
     top: calc(4px + 0.1em);
     left: calc(4px + 0.1em);
     opacity: 25%;
+    line-height: initial;
 }
 
 .item-slot:hover .item-slot-tooltip {
