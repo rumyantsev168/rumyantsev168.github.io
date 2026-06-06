@@ -57,19 +57,48 @@
             If there are less than W*H <code>&lt;item-slot&gt;</code> elements inside, you can add a <code>continue</code> attribute, which makes it fill in to W*H slots.
         </p>
         <p>
-            Here's an example (use Inspect Element to see structure). The first one won't add new slots.
+            Here's an example. This element:
+        </p>
+
+        <p>
+            <code class="code-block"> 
+&lt;item-slot-grid size="3x2"&gt;
+    &lt;item-slot item="static/preani.gif" tooltip="preani"&gt;&lt;/item-slot&gt;
+    &lt;item-slot item="static/preani.gif" tooltip="preani"&gt;&lt;/item-slot&gt;
+    &lt;item-slot&gt;&lt;/item-slot&gt;
+    &lt;item-slot&gt;&lt;/item-slot&gt;
+    &lt;item-slot&gt;&lt;/item-slot&gt;
+&lt;/item-slot-grid&gt;
+            </code>
+        </p>
+
+        <p>
+            Will produce this:
         </p>
 
         <item-slot-grid size="3x2">
-            <item-slot item="static/preani.gif" tooltip="preani"></item-slot>
-            <item-slot item="static/preani.gif" tooltip="preani"></item-slot>
+            <item-slot item="static/preani1.gif" tooltip="preani 1"></item-slot>
+            <item-slot item="static/preani2.gif" tooltip="preani 2"></item-slot>
             <item-slot></item-slot>
             <item-slot></item-slot>
             <item-slot></item-slot>
         </item-slot-grid>
 
         <p>
-            But this one has a <code>continue</code> attribute.
+            But this one has a <code>continue</code> attribute:
+        </p>
+
+        <p>
+            <code class="code-block">
+&lt;item-slot-grid size="3x2" continue&gt;
+    &lt;item-slot item="https://minecraft.wiki/images/Invicon_Stick.png"&gt;&lt;/item-slot&gt;
+    &lt;item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" count="2"&gt;&lt;/item-slot&gt;
+&lt;/item-slot-grid&gt;
+            </code>
+        </p>
+
+        <p>
+            And here's the result:
         </p>
 
         <item-slot-grid size="3x2" continue>
@@ -97,7 +126,6 @@
         <p>
             Everything gets added with one JS script - <a href="static/js/ItemSlot.js">ItemSlot.js</a>. Just add it to your page and use all of the above features!
         </p>
-
         <p>
             Click to copy -
             <code id="embed" onclick="copyElement('embed')">&lt;script src="https://rumyantsev168.github.io/static/js/ItemSlot.js"&gt;&lt;script&gt;</code>

@@ -121,6 +121,7 @@ item-slot, item-slot-grid {
 
 .item-slot-crafting-arrow {
     display: inline-block;
+    image-rendering: pixelated;
     background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
     min-width: 32px;
     height: 26px;

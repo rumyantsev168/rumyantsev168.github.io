@@ -42,6 +42,16 @@ code {
     font-size: 0.75rem;
 }
 
+code.code-block {
+    display: block;
+    margin: 8px 0;
+    padding: 8px;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+}
+
 ul, ol {
     margin: 5px 0px;
 }
