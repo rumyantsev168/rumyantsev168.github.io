@@ -23,7 +23,7 @@
                 <div class="buttons">
                     <button type="button" id="encode-btn">Encode</button>
                     <button type="button" id="regular-input-clear-btn">Clear</button>
-                    <button type="button" disabled title="Nothing to copy!" id="regular-copy-btn" onclick="selectTextarea('regular-input')">Copy</button>
+                    <button type="button" disabled title="Nothing to copy!" id="regular-copy-btn" onclick="copyTextarea('regular-input')">Copy</button>
                 </div>
             </div>
 
@@ -34,13 +34,13 @@
                 <div class="buttons">
                     <button type="button" id="decode-btn">Decode</button>
                     <button type="button" id="encoded-input-clear-btn">Clear</button>
-                    <button type="button" disabled title="Nothing to copy!" id="encoded-copy-btn" onclick="selectTextarea('encoded-input')">Copy</button>
+                    <button type="button" disabled title="Nothing to copy!" id="encoded-copy-btn" onclick="copyTextarea('encoded-input')">Copy</button>
                 </div>
             </div>
         </form>
     </main>
     <script src="static/js/main.js"></script>
-    <script src="static/js/selection.js"></script>
+    <script src="static/js/copy.js"></script>
     <script>
         const regularText = document.getElementById("regular-input");
         const encodedText = document.getElementById("encoded-input");

@@ -74,12 +74,12 @@
             <h3>Result</h3>
             <p class="results-field" id="results-field">Your link will appear here once you click "Generate"!</p>
             <div class="buttons">
-                <button type="button" disabled title="Nothing to copy!" id="copy-btn" onclick="selectInput('results-field')">Copy</button>
+                <button type="button" disabled title="Nothing to copy!" id="copy-btn" onclick="copyInput('results-field')">Copy</button>
             </div>
         </div>
     </main>
     <script src="static/js/main.js"></script>
-    <script src="static/js/selection.js"></script>
+    <script src="static/js/copy.js"></script>
     <script>
         const recipient = document.getElementById("recipient-input");
         const titleContent = document.getElementById("title-input");

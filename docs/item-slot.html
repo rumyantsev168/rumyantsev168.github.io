@@ -11,11 +11,15 @@
         item-slot-grid {
             margin: 10px 0;
         }
+
+        #embed {
+            cursor: pointer;
+        }
     </style>
     <title>ItemSlot.js Showcase</title>
 </head>
 <body>
-    <main style="max-width: 800px;">
+    <main style="max-width: 850px;">
         <header>
             <center><h1>Minecraft-style custom HTML elements showcase!</h1></center>
             <hr>
@@ -94,8 +98,13 @@
             Everything gets added with one JS script - <a href="static/js/ItemSlot.js">ItemSlot.js</a>. Just add it to your page and use all of the above features!
         </p>
 
-        <code>&lt;script src="https://rumyantsev168.github.io/static/js/ItemSlot.js"&gt;&lt;script&gt;</code>
+        <p>
+            Click to copy -
+            <code id="embed" onclick="copyElement('embed')">&lt;script src="https://rumyantsev168.github.io/static/js/ItemSlot.js"&gt;&lt;script&gt;</code>
+        </p>
     </main>
+    <script src="static/js/main.js"></script>
+    <script src="static/js/copy.js"></script>
     <script src="static/js/ItemSlot.js"></script>
     <noscript>
         <div class="warning">

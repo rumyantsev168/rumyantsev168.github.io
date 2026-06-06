@@ -31,6 +31,14 @@ class ItemSlot extends HTMLElement {
 
         const loadingIndicator = document.createElement("div");
         loadingIndicator.id = "item-slot-loading";
+        loadingIndicator.style.position = "fixed";
+        loadingIndicator.style.bottom = "0";
+        loadingIndicator.style.left = "0";
+        loadingIndicator.style.background = "#f2f2f2";
+        loadingIndicator.style.border = "1px solid black";
+        loadingIndicator.style.borderRadius = "none";
+        loadingIndicator.style.width = "fit-content";
+        loadingIndicator.style.height = "fit-content";
         loadingIndicator.innerText = "Loading <item-slot> elements...";
         document.body.appendChild(loadingIndicator);
 
