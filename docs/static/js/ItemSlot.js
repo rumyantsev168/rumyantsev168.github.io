@@ -5,7 +5,8 @@ TODO:
   - Make the <item-slot-grid> have a "continue" attribute,
     which makes it fill in if there are lt width*height <item-slot>'s inside -> Done
   - Remove mouseover listener on disconnectedCallback() in ItemSlot -> Tooltip isn't implemented yet
-  - FIX THE TOOLTIP!!!
+  - FIX THE TOOLTIP!!! -> Works now
+  - Prevent horizontal tooltip overflow
 */
 
 class ItemSlot extends HTMLElement {
@@ -122,7 +123,6 @@ class ItemSlot extends HTMLElement {
             itemSlot.appendChild(itemCountSpan);
         }
 
-/*
         if (itemTooltip) {
             const tooltipDiv = document.createElement("div");
             const tooltipTextShadow = document.createElement("div");
@@ -134,12 +134,13 @@ class ItemSlot extends HTMLElement {
             tooltipTextShadow.appendChild(itemTooltipText.cloneNode(true));
 
             tooltipDiv.appendChild(tooltipTextShadow);
-            this.appendChild(tooltipDiv);
-            this._tooltipElement = tooltipDiv;
+            itemSlot.appendChild(tooltipDiv);
 
-            // Tooltip mousemove event listener here
+            const moveHandler = (event) => { move(event, tooltipDiv) };
+            this._tooltipMoveHandler = moveHandler;
+
+            document.addEventListener("mousemove", this._tooltipMoveHandler);
         }
-*/
 
         this.appendChild(itemSlot);
         this._rendered = true;
@@ -147,7 +148,9 @@ class ItemSlot extends HTMLElement {
     }
 
     disconnectedCallback() {
-        // Cleanup tooltip event listeners here
+        if (this._tooltipMoveHandler) {
+            document.removeEventListener("mousemove", this._tooltipMoveHandler);
+        }
     }
 }
 
@@ -225,3 +228,10 @@ class ItemSlotGrid extends HTMLElement {
 
 customElements.define("item-slot", ItemSlot);
 customElements.define("item-slot-grid", ItemSlotGrid);
+
+const move = (e, t) => {
+    try {
+        t.style.left = e.clientX + 25 + "px";
+        t.style.top = Math.max(0, e.clientY - 37) + "px";
+    } catch (err) {}
+};
