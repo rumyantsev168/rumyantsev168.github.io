@@ -6,7 +6,7 @@ TODO:
     which makes it fill in if there are lt width*height <item-slot>'s inside -> Done
   - Remove mouseover listener on disconnectedCallback() in ItemSlot -> Tooltip isn't implemented yet
   - FIX THE TOOLTIP!!! -> Works now
-  - Prevent horizontal tooltip overflow
+  - Prevent horizontal tooltip overflow -> Done
 */
 
 class ItemSlot extends HTMLElement {
