@@ -238,13 +238,17 @@ const move = (e, t) => {
 
         const tooltipRect = t.getBoundingClientRect();
         const tooltipWidth = tooltipRect.width;
+        const tooltipHeight = tooltipRect.height;
 
         const maxX = window.innerWidth - tooltipWidth;
         if (x > maxX) {
             x = maxX;
         }
 
-        t.style.left = x + "px";
-        t.style.top = y + "px";
+        const maxY = window.innerHeight - tooltipHeight;
+        y = Math.min(Math.max(0, y), maxY);
+
+        t.style.left = `calc(${x}px - 0.1em)`;
+        t.style.top = `calc(${y}px + 0.1em)`;
     } catch (err) {}
 };

@@ -84,10 +84,10 @@ item-slot, item-slot-grid {
 
 .item-slot-tooltip .item-slot-tooltip-text-shadow {
     position: absolute;
-    top: calc(0.1em + 0.1em);
+    top: calc(0.2em + 0.1em);
     left: calc(0.4em + 0.1em);
     opacity: 25%;
-    line-height: initial;
+    line-height: 1em;
 }
 
 .item-slot:hover .item-slot-tooltip {
