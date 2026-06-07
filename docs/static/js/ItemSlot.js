@@ -209,15 +209,25 @@ class ItemSlotGrid extends HTMLElement {
         grid.appendChild(rows);
 
         const mainContainer = document.createElement("div");
-        mainContainer.classList.add("item-slot-mcui", "item-slot-crafting-ui");
-        mainContainer.appendChild(grid);
+        mainContainer.className = "item-slot-mcui";
+        const title = this.getAttribute("title");
+        if (title) {
+            const titleSpan = document.createElement("span");
+            titleSpan.innerText = title;
+            mainContainer.style.paddingTop = "0.1em";
+            mainContainer.appendChild(titleSpan);
+        }
 
         if (result) {
             result.setAttribute("large", "");
             const arrow = document.createElement("div");
             arrow.className = "item-slot-crafting-arrow";
-            mainContainer.appendChild(arrow);
-            mainContainer.appendChild(result);
+            const craftingDiv = document.createElement("div");
+            craftingDiv.className = "item-slot-crafting-ui";
+            craftingDiv.append(grid, arrow, result);
+            mainContainer.appendChild(craftingDiv);
+        } else {
+            mainContainer.appendChild(grid);
         }
 
         this.replaceChildren(mainContainer);
