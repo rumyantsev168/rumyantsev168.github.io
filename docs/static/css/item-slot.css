@@ -54,7 +54,7 @@ item-slot, item-slot-grid {
 .item-slot-tooltip {
     display: none;
     position: fixed;
-    padding: 4px;
+    padding: 0.2em 0.3em 0.2em 0.4em;
     background: #1E0F1E;
     color: #ffffff;
     font-family: MC-Regular;
@@ -64,23 +64,28 @@ item-slot, item-slot-grid {
     z-index: 9999;
     white-space: nowrap;
     pointer-events: none;
-    line-height: initial;
+    line-height: 1em;
+    box-shadow:
+        0 -0.1em 0 0 #1E0F1E,
+        0  0.1em 0 0 #1E0F1E,
+        -0.1em 0 0 0 #1E0F1E,
+        0.1em 0 0 0 #1E0F1E;
 }
 
 .item-slot-tooltip::after {
     content: "";
     position: absolute;
-    left: 0.1em;
-    right: 0.1em;
-    top: 0.1em;
-    bottom: 0.1em;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     border: 0.1em solid #2B0A5E;
 }
 
 .item-slot-tooltip .item-slot-tooltip-text-shadow {
     position: absolute;
-    top: calc(4px + 0.1em);
-    left: calc(4px + 0.1em);
+    top: calc(0.1em + 0.1em);
+    left: calc(0.4em + 0.1em);
     opacity: 25%;
     line-height: initial;
 }

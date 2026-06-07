@@ -1,14 +1,3 @@
-/*
-TODO:
-  - Add <crafting-grid> custom element -> Added ItemSlotGrid instead
-  - Add comments where necessary -> Done (mostly)
-  - Make the <item-slot-grid> have a "continue" attribute,
-    which makes it fill in if there are lt width*height <item-slot>'s inside -> Done
-  - Remove mouseover listener on disconnectedCallback() in ItemSlot -> Tooltip isn't implemented yet
-  - FIX THE TOOLTIP!!! -> Works now
-  - Prevent horizontal tooltip overflow -> Done
-*/
-
 class ItemSlot extends HTMLElement {
     static assetsLoaded = false;
     static loadingPromises = [];
@@ -61,7 +50,9 @@ class ItemSlot extends HTMLElement {
     // I originally had it append a <link> and <script> for every <item-slot> on the page lol
     loadAssets() {
         return new Promise((resolve, reject) => {
-            const cssHref = "https://rumyantsev168.github.io/static/css/item-slot.css";
+            const useLocal = window.ITEM_SLOT_USE_LOCAL_ASSETS;
+            const cssHref = useLocal ? "static/css/item-slot.css" :
+                                       "https://rumyantsev168.github.io/static/css/item-slot.css";
             const jsSrc = "https://rumyantsev168.github.io/static/js/min/minecraftColors.min.js";
 
             let stylesheet = document.head.querySelector(`link[href="${cssHref}"]`);
@@ -237,6 +228,7 @@ class ItemSlotGrid extends HTMLElement {
 customElements.define("item-slot", ItemSlot);
 customElements.define("item-slot-grid", ItemSlotGrid);
 
+// Moves the tooltip and also prevents overflow
 const move = (e, t) => {
     try {
         const offsetX = 25;
