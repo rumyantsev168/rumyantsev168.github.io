@@ -5,6 +5,7 @@
 
 item-slot, item-slot-grid {
     display: inline-block;
+    vertical-align: middle;
 }
 
 .item-slot {
@@ -18,6 +19,9 @@ item-slot, item-slot-grid {
     cursor: default;
     text-align: center;
     box-sizing: content-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .item-slot::before, .item-slot::after {
@@ -98,11 +102,13 @@ item-slot, item-slot-grid {
     background-color: #C6C6C6;
     border: 2px solid;
     border-color: #DBDBDB #5B5B5B #5B5B5B #DBDBDB;
-    padding: 6px;
+    padding: 0.4em;
     text-align: left;
     white-space: nowrap;
     vertical-align: bottom;
     height: fit-content;
+    font-family: MC-Regular;
+    color: #373737;
 }
 
 .item-slot-crafting-ui {
@@ -121,7 +127,7 @@ item-slot, item-slot-grid {
 
 .item-slot-row {
     display: flex;
-    align-items: left;
+    align-items: center;
 }
 
 .item-slot-crafting-arrow {
