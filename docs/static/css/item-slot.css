@@ -106,6 +106,7 @@ item-slot, item-slot-grid {
     text-align: left;
     white-space: nowrap;
     vertical-align: bottom;
+    width: fit-content;
     height: fit-content;
     font-family: MC-Regular;
     color: #373737;
