@@ -6,41 +6,39 @@
 item-slot, item-slot-grid {
     display: inline-block;
     vertical-align: middle;
+    font-size: 16px;
 }
 
 .item-slot {
     position: relative;
-    background: #8B8B8B no-repeat center center / 32px 32px;
+    background: #8B8B8B no-repeat center center / 2em 2em;
     border: 2px solid;
     border-color: #373737 #FFF #FFF #373737;
-    width: 32px;
-    height: 32px;
+    width: 2em;
+    height: 2em;
     image-rendering: pixelated;
     cursor: default;
     text-align: center;
     box-sizing: content-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .item-slot::before, .item-slot::after {
     content: "";
     position: absolute;
     background-color: #8B8B8B;
-    height: 2px;
-    width: 2px;
+    height: 0.1em;
+    width: 0.1em;
     pointer-events: none;
 }
 
 .item-slot::before {
-    bottom: -2px;
-    left: -2px;
+    bottom: -0.1em;
+    left: -0.1em;
 }
 
 .item-slot::after {
-    top: -2px;
-    right: -2px;
+    top: -0.1em;
+    right: -0.1em;
 }
 
 .item-slot > span {
@@ -49,10 +47,27 @@ item-slot, item-slot-grid {
     right: 0;
     line-height: 1em;
     width: fit-content;
-    font-size: 16px;
     font-family: MC-Regular;
+    font-size: 1em;
     color: #ffffff;
     text-shadow: 0.1em 0.1em 0px black;
+    z-index: 100;
+}
+
+.item-slot-durability {
+    position: absolute;
+    bottom: 0.2em;
+    left: 0.2em;
+    height: 0.1em;
+}
+
+.item-slot-durability-bg {
+    position: absolute;
+    bottom: 0.1em;
+    left: 0.2em;
+    width: 1.7em;
+    height: 0.2em;
+    background-color: #1E0F1E;
 }
 
 .item-slot-tooltip {
@@ -62,7 +77,7 @@ item-slot, item-slot-grid {
     background: #1E0F1E;
     color: #ffffff;
     font-family: MC-Regular;
-    font-size: 1rem;
+    font-size: 1em;
     text-align: left;
     width: fit-content;
     z-index: 9999;
@@ -100,7 +115,7 @@ item-slot, item-slot-grid {
 
 .item-slot-mcui {
     background-color: #C6C6C6;
-    border: 2px solid;
+    border: 0.1em solid;
     border-color: #DBDBDB #5B5B5B #5B5B5B #DBDBDB;
     padding: 0.4em;
     text-align: left;
@@ -115,7 +130,7 @@ item-slot, item-slot-grid {
 .item-slot-crafting-ui {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5em;
     width: fit-content;
 }
 
@@ -123,7 +138,7 @@ item-slot, item-slot-grid {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0px;
+    gap: 0;
 }
 
 .item-slot-row {
@@ -135,6 +150,6 @@ item-slot, item-slot-grid {
     display: inline-block;
     image-rendering: pixelated;
     background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
-    min-width: 32px;
-    height: 26px;
+    min-width: 2em;
+    height: 1.6em;
 }

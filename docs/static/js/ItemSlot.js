@@ -39,7 +39,7 @@ class ItemSlot extends HTMLElement {
             ItemSlot.loadingPromises.forEach(resolve => resolve());
             ItemSlot.loadingPromises = [];
         }).catch(err => {
-            console.error("Failed to load assets:", err);
+            console.error("Failed to load:", err);
         }).finally(() => {
             const loader = document.getElementById("item-slot-loading");
             if (loader) loader.remove();
@@ -95,9 +95,10 @@ class ItemSlot extends HTMLElement {
         const itemSrc = this.getAttribute("item");
         const itemCount = this.getAttribute("count");
         const itemTooltip = this.getAttribute("tooltip");
+        const itemDurability = parseInt(this.getAttribute("durability"));
 
         if (isLarge) {
-            itemSlot.style.padding = "4px";
+            itemSlot.style.padding = "0.25em";
         }
 
         // Makes sure the image is not stretched
@@ -107,9 +108,9 @@ class ItemSlot extends HTMLElement {
                 const itemImg = document.createElement("img");
                 itemImg.src = itemSrc;
                 if (this.width >= this.height) {
-                    itemImg.width = 32;
+                    itemImg.style.width = "2em";
                 } else {
-                    itemImg.height = 32;
+                    itemImg.style.height = "2em";
                 };
                 itemSlot.appendChild(itemImg);
             };
@@ -120,6 +121,32 @@ class ItemSlot extends HTMLElement {
             const itemCountSpan = document.createElement("span");
             itemCountSpan.innerText = itemCount;
             itemSlot.appendChild(itemCountSpan);
+        }
+
+        if (!isNaN(itemDurability)) {
+            const progress = itemDurability / 13;
+
+            const durabilityBar = document.createElement("div");
+            durabilityBar.className = "item-slot-durability";
+            durabilityBar.style.padding = isLarge ? "0.25em" : "0";
+            durabilityBar.style.width = `${1.7 * Math.abs(progress)}em`;
+
+            let hueProgress;
+            if (progress >= 0) {
+                hueProgress = progress;
+            } else {
+                durabilityBar.style.transform = "scaleX(-1) translate(100%)";
+                hueProgress = 0;
+            }
+            
+            const hue = 120 * hueProgress;
+            const saturation = 100;
+            const lightness = 40;
+            durabilityBar.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+
+            const durabilityBarBg = document.createElement("div");
+            durabilityBarBg.className = "item-slot-durability-bg";
+            itemSlot.append(durabilityBarBg, durabilityBar);
         }
 
         if (itemTooltip) {

@@ -19,7 +19,7 @@
     <title>ItemSlot.js Showcase</title>
 </head>
 <body>
-    <main style="max-width: 900px;">
+    <main style="max-width: 1000px;">
         <header>
             <center><h1>Minecraft-style custom HTML elements showcase!</h1></center>
             <hr>
@@ -32,17 +32,34 @@
         <p>
             Available attributes:
             <ul>
+                <li><code>large</code>: Makes it large</li>
                 <li><code>item</code>: Image link</li>
                 <li><code>tooltip</code>: Text, supports Minecraft color codes</li>
                 <li><code>count</code>: You can put here any text you want, lol</li>
-                <li><code>large</code>: Makes it large</li>
+                <li><code>durability</code>: Any integer, adds a durability bar for the item</li>
             </ul>
         </p>
 
         <item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" count="999" tooltip="&bEnchanted Golden Apple"></item-slot>
         <item-slot tooltip="Air" count="&infin;"></item-slot>
-        <item-slot item="https://minecraft.wiki/images/Uncraftable_Splash_Potion_JE2.png" tooltip="&oop ahh splash potion &r(#0438)\n&9Haste potion.potency.127 (8:00)\nStrength potion.potency.127 (8:00)\nRegeneration potion.potency.127 (8:00)\nResistance potion.potency.127 (8:00)\nFire Resistance potion.potency.127 (8:00)\nWater Breathing potion.potency.127 (8:00)\nNight Vision potion.potency.127 (8:00)\nHealth Boost potion.potency.127 (8:00)\nAbsorption potion.potency.127 (8:00)\nSaturation potion.potency.127 (8:00)\n\n&5When Applied:\n&9&nbsp;+1280 Attack Speed\n&nbsp;+384 Attack Damage\n&nbsp;+512 Max Health\n&o&5Extremely OP\n&r&8minecraft:splash_potion\nNBT: 4 tag(s)"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Uncraftable_Splash_Potion_JE2.png" tooltip="&oop ahh splash potion &r(#0438)\n&9Haste potion.potency.127 (8:00)\nStrength potion.potency.127 (8:00)\nRegeneration potion.potency.127 (8:00)\nResistance potion.potency.127 (8:00)\nFire Resistance potion.potency.127 (8:00)\nWater Breathing potion.potency.127 (8:00)\nNight Vision potion.potency.127 (8:00)\nHealth Boost potion.potency.127 (8:00)\nAbsorption potion.potency.127 (8:00)\nSaturation potion.potency.127 (8:00)\n\n&5When Applied:\n&9&nbsp;+1280 Attack Speed\n&nbsp;+384 Attack Damage\n&nbsp;+512 Max Health\n&o&5Extremely OP\n&r&8minecraft:splash_potion\nNBT: 4 tag(s)" durability="10"></item-slot>
         <item-slot large item="https://minecraft.wiki/images/thumb/Baby_Chicken_JE3_BE3.png/200px-Baby_Chicken_JE3_BE3.png" count="xyz" tooltip="&cchirp"></item-slot>
+        <br>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="0"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="1"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="2"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="3"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="4"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="5"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="6"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="7"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="8"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="9"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="10"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="11"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="12"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="13"></item-slot>
+
 
         <p>
             Also there's an <code>&lt;item-slot-grid&gt;</code> element. You can set it's size using <code>size</code> attribute in format "WxH" where W is width and H is height. Default size is "3x3".
@@ -120,9 +137,9 @@
         </p>
 
         <item-slot-grid title="Crafting">
-            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
-            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
-            <item-slot item="https://minecraft.wiki/images/Invicon_Block_of_Diamond.png" tooltip="Block of Diamond"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond"></item-slot>
             <item-slot></item-slot>
             <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
             <item-slot></item-slot>
@@ -157,6 +174,10 @@
         <item-slot-grid size="1x1">
             <item-slot large item="https://minecraft.wiki/images/Invicon_Dirt.png" tooltip="Dirt"></item-slot>
             <item-slot result item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond" count="64"></item-slot>
+        </item-slot-grid>
+
+        <item-slot-grid size="1x1">
+            <item-slot item="https://minecraft.wiki/images/Invicon_Diamond_Pickaxe.png" tooltip="Diamond Pickaxe" durability="-7"></item-slot>
         </item-slot-grid>
 
         <p>
