@@ -137,8 +137,7 @@ button:disabled {
 
 .buttons {
     display: flex;
-    flex-direction: row;
-    align-items: right;
+    align-items: flex-end;
     gap: 10px;
 }
 
@@ -163,6 +162,7 @@ label {
     border: 1px solid gray;
     border-radius: 3px;
     box-shadow: 2px 2px 5px #00000020;
+    z-index: 999;
 }
 
 .warning {

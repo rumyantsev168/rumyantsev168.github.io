@@ -8,10 +8,17 @@
     <link rel="stylesheet" href="static/css/stylesheet.css">
     <!-- <link rel="stylesheet" href="static/css/custom-cursor.css"> -->
     <style>
-        #codes, #preview {
+        p#codes, p#preview {
             font-family: Minecraft;
         }
-        #result {
+        code#result {
+            cursor: pointer;
+        }
+        div.popup {
+            display: none;
+            padding: 10px;
+        }
+        div.popup#tooltip-templates > img {
             cursor: pointer;
         }
     </style>
@@ -34,8 +41,11 @@
         <form id="form" class="form">
             <textarea id="tooltip-text" style="font-family: monospace;"></textarea>
             <div style="display: flex; align-items: center; justify-content: space-between;">
-                <small class="a" onclick="showHint()">Color codes</small>
-                <div class="buttons" style="width: fit-content;">
+                <div style="display: flex; align-items: center; gap: 10px; width: fit-content;">
+                    <small class="a" onclick="showPopup('color-codes-hint')">Color codes help</small>
+                    <small class="a" onclick="showPopup('tooltip-templates')">Tooltip templates</small>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; width: fit-content;">
                     <button type="button" id="clear">Clear</button>
                     <button type="button" id="set-tooltip">Set Tooltip</button>
                     <button type="button" id="get-result">Get Result</button>
@@ -43,8 +53,8 @@
             </div>
         </form>
     </main>
-    <div id="popup-bg" style="display: none; position: fixed; top: 0; width: 100%; height: 100%; background: #00000040" onclick="hideHint()"></div>
-    <div class="popup" id="popup" style="display: none; padding: 10px; z-index: 999">
+    <div id="popup-bg" style="display: none; position: fixed; top: 0; width: 100%; height: 100%; background: #00000040" onclick="hidePopups()"></div>
+    <div class="popup" id="color-codes-hint">
         <p id="codes" style="padding: 5px; background: #fff9ec; color: black;">
             &00 &11 &22 &33 &44
             &55 &66 &77 &88 &99
@@ -58,6 +68,9 @@
             &rr &rMinecraft
         </p>
     </div>
+    <div class="popup" id="tooltip-templates">
+        <img src="static/BasicItem.png" id="template-1" title="Default Item">
+    </div>
     <script src="static/js/main.js"></script>
     <script src="static/js/copy.js"></script>
     <script src="static/js/ItemSlot.js"></script>
@@ -66,15 +79,15 @@
         const codes = document.getElementById("codes");
         codes.replaceChildren(codes.innerText.trim().replaceColorCodes());
 
-        const hint = document.getElementById("popup");
-        const hintBg = document.getElementById("popup-bg");
-        function showHint() {
-            hint.style.display = "block";
-            hintBg.style.display = "block";
+        const popupBg = document.getElementById("popup-bg");
+        function showPopup(id) {
+            document.getElementById(id).style.display = "block";
+            popupBg.style.display = "block";
         };
-        function hideHint() {
-            hint.style.display = "none"
-            hintBg.style.display = "none"
+        function hidePopups() {
+            const popups = document.getElementsByClassName("popup");
+            for (const el of popups) { el.style.display = "none" };
+            popupBg.style.display = "none";
         };
 
         const slot = document.getElementById("slot");
@@ -93,8 +106,13 @@
 
         const setTooltipBtn = document.getElementById("set-tooltip");
         setTooltipBtn.onclick = () => {
-            slot.setAttribute("tooltip", text.value.replaceAll(" ", "\u00A0"));
+            slot.setAttribute("tooltip", text.value.replaceAll("\n", "\\n").replaceAll(" ", "\u00A0"));
         }
+
+        document.getElementById("template-1").addEventListener("click", () => {
+            text.value = `&r&fItem Name (#0000)\n&r&7Enchantment I\n&r&7Enchantment II\n&r&7Enchantment III\n\n&o&dDescription\n&r&8minecraft:item_name\n&o&9Minecraft`;
+            hidePopups();
+        });
     </script>
     <noscript>
         <div class="warning">

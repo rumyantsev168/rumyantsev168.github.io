@@ -127,8 +127,8 @@ class ItemSlot extends HTMLElement {
             tooltipTextShadow.className = "item-slot-tooltip-text-shadow";
 
             const itemTooltipText = itemTooltip.replace("&k", "").replaceColorCodes();
-            tooltipDiv.appendChild(itemTooltipText);
-            tooltipTextShadow.appendChild(tooltipDiv.firstChild.cloneNode(true));
+            tooltipDiv.appendChild(itemTooltipText.cloneNode(true));
+            tooltipTextShadow.appendChild(itemTooltipText.cloneNode(true));
 
             tooltipDiv.appendChild(tooltipTextShadow);
             itemSlot.appendChild(tooltipDiv);
