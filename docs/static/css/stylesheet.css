@@ -72,7 +72,7 @@ code.code-block {
     margin: 8px 0;
     padding: 8px;
     white-space: pre-wrap;
-    word-break: break-word;
+    word-break: break-all;
     overflow-x: auto;
 }
 
