@@ -1,7 +1,28 @@
 @font-face {
-    font-family: "MC-Regular";
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: normal;
     src: url("https://rumyantsev168.github.io/static/font/MinecraftRegular.otf");
 }
+@font-face {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: normal;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftBold.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: italic;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftItalic.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: italic;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftBoldItalic.otf");
+}
+
 
 item-slot, item-slot-grid {
     display: inline-block;
@@ -47,11 +68,17 @@ item-slot, item-slot-grid {
     right: 0;
     line-height: 1em;
     width: fit-content;
-    font-family: MC-Regular;
+    font-family: Minecraft;
     font-size: 1em;
     color: #ffffff;
     text-shadow: 0.1em 0.1em 0px black;
     z-index: 100;
+}
+
+.item-slot > img.item-image {
+    width: 2em;
+    height: 2em;
+    object-fit: contain;
 }
 
 .item-slot-durability {
@@ -59,6 +86,11 @@ item-slot, item-slot-grid {
     bottom: 0.2em;
     left: 0.2em;
     height: 0.1em;
+}
+
+item-slot[large] .item-slot-durability {
+    bottom: 0.45em;
+    left: 0.45em;
 }
 
 .item-slot-durability-bg {
@@ -70,13 +102,18 @@ item-slot, item-slot-grid {
     background-color: #1E0F1E;
 }
 
+item-slot[large] .item-slot-durability-bg {
+    bottom: 0.35em;
+    left: 0.45em;
+}
+
 .item-slot-tooltip {
     display: none;
     position: fixed;
     padding: 0.2em 0.3em 0.2em 0.4em;
     background: #1E0F1E;
     color: #ffffff;
-    font-family: MC-Regular;
+    font-family: Minecraft;
     font-size: 1em;
     text-align: left;
     width: fit-content;
@@ -123,7 +160,7 @@ item-slot, item-slot-grid {
     vertical-align: bottom;
     width: fit-content;
     height: fit-content;
-    font-family: MC-Regular;
+    font-family: Minecraft;
     color: #373737;
 }
 
@@ -149,7 +186,7 @@ item-slot, item-slot-grid {
 .item-slot-crafting-arrow {
     display: inline-block;
     image-rendering: pixelated;
-    background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png?a4894) no-repeat;
+    background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png) no-repeat;
     min-width: 2em;
     height: 1.6em;
 }

@@ -2,9 +2,9 @@
 function safe_copy() {
     let res = false;
     try {
-        res = document.execCommand('copy');
+        res = document.execCommand("copy");
     } catch (e) { console.warn("Failed to copy selected text!", e)};
-    message(res ? 'Copied!' : 'Could not copy!');
+    message(res ? "Copied!" : "Could not copy!");
 };
 
 function copyElement(element_id) {
@@ -51,12 +51,12 @@ function copyTextarea(textarea_id) {
 };
 
 function message(msg) {
-    let els = document.getElementsByClassName('copied');
+    let els = document.getElementsByClassName("copied");
     for (let i=0; i<els.length; i++) {
         els[i].remove();
     }
-    let el = document.createElement('div');
-    el.className = 'copied';
+    let el = document.createElement("div");
+    el.classList.add("popup", "copied");
     el.innerHTML = msg;
     el.onclick = () => el.remove();
     document.body.appendChild(el);

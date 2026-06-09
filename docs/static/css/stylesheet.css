@@ -1,3 +1,28 @@
+@font-face {
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: normal;
+    src: url("../font/MinecraftRegular.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: normal;
+    src: url("../font/MinecraftBold.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: italic;
+    src: url("../font/MinecraftItalic.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: italic;
+    src: url("../font/MinecraftBoldItalic.otf");
+}
+
 html {
     margin: 0px;
     padding: 0px;
@@ -112,7 +137,7 @@ button:disabled {
 
 .buttons {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: right;
     gap: 10px;
 }
@@ -121,7 +146,7 @@ label {
     font-size: 12px;
 }
 
-.copied {
+.popup {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -185,3 +210,9 @@ label {
 
 .chat > p.admin::before { content: "[A]: "; font-family: monospace; font-size: 12px; line-height: 16px; }
 .chat > p.user::before { content: "[U]: "; font-family: monospace; font-size: 12px; line-height: 16px; }
+
+.a {
+    color: #0000ee;
+    text-decoration: underline;
+    cursor: pointer;
+}

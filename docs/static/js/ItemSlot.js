@@ -1,6 +1,9 @@
 class ItemSlot extends HTMLElement {
     static assetsLoaded = false;
     static loadingPromises = [];
+    static get observedAttributes() {
+        return ["large", "item", "count", "tooltip", "durability"];
+    }
 
     constructor() {
         super();
@@ -103,40 +106,56 @@ class ItemSlot extends HTMLElement {
 
         // Makes sure the image is not stretched
         if (itemSrc) {
-            const img = new Image();            
-            img.onload = function() {
-                const itemImg = document.createElement("img");
-                itemImg.src = itemSrc;
-                if (this.width >= this.height) {
-                    itemImg.style.width = "2em";
-                } else {
-                    itemImg.style.height = "2em";
-                };
-                itemSlot.appendChild(itemImg);
-            };
-            img.src = itemSrc;
+            const itemImg = document.createElement("img");
+            itemImg.className = "item-image";
+            itemImg.src = itemSrc;
+            itemSlot.appendChild(itemImg);
+            this._itemImg = itemImg;
         };
 
         if (itemCount) {
             const itemCountSpan = document.createElement("span");
-            itemCountSpan.innerText = itemCount;
+            itemCountSpan.appendChild(itemCount.replaceColorCodes());
             itemSlot.appendChild(itemCountSpan);
+            this._itemCount = itemCountSpan;
         }
 
+        if (itemTooltip) {
+            const tooltipDiv = document.createElement("div");
+            const tooltipTextShadow = document.createElement("div");
+            tooltipDiv.className = "item-slot-tooltip";
+            tooltipTextShadow.className = "item-slot-tooltip-text-shadow";
+
+            const itemTooltipText = itemTooltip.replace("&k", "").replaceColorCodes();
+            tooltipDiv.appendChild(itemTooltipText);
+            tooltipTextShadow.appendChild(tooltipDiv.firstChild.cloneNode(true));
+
+            tooltipDiv.appendChild(tooltipTextShadow);
+            itemSlot.appendChild(tooltipDiv);
+            this._itemTooltip = tooltipDiv;
+            this._itemTooltipShadow = tooltipTextShadow;
+
+            const moveHandler = (event) => { move(event, tooltipDiv) };
+            this._tooltipMoveHandler = moveHandler;
+
+            document.addEventListener("mousemove", this._tooltipMoveHandler);
+        }
+        
         if (!isNaN(itemDurability)) {
             const progress = itemDurability / 13;
 
             const durabilityBar = document.createElement("div");
             durabilityBar.className = "item-slot-durability";
-            durabilityBar.style.padding = isLarge ? "0.25em" : "0";
             durabilityBar.style.width = `${1.7 * Math.abs(progress)}em`;
 
             let hueProgress;
-            if (progress >= 0) {
-                hueProgress = progress;
-            } else {
+            if (progress < 0) {
                 durabilityBar.style.transform = "scaleX(-1) translate(100%)";
                 hueProgress = 0;
+            } else if (progress >= 0 && progress <= 1) {
+                hueProgress = progress;
+            } else if (progress > 1) {
+                hueProgress = 1;
             }
             
             const hue = 120 * hueProgress;
@@ -147,30 +166,12 @@ class ItemSlot extends HTMLElement {
             const durabilityBarBg = document.createElement("div");
             durabilityBarBg.className = "item-slot-durability-bg";
             itemSlot.append(durabilityBarBg, durabilityBar);
-        }
-
-        if (itemTooltip) {
-            const tooltipDiv = document.createElement("div");
-            const tooltipTextShadow = document.createElement("div");
-            tooltipDiv.className = "item-slot-tooltip";
-            tooltipTextShadow.className = "item-slot-tooltip-text-shadow";
-
-            let itemTooltipText = itemTooltip.replaceColorCodes();
-            tooltipDiv.appendChild(itemTooltipText.cloneNode(true));
-            tooltipTextShadow.appendChild(itemTooltipText.cloneNode(true));
-
-            tooltipDiv.appendChild(tooltipTextShadow);
-            itemSlot.appendChild(tooltipDiv);
-
-            const moveHandler = (event) => { move(event, tooltipDiv) };
-            this._tooltipMoveHandler = moveHandler;
-
-            document.addEventListener("mousemove", this._tooltipMoveHandler);
+            this._durabilityBar = durabilityBar;
+            this._durabilityBarBg = durabilityBarBg;
         }
 
         this.appendChild(itemSlot);
         this._rendered = true;
-        console.log("Added new <item-slot> element");
     }
 
     disconnectedCallback() {
@@ -178,14 +179,26 @@ class ItemSlot extends HTMLElement {
             document.removeEventListener("mousemove", this._tooltipMoveHandler);
         }
     }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue === newValue) return;
+        this.innerHTML = "";
+        this._rendered = false;
+        this.render();
+    }
 }
 
 class ItemSlotGrid extends HTMLElement {
-    constructor() {
-        super();
+    static get observedAttributes() {
+        return ["size", "label", "continue"];
     }
 
-    connectedCallback() {
+    constructor() {
+        super();
+        this._rawHtml = this.innerHTML.trim();
+    }
+
+    render() {
         const size = this.getAttribute("size") || "3x3";
         let [width, height] = size.split("x").map(Number);
         if (isNaN(width) || isNaN(height)) {
@@ -194,12 +207,13 @@ class ItemSlotGrid extends HTMLElement {
         }
         const doContinue = this.hasAttribute("continue");
 
-        const rawHTML = this.innerHTML.trim();
         const rows = document.createDocumentFragment();
 
         let result;
-        if (rawHTML) {
-            const allSlots = [...this.children].filter(el => el.tagName.toLowerCase() === "item-slot");
+        if (this._rawHtml) {
+            const temp = document.createElement("div");
+            temp.innerHTML = this._rawHtml;
+            const allSlots = [...temp.children].filter(el => el.tagName.toLowerCase() === "item-slot");
 
             const resultIndex = allSlots.findIndex(el => el.hasAttribute("result"));
             if (resultIndex !== -1) {
@@ -237,7 +251,7 @@ class ItemSlotGrid extends HTMLElement {
 
         const mainContainer = document.createElement("div");
         mainContainer.className = "item-slot-mcui";
-        const title = this.getAttribute("title");
+        const title = this.getAttribute("label");
         if (title) {
             const titleSpan = document.createElement("span");
             titleSpan.innerText = title;
@@ -258,7 +272,15 @@ class ItemSlotGrid extends HTMLElement {
         }
 
         this.replaceChildren(mainContainer);
-        console.log("Added new <item-slot-grid> element");
+    }
+
+    connectedCallback() {
+        this.render();
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue === newValue) return;
+        this.render();
     }
 }
 

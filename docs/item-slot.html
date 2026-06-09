@@ -35,7 +35,7 @@
                 <li><code>large</code>: Makes it large</li>
                 <li><code>item</code>: Image link</li>
                 <li><code>tooltip</code>: Text, supports Minecraft color codes</li>
-                <li><code>count</code>: You can put here any text you want, lol</li>
+                <li><code>count</code>: Text, also supports Minecraft colors. You can put here any text you want, lol</li>
                 <li><code>durability</code>: Any integer, adds a durability bar for the item</li>
             </ul>
         </p>
@@ -43,7 +43,7 @@
         <item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" count="999" tooltip="&bEnchanted Golden Apple"></item-slot>
         <item-slot tooltip="Air" count="&infin;"></item-slot>
         <item-slot item="https://minecraft.wiki/images/Uncraftable_Splash_Potion_JE2.png" tooltip="&oop ahh splash potion &r(#0438)\n&9Haste potion.potency.127 (8:00)\nStrength potion.potency.127 (8:00)\nRegeneration potion.potency.127 (8:00)\nResistance potion.potency.127 (8:00)\nFire Resistance potion.potency.127 (8:00)\nWater Breathing potion.potency.127 (8:00)\nNight Vision potion.potency.127 (8:00)\nHealth Boost potion.potency.127 (8:00)\nAbsorption potion.potency.127 (8:00)\nSaturation potion.potency.127 (8:00)\n\n&5When Applied:\n&9&nbsp;+1280 Attack Speed\n&nbsp;+384 Attack Damage\n&nbsp;+512 Max Health\n&o&5Extremely OP\n&r&8minecraft:splash_potion\nNBT: 4 tag(s)" durability="10"></item-slot>
-        <item-slot large item="https://minecraft.wiki/images/thumb/Baby_Chicken_JE3_BE3.png/200px-Baby_Chicken_JE3_BE3.png" count="xyz" tooltip="&cchirp"></item-slot>
+        <item-slot large item="https://minecraft.wiki/images/thumb/Baby_Chicken_JE3_BE3.png/200px-Baby_Chicken_JE3_BE3.png" count="&cx&3y&az" tooltip="&cchirp"></item-slot>
         <br>
         <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="0"></item-slot>
         <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="1"></item-slot>
@@ -60,7 +60,9 @@
         <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="12"></item-slot>
         <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="13"></item-slot>
 
-
+        <p>
+            <a href="mccolors.html">This page</a> can help you create a <code>tooltip</code> attribute.
+        </p>
         <p>
             Also there's an <code>&lt;item-slot-grid&gt;</code> element. You can set it's size using <code>size</code> attribute in format "WxH" where W is width and H is height. Default size is "3x3".
         </p>
@@ -127,16 +129,16 @@
         </item-slot-grid>
 
         <p>
-            <code>title</code> attribute lets you add a custom title for the grid like this:
+            <code>label</code> attribute lets you add a custom title for the grid like this:
         </p>
 
-        <item-slot-grid size="5x5" title="5x5 Container"></item-slot-grid>
+        <item-slot-grid size="5x5" label="5x5 Container"></item-slot-grid>
 
         <p>
             Finally, you can easily display a crafting recipe! Just add an <code>&lt;item-slot&gt;</code> element with a <code>result</code> attribute inside <code>&lt;item-slot-grid&gt;</code>.
         </p>
 
-        <item-slot-grid title="Crafting">
+        <item-slot-grid label="Crafting">
             <item-slot item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond"></item-slot>
             <item-slot item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond"></item-slot>
             <item-slot item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond"></item-slot>
@@ -153,11 +155,11 @@
             Some more examples:
         </p>
 
-        <item-slot-grid size="9x3" title="Chest" continue>
+        <item-slot-grid size="9x3" label="Chest" continue>
             <item-slot item="https://minecraft.wiki/images/Invicon_Shulker_Box.png" tooltip="Shulker Box\nStone x64\nStone x64\nStone x64\nStone x64\nStone x64\n&oand 22 more..."></item-slot>
         </item-slot-grid>
 
-        <item-slot-grid size="2x2" title="Crafting">
+        <item-slot-grid size="2x2" label="Crafting">
             <item-slot item="https://minecraft.wiki/images/Invicon_Oak_Planks.png" tooltip="Oak Planks"></item-slot>
             <item-slot item="https://minecraft.wiki/images/Invicon_Oak_Planks.png" tooltip="Oak Planks"></item-slot>
             <item-slot item="https://minecraft.wiki/images/Invicon_Oak_Planks.png" tooltip="Oak Planks"></item-slot>
@@ -165,7 +167,7 @@
             <item-slot result item="https://minecraft.wiki/images/Invicon_Crafting_Table.png" tooltip="Crafting Table"></item-slot>
         </item-slot-grid>
 
-        <item-slot-grid size="5x1" title="Operator Items" continue>
+        <item-slot-grid size="5x1" label="Operator Items" continue>
             <item-slot item="https://minecraft.wiki/images/Invicon_Debug_Stick.gif" tooltip="&dDebug Stick"></item-slot>
             <item-slot item="https://minecraft.wiki/images/Invicon_Command_Block.gif" tooltip="&dCommand Block"></item-slot>
             <item-slot item="https://minecraft.wiki/images/Invicon_Barrier.png" tooltip="&dBarrier"></item-slot>
@@ -177,7 +179,7 @@
         </item-slot-grid>
 
         <item-slot-grid size="1x1">
-            <item-slot item="https://minecraft.wiki/images/Invicon_Diamond_Pickaxe.png" tooltip="Diamond Pickaxe" durability="-7"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Diamond_Pickaxe.png" tooltip="Diamond Pickaxe" count="&c0" durability="-7"></item-slot>
         </item-slot-grid>
 
         <p>

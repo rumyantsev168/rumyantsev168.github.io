@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="Index page for my website.">
+    <link rel="icon" href="static/icons/Page.png">
+    <link rel="stylesheet" href="static/css/stylesheet.css">
+    <!-- <link rel="stylesheet" href="static/css/custom-cursor.css"> -->
+    <style>
+        #codes, #preview {
+            font-family: Minecraft;
+        }
+        #result {
+            cursor: pointer;
+        }
+    </style>
+    <title>Minecraft Colors</title>
+    <script> window.ITEM_SLOT_USE_LOCAL_ASSETS = true; </script>
+</head>
+<body>
+    <main style="max-width: 600px">
+        <header>
+            <h1>Minecraft Colored Text</h1>
+            <hr>
+        </header>
+        <p class="text-center">
+            This page generates <code>tooltip</code> attribute for a static <a href="item-slot.html"><code>&lt;item-slot&gt;</code></a> element.
+        </p>
+        <p class="text-center" id="preview">
+            ===[ <item-slot id="slot"></item-slot> ]===
+        </p>
+        <code class="code-block" id="result" onclick="copyElement('result')">Result will appear here! Click to copy</code>
+        <form id="form" class="form">
+            <textarea id="tooltip-text" style="font-family: monospace;"></textarea>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <small class="a" onclick="showHint()">Color codes</small>
+                <div class="buttons" style="width: fit-content;">
+                    <button type="button" id="clear">Clear</button>
+                    <button type="submit" id="set-tooltip">Set Tooltip</button>
+                    <button type="button" id="get-result">Get Result</button>
+                </div>
+            </div>
+        </form>
+    </main>
+    <div id="popup-bg" style="display: none; position: fixed; top: 0; width: 100%; height: 100%; background: #00000040" onclick="hideHint()"></div>
+    <div class="popup" id="popup" style="display: none; padding: 10px; z-index: 999">
+        <p id="codes" style="padding: 5px; background: #fff9ec; color: black;">
+            &00 &11 &22 &33 &44
+            &55 &66 &77 &88 &99
+            
+            &aa &bb &cc &dd &ee &ff
+
+            &rl &lMinecraft
+            &rm &mMinecraft
+            &rn &nMinecraft
+            &ro &oMinecraft
+            &rr &rMinecraft
+        </p>
+    </div>
+    <script src="static/js/main.js"></script>
+    <script src="static/js/copy.js"></script>
+    <script src="static/js/ItemSlot.js"></script>
+    <script src="static/js/min/minecraftColors.min.js"></script>
+    <script>
+        const codes = document.getElementById("codes");
+        codes.replaceChildren(codes.innerText.trim().replaceColorCodes());
+
+        const hint = document.getElementById("popup");
+        const hintBg = document.getElementById("popup-bg");
+        function showHint() {
+            hint.style.display = "block";
+            hintBg.style.display = "block";
+        };
+        function hideHint() {
+            hint.style.display = "none"
+            hintBg.style.display = "none"
+        };
+
+        const slot = document.getElementById("slot");
+        const text = document.getElementById("tooltip-text");
+
+        const clearBtn = document.getElementById("clear");
+        clearBtn.onclick = () => {
+            text.value = "";
+        };
+
+        const getResultBtn = document.getElementById("get-result");
+        const result = document.getElementById("result");
+        getResultBtn.onclick = () => {
+            result.innerText = text.value.replaceAll("\n", "\\n").replaceAll(" ", "&nbsp;");
+        };
+
+        const setTooltipBtn = document.getElementById("set-tooltip");
+        setTooltipBtn.onclick = () => {
+            slot.setAttribute("tooltip", text.value.replaceAll(" ", "\u00A0"));
+        }
+    </script>
+    <noscript>
+        <div class="warning">
+            <img src="static/icons/Warning.png" height="20px">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
+</body>
+</html>
