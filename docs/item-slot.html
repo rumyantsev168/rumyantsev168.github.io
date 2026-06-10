@@ -45,7 +45,7 @@
         <item-slot item="https://minecraft.wiki/images/Uncraftable_Splash_Potion_JE2.png" tooltip="&oop ahh splash potion &r(#0438)\n&9Haste potion.potency.127 (8:00)\nStrength potion.potency.127 (8:00)\nRegeneration potion.potency.127 (8:00)\nResistance potion.potency.127 (8:00)\nFire Resistance potion.potency.127 (8:00)\nWater Breathing potion.potency.127 (8:00)\nNight Vision potion.potency.127 (8:00)\nHealth Boost potion.potency.127 (8:00)\nAbsorption potion.potency.127 (8:00)\nSaturation potion.potency.127 (8:00)\n\n&5When Applied:\n&9&nbsp;+1280 Attack Speed\n&nbsp;+384 Attack Damage\n&nbsp;+512 Max Health\n&o&5Extremely OP\n&r&8minecraft:splash_potion\nNBT: 4 tag(s)" durability="10"></item-slot>
         <item-slot large item="https://minecraft.wiki/images/thumb/Baby_Chicken_JE3_BE3.png/200px-Baby_Chicken_JE3_BE3.png" count="&cx&3y&az" tooltip="&cchirp"></item-slot>
         <br>
-        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="0"></item-slot>
+        <!-- <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="0"></item-slot>
         <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="1"></item-slot>
         <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="2"></item-slot>
         <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="3"></item-slot>
@@ -58,7 +58,7 @@
         <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="10"></item-slot>
         <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="11"></item-slot>
         <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="12"></item-slot>
-        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="13"></item-slot>
+        <item-slot item="https://minecraft.wiki/images/Invicon_Iron_Pickaxe.png" durability="13"></item-slot> -->
 
         <p>
             <a href="mccolors.html">This page</a> can help you create a <code>tooltip</code> attribute.
@@ -152,6 +152,23 @@
         </item-slot-grid>
 
         <p>
+            If you also add an <code>error</code> attribute, the arrow will be crossed out:
+        </p>
+
+        <item-slot-grid label="Crafting" error>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond"></item-slot>
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
+            <item-slot></item-slot>
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Stick.png" tooltip="Stick"></item-slot>
+            <item-slot></item-slot>
+            <item-slot result item="https://minecraft.wiki/images/Invicon_Diamond_Pickaxe.png" tooltip="Diamond Pickaxe"></item-slot>
+        </item-slot-grid>
+
+        <p>
             Some more examples:
         </p>
 
@@ -173,13 +190,52 @@
             <item-slot item="https://minecraft.wiki/images/Invicon_Barrier.png" tooltip="&dBarrier"></item-slot>
         </item-slot-grid>
 
-        <item-slot-grid size="1x1">
+        <item-slot-grid size="1x1" error>
             <item-slot large item="https://minecraft.wiki/images/Invicon_Dirt.png" tooltip="Dirt"></item-slot>
             <item-slot result item="https://minecraft.wiki/images/Invicon_Diamond.png" tooltip="Diamond" count="64"></item-slot>
         </item-slot-grid>
 
-        <item-slot-grid size="1x1">
-            <item-slot item="https://minecraft.wiki/images/Invicon_Diamond_Pickaxe.png" tooltip="Diamond Pickaxe" count="&c0" durability="-7"></item-slot>
+        <item-slot-grid size="9x4" label="Inventory">
+            <!-- Row 1 -->
+            <item-slot item="https://minecraft.wiki/images/On_Redstone_Torch_%28texture%29_JE1_BE1.png" tooltip="Redstone Torch" durability="9"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/On_Redstone_Wire_Line_%28texture%29_JE1.png"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/On_Redstone_Wire_Line_%28texture%29_JE1.png"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/thumb/Dispenser_%28E%29_JE2_BE1.png/64px-Dispenser_%28E%29_JE2_BE1.png" tooltip="Dispenser"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Arrow.png" tooltip="Arrow"></item-slot>
+            <item-slot count="4"></item-slot>
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Slot_saddle.png"></item-slot>
+            <item-slot></item-slot>
+            <!-- Row 2 -->
+            <item-slot item="https://minecraft.wiki/images/Invicon_Knowledge_Book.png" tooltip="Knowledge Book"></item-slot>
+            <item-slot></item-slot>
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Invicon_Charcoal.png" count="&c-0" tooltip="Charcoal"></item-slot>
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Sulfur_cube_goo.png" tooltip="Sulfur Cube Goo"></item-slot>
+            <item-slot></item-slot>
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Curved_Rail_%28texture%29_JE1.png"></item-slot>
+            <!-- Row 3 -->
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Disabled_slot.png"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Wheat_Age_7_%28texture%29_JE1_BE1.png"></item-slot>
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Anvil_Hammer.png" tooltip="Hammer"></item-slot>
+            <item-slot></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Toast_tree.png" tooltip="Tree"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/thumb/Rose_%28texture%29_BE1.png/96px-Rose_%28texture%29_BE1.png" tooltip="Rose"></item-slot>
+            <item-slot item="https://minecraft.wiki/images/Rail_%28texture%29_JE1.png"></item-slot>
+            <!-- Hotbar -->
+            <item-slot style="margin-top: 0.4em" item="https://minecraft.wiki/images/Invicon_Diamond_Pickaxe.png" tooltip="Diamond Pickaxe" durability="-9"></item-slot>
+            <item-slot style="margin-top: 0.4em" item="https://minecraft.wiki/images/Item_broken.png" tooltip="Iron Shovel" durability="0"></item-slot>
+            <item-slot style="margin-top: 0.4em"></item-slot>
+            <item-slot style="margin-top: 0.4em" item="https://minecraft.wiki/images/Invicon_Golden_Apple.png" count="1" tooltip="Golden Apple"></item-slot>
+            <item-slot style="margin-top: 0.4em"></item-slot>
+            <item-slot style="margin-top: 0.4em"></item-slot>
+            <item-slot style="margin-top: 0.4em" item="https://minecraft.wiki/images/Invicon_Structure_Void.png" tooltip="Structure Void"></item-slot>
+            <item-slot style="margin-top: 0.4em"></item-slot>
+            <item-slot style="margin-top: 0.4em" item="https://minecraft.wiki/images/Teleport_to_player.png"></item-slot>
         </item-slot-grid>
 
         <p>

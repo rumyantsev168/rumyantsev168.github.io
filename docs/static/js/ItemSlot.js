@@ -170,6 +170,10 @@ class ItemSlot extends HTMLElement {
             this._durabilityBarBg = durabilityBarBg;
         }
 
+        const hoverOverlay = document.createElement("div");
+        hoverOverlay.className = "item-slot-hover-overlay";
+        itemSlot.appendChild(hoverOverlay);
+
         this.appendChild(itemSlot);
         this._rendered = true;
     }
@@ -206,6 +210,7 @@ class ItemSlotGrid extends HTMLElement {
             width = 3; height = 3;
         }
         const doContinue = this.hasAttribute("continue");
+        const isError = this.hasAttribute("error");
 
         const rows = document.createDocumentFragment();
 
@@ -262,7 +267,8 @@ class ItemSlotGrid extends HTMLElement {
         if (result) {
             result.setAttribute("large", "");
             const arrow = document.createElement("div");
-            arrow.className = "item-slot-crafting-arrow";
+            arrow.className = isError ? "item-slot-crafting-arrow-no" :
+                                        "item-slot-crafting-arrow-yes";
             const craftingDiv = document.createElement("div");
             craftingDiv.className = "item-slot-crafting-ui";
             craftingDiv.append(grid, arrow, result);

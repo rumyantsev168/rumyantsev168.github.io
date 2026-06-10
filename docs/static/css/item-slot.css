@@ -64,9 +64,9 @@ item-slot, item-slot-grid {
 
 .item-slot > span {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    line-height: 1em;
+    bottom: -0.1em;
+    right: -0.1em;
+    line-height: 0.8em;
     width: fit-content;
     font-family: Minecraft;
     font-size: 1em;
@@ -79,6 +79,24 @@ item-slot, item-slot-grid {
     width: 2em;
     height: 2em;
     object-fit: contain;
+}
+
+.item-slot-hover-overlay {
+    display: none;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 2em;
+    height: 2em;
+    background: #FFFFFF50;
+    z-index: 999;
+}
+
+.item-slot:hover > .item-slot-hover-overlay {
+    display: block;
 }
 
 .item-slot-durability {
@@ -183,10 +201,17 @@ item-slot[large] .item-slot-durability-bg {
     align-items: center;
 }
 
-.item-slot-crafting-arrow {
-    display: inline-block;
+.item-slot-crafting-arrow-yes {
     image-rendering: pixelated;
-    background: url(https://minecraft.wiki/images/Grid_layout_Arrow_%28small%29.png) no-repeat;
+    background: url("https://rumyantsev168.github.io/static/Crafting_Arrow.png") no-repeat;
     min-width: 2em;
     height: 1.6em;
+}
+
+.item-slot-crafting-arrow-no {
+    image-rendering: pixelated;
+    background: url("https://rumyantsev168.github.io/static/Crafting_Arrow_Error.png") no-repeat;
+    min-width: 2em;
+    height: 1.6em;
+    object-fit: cover;
 }
