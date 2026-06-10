@@ -94,15 +94,11 @@ class ItemSlot extends HTMLElement {
         const itemSlot = document.createElement("div");
         itemSlot.className = "item-slot";
 
-        const isLarge = this.hasAttribute("large");
+        const isLarge = this.hasAttribute("large");  // Adds padding via CSS, not handled here
         const itemSrc = this.getAttribute("item");
         const itemCount = this.getAttribute("count");
         const itemTooltip = this.getAttribute("tooltip");
         const itemDurability = parseInt(this.getAttribute("durability"));
-
-        if (isLarge) {
-            itemSlot.style.padding = "0.25em";
-        }
 
         // Makes sure the image is not stretched
         if (itemSrc) {
@@ -265,7 +261,6 @@ class ItemSlotGrid extends HTMLElement {
         }
 
         if (result) {
-            result.setAttribute("large", "");
             const arrow = document.createElement("div");
             arrow.className = isError ? "item-slot-crafting-arrow-no" :
                                         "item-slot-crafting-arrow-yes";
