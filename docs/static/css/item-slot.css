@@ -71,7 +71,7 @@ item-slot, item-slot-grid {
     font-family: Minecraft;
     font-size: 1em;
     color: #ffffff;
-    text-shadow: 0.1em 0.1em 0px black;
+    text-shadow: 0.1em 0.1em 0 black;
     z-index: 100;
 }
 
@@ -140,8 +140,8 @@ item-slot[large] .item-slot-durability-bg {
 
 .item-slot-tooltip .item-slot-tooltip-text-shadow {
     position: absolute;
-    top: calc(0.2em + 0.1em);
-    left: calc(0.4em + 0.1em);
+    top: 0.3em;
+    left: 0.5em;
     opacity: 25%;
     line-height: 1em;
 }
