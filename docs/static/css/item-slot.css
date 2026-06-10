@@ -33,7 +33,7 @@ item-slot, item-slot-grid {
 .item-slot {
     position: relative;
     background: #8B8B8B no-repeat center center / 2em 2em;
-    border: 2px solid;
+    border: 0.1em solid;
     border-color: #373737 #FFF #FFF #373737;
     width: 2em;
     height: 2em;

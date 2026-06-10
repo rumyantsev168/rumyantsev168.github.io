@@ -65,6 +65,7 @@ code {
     padding: 0px 2px;
     font-family: monospace;
     font-size: 0.75rem;
+    word-break: break-all;
 }
 
 code.code-block {
@@ -72,7 +73,6 @@ code.code-block {
     margin: 8px 0;
     padding: 8px;
     white-space: pre-wrap;
-    word-break: break-all;
     overflow-x: auto;
 }
 
