@@ -1,3 +1,15 @@
+// ItemSlot.js
+// Custom Minecraft-styled <item-slot> and <item-slot-grid> elements.
+// Author: rumyantsev168 (https://github.com/rumyantsev168)
+// Source: https://rumyantsev168.github.io/static/js/ItemSlot.js
+
+// ========== Minecraft Color Codes Formatter ==========
+// Author: FoxInFlame (https://github.com/FoxInFlame)
+// Source: https://github.com/FoxInFlame/MinecraftColorCodes/blob/master/MinecraftColorCodes.min.3.7.js
+function obfuscate(e,o){function t(e,o){var t=0,n=o||e.innerHTML,a=n.length;obfuscators.push(window.setInterval(function(){t>=a&&(t=0),n=r(n,t),e.innerHTML=n,t++},0))}function n(e,o){return Math.floor(Math.random()*(o-e+1))+e}function r(e,o){var t=String.fromCharCode(n(64,90));return e.substr(0,o)+t+e.substr(o+1,e.length)}var a,c,f=o.childNodes.length;if(e.indexOf("<br>")>-1){o.innerHTML=e;for(var i=0;f>i;i++)c=o.childNodes[i],3===c.nodeType&&(a=document.createElement("span"),a.innerHTML=c.nodeValue,o.replaceChild(a,c),t(a))}else t(o,e)}function applyCode(e,o){for(var t=o.length,n=document.createElement("span"),r=!1,a=0;t>a;a++)n.style.cssText+=styleMap[o[a]]+";","&k"===o[a]&&(obfuscate(e,n),r=!0);return r||(n.innerHTML=e),n}function parseStyle(e){for(var o,t,n=e.match(/&.{1}/g)||[],r=[],a=[],c=document.createDocumentFragment(),f=n.length,e=e.replace(/\n|\\n/g,"<br>"),i=0;f>i;i++)r.push(e.indexOf(n[i])),e=e.replace(n[i],"\x00\x00");0!==r[0]&&c.appendChild(applyCode(e.substring(0,r[0]),[]));for(var i=0;f>i;i++){if(t=r[i+1]-r[i],2===t){for(;2===t;)a.push(n[i]),i++,t=r[i+1]-r[i];a.push(n[i])}else a.push(n[i]);a.lastIndexOf("&r")>-1&&(a=a.slice(a.lastIndexOf("&r")+1)),o=e.substring(r[i],r[i+1]),c.appendChild(applyCode(o,a))}return c}function clearObfuscators(){for(var e=obfuscators.length;e--;)clearInterval(obfuscators[e]);obfuscators=[]}function cutString(e,o,t){return e.substr(0,o)+e.substr(t+1)}var obfuscators=[],styleMap={"&4":"font-weight:normal;text-decoration:none;color:#be0000","&c":"font-weight:normal;text-decoration:none;color:#fe3f3f","&6":"font-weight:normal;text-decoration:none;color:#d9a334","&e":"font-weight:normal;text-decoration:none;color:#fefe3f","&2":"font-weight:normal;text-decoration:none;color:#00be00","&a":"font-weight:normal;text-decoration:none;color:#3ffe3f","&b":"font-weight:normal;text-decoration:none;color:#3ffefe","&3":"font-weight:normal;text-decoration:none;color:#00bebe","&1":"font-weight:normal;text-decoration:none;color:#0000be","&9":"font-weight:normal;text-decoration:none;color:#3f3ffe","&d":"font-weight:normal;text-decoration:none;color:#fe3ffe","&5":"font-weight:normal;text-decoration:none;color:#be00be","&f":"font-weight:normal;text-decoration:none;color:#ffffff","&7":"font-weight:normal;text-decoration:none;color:#bebebe","&8":"font-weight:normal;text-decoration:none;color:#3f3f3f","&0":"font-weight:normal;text-decoration:none;color:#000000","&l":"font-weight:bold","&n":"text-decoration:underline;text-decoration-skip:spaces","&o":"font-style:italic","&m":"text-decoration:line-through;text-decoration-skip:spaces"};String.prototype.replaceColorCodes=function(){clearObfuscators();var e=parseStyle(String(this));return e};
+// =====================================================
+
+
 class ItemSlot extends HTMLElement {
     static assetsLoaded = false;
     static loadingPromises = [];
@@ -50,13 +62,10 @@ class ItemSlot extends HTMLElement {
     }
 
     // Ensures the necessary files are only loaded once
-    // I originally had it append a <link> and <script> for every <item-slot> on the page lol
     loadAssets() {
         return new Promise((resolve, reject) => {
             const useLocal = window.ITEM_SLOT_USE_LOCAL_ASSETS;
-            const cssHref = useLocal ? "static/css/item-slot.css" :
-                                       "https://rumyantsev168.github.io/static/css/item-slot.css";
-            const jsSrc = "https://rumyantsev168.github.io/static/js/min/minecraftColors.min.js";
+            const cssHref = useLocal ? "static/css/item-slot.css" : "https://rumyantsev168.github.io/static/css/item-slot.css";
 
             let stylesheet = document.head.querySelector(`link[href="${cssHref}"]`);
             if (!stylesheet) {
@@ -66,23 +75,11 @@ class ItemSlot extends HTMLElement {
                 document.head.appendChild(stylesheet);
             }
 
-            let minecraftColors = document.head.querySelector(`script[src="${jsSrc}"]`);
-            if (!minecraftColors) {
-                minecraftColors = document.createElement("script");
-                minecraftColors.src = jsSrc;
-                document.head.appendChild(minecraftColors);
-            }
-
             Promise.all([
                 new Promise((res, rej) => {
                     if (stylesheet.sheet) res();
                     stylesheet.onload = res;
                     stylesheet.onerror = () => rej(new Error("Failed to load item-slot.css"));
-                }),
-                new Promise((res, rej) => {
-                    if (minecraftColors.readyState === "loaded" || minecraftColors.readyState === "complete") res();
-                    minecraftColors.onload = res;
-                    minecraftColors.onerror = () => rej(new Error("Failed to load minecraftColors.min.js"));
                 })
             ]).then(resolve).catch(reject);
         });
@@ -100,14 +97,13 @@ class ItemSlot extends HTMLElement {
         const itemTooltip = this.getAttribute("tooltip");
         const itemDurability = parseInt(this.getAttribute("durability"));
 
-        // Makes sure the image is not stretched
         if (itemSrc) {
             const itemImg = document.createElement("img");
             itemImg.className = "item-image";
             itemImg.src = itemSrc;
             itemSlot.appendChild(itemImg);
             this._itemImg = itemImg;
-        };
+        }
 
         if (itemCount) {
             const itemCountSpan = document.createElement("span");
@@ -183,6 +179,7 @@ class ItemSlot extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue === newValue) return;
         this.innerHTML = "";
+        this.disconnectedCallback();
         this._rendered = false;
         this.render();
     }
@@ -312,3 +309,5 @@ const move = (e, t) => {
         t.style.top = `calc(${y}px + 0.1em)`;
     } catch (err) {}
 };
+
+console.log("This page uses ItemSlot.js!");
