@@ -75,7 +75,7 @@ item-slot[large] > .item-slot {
     font-family: Minecraft;
     font-size: 1em;
     color: #ffffff;
-    text-shadow: 0.1em 0.1em 0 black;
+    text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
     z-index: 100;
 }
 
