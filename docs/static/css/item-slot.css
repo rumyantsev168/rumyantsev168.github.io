@@ -157,7 +157,7 @@ item-slot[large] .item-slot-durability-bg {
         0  0.1em 0 0 #1E0F1E,
         -0.1em 0 0 0 #1E0F1E,
         0.1em 0 0 0 #1E0F1E;
-    text-shadow: 0.1em 0.1em 0 color-mix(in srgb, currentColor 25%, transparent);
+    text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
 }
 
 .item-slot-tooltip::after {
