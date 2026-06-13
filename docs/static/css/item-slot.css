@@ -79,6 +79,11 @@ item-slot[large] > .item-slot {
     z-index: 100;
 }
 
+item-slot[large] > .item-slot > span {
+    bottom: 0.2em;
+    right: 0.2em;
+}
+
 .item-slot > img.item-image {
     width: 2em;
     height: 2em;
@@ -150,6 +155,7 @@ item-slot[large] .item-slot-durability-bg {
         0  0.1em 0 0 #1E0F1E,
         -0.1em 0 0 0 #1E0F1E,
         0.1em 0 0 0 #1E0F1E;
+    text-shadow: 0.1em 0.1em 0 color-mix(in srgb, currentColor 25%, transparent);
 }
 
 .item-slot-tooltip::after {
@@ -160,14 +166,6 @@ item-slot[large] .item-slot-durability-bg {
     top: 0;
     bottom: 0;
     border: 0.1em solid #2B0A5E;
-}
-
-.item-slot-tooltip .item-slot-tooltip-text-shadow {
-    position: absolute;
-    top: 0.3em;
-    left: 0.5em;
-    opacity: 25%;
-    line-height: 1em;
 }
 
 .item-slot:hover .item-slot-tooltip {

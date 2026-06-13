@@ -114,18 +114,13 @@ class ItemSlot extends HTMLElement {
 
         if (itemTooltip) {
             const tooltipDiv = document.createElement("div");
-            const tooltipTextShadow = document.createElement("div");
             tooltipDiv.className = "item-slot-tooltip";
-            tooltipTextShadow.className = "item-slot-tooltip-text-shadow";
 
-            const itemTooltipText = itemTooltip.replace("&k", "").replaceColorCodes();
-            tooltipDiv.appendChild(itemTooltipText.cloneNode(true));
-            tooltipTextShadow.appendChild(itemTooltipText.cloneNode(true));
-
-            tooltipDiv.appendChild(tooltipTextShadow);
+            const itemTooltipText = itemTooltip.replace("&k", "");
+            tooltipDiv.appendChild(itemTooltipText.replaceColorCodes());
+            
             itemSlot.appendChild(tooltipDiv);
             this._itemTooltip = tooltipDiv;
-            this._itemTooltipShadow = tooltipTextShadow;
 
             const moveHandler = (event) => { move(event, tooltipDiv) };
             this._tooltipMoveHandler = moveHandler;
