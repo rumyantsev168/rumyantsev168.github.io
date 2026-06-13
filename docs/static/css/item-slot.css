@@ -139,6 +139,8 @@ item-slot[large] .item-slot-durability-bg {
 .item-slot-tooltip {
     display: none;
     position: fixed;
+    top: 0;
+    left: 0;
     padding: 0.2em 0.3em 0.2em 0.4em;
     background: #1E0F1E;
     color: #ffffff;
@@ -149,7 +151,7 @@ item-slot[large] .item-slot-durability-bg {
     z-index: 9999;
     white-space: pre-wrap;
     pointer-events: none;
-    line-height: 1em;
+    line-height: 1.1em;
     box-shadow:
         0 -0.1em 0 0 #1E0F1E,
         0  0.1em 0 0 #1E0F1E,

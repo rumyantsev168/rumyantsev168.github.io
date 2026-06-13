@@ -7,44 +7,158 @@
     <link rel="icon" href="static/icons/Page.png">
     <link rel="stylesheet" href="static/css/stylesheet.css">
     <!-- <link rel="stylesheet" href="static/css/custom-cursor.css"> -->
+    <style>
+        #input {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            gap: 5px;
+            margin: 10px 0;
+        }
+        #ws-address {
+            font-family: monospace;
+            width: 100%;
+        }
+        #server {
+            position: relative;
+            top: 0;
+            left: 0;
+            display: flex;
+            border: 1px solid black;
+            gap: 5px;
+            height: fit-content;
+            width: 511px;
+            background: linear-gradient(#000000cc, #000000cc), url("https://minecraft.wiki/images/Dirt_%28texture%29_JE2_BE2.png");
+            background-size: 64px;
+            image-rendering: pixelated;
+            font-family: Minecraft;
+            font-size: 16px;
+            color: white;
+            text-shadow: 0.1em 0.1em 0 color-mix(in srgb, currentColor 25%, transparent);
+            cursor: default;
+        }
+        #icon {
+            height: 64px;
+        }
+        #name-motd {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        #name {
+        }
+        #motd {
+        }
+        #status {
+            position: absolute;
+            top: 0;
+            right: 0;
+            image-rendering: pixelated;
+            height: 16px;
+        }
+        #count {
+            position: absolute;
+            top: 0;
+            right: 24px;
+        }
+        #players {    
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 0.2em 0.3em 0.2em 0.4em;
+            background: #1E0F1E;
+            color: #ffffff;
+            font-family: Minecraft;
+            font-size: 1em;
+            text-align: left;
+            width: fit-content;
+            z-index: 9999;
+            white-space: pre-wrap;
+            pointer-events: none;
+            line-height: 1.1em;
+            box-shadow:
+                0 -0.1em 0 0 #1E0F1E,
+                0  0.1em 0 0 #1E0F1E,
+                -0.1em 0 0 0 #1E0F1E,
+                0.1em 0 0 0 #1E0F1E;
+        }
+
+        #players::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border: 0.1em solid #2B0A5E;
+        }
+
+        #count:hover + #players {
+            display: block;
+        }
+    </style>
     <title>Minecraft WebSocket</title>
 </head>
 <body>
-    <main style="max-width: 350px">
+    <main style="max-width: 512px">
         <header>
             <h1>Minecraft WebSocket</h1>
             <hr size="1px">
         </header>
-        <form class="form" onsubmit="ping(event)" autocomplete="off">
-            <div>
-                <label for="ws-address">Server address</label>
-                <input id="ws-address" style="font-family: monospace; width: calc(100% - 7px);" value="wss://" placeholder="wss://">
+        <div id="input">
+            <input id="ws-address" value="wss://" placeholder="wss://">
+            <button type="button" id="ping-btn">Ping!</button>
+        </div>
+        <div id="server">
+            <img src="https://minecraft.wiki/images/Unknown_server.png" id="icon">
+            <div id="name-motd">
+                <span id="name">Minecraft Server</span>
+                <span id="motd">&7A Minecraft Server</span>
             </div>
-        </form>
-        <div>
-            <p><b>Status:</b> <span id="server-status">-</span></p>
-            <p><b>Name:</b> <span id="server-name">-</span></p>
-            <p><b>Players:</b> <span id="player-count">-/-</span></p>
-            <small id="players-container"></small>
+            <img src="https://minecraft.wiki/images/Incompatible.png" id="status">
+            <span id="count">0/64</span>
+            <div id="players">&7&o...</div>
         </div>
     </main>
     <script src="static/js/main.js"></script>
-    <script src="static/js/minecraftColors.js"></script>
+    <script src="static/js/min/minecraftColors.min.js"></script>
     <script>
         const address = document.getElementById("ws-address");
-        const serverStatus = document.getElementById("server-status");
-        const serverName = document.getElementById("server-name");
-        const playerCount = document.getElementById("player-count");
-        const playersContainer = document.getElementById("players-container");
+        const serverName = document.getElementById("name");
+        const serverMotd = document.getElementById("motd");
+        serverMotd.replaceChildren(serverMotd.innerText.replaceColorCodes());
+        const serverStatus = document.getElementById("status");
+        const playerCount = document.getElementById("count");
+        const playerList = document.getElementById("players");
+        playerList.replaceChildren(serverMotd.innerText.replaceColorCodes());
 
-        function ping(e) {
-            e.preventDefault();
+        document.addEventListener("mousemove", (event) => {
+            try {
+                playerList.style.top = event.clientY + 15 + "px";
+                playerList.style.left = event.clientX + 25 + "px";
+            } catch (err) {}
+        });
+
+        const pingingStatus = "static/pinging.gif";
+        const successStatus = "static/success.png";
+        const failureStatus = "static/failure.png";
+
+        function makeColors(lines) {
+            return lines.join("\n").replaceAll("§", "&").replaceColorCodes();
+        }
+
+        document.getElementById("ping-btn").onclick = () => {
             let addr = address.value;
             if (!addr || !addr.startsWith("wss://") || addr == "wss://") {
                 alert("Server address must start with 'wss://' and be a valid WebSocket address!");
                 return;
-            };
+            }
             try {
+                serverStatus.src = pingingStatus;
+                serverName.innerText = "...";
+                serverMotd.replaceChildren(makeColors(["&7..."]));
+                playerCount.innerText = "-/-";
                 let ws = new WebSocket(addr);
                 ws.onopen = () => {
                     console.log("Connected to", addr);
@@ -55,20 +169,15 @@
                     try {
                         let data = JSON.parse(event.data);
                         console.log("Received JSON data:", data);
-                        serverStatus.style.color = "darkgreen";
-                        serverStatus.innerText = "online";
+                        serverStatus.src = successStatus;
                         serverName.innerText = data.name;
                         playerCount.innerText = `${data.data.online}/${data.data.max}`;
-                        let players = [];
-                        let more = "";
-                        data.data.players.forEach(player => {
-                            if (!player.startsWith("§")) {
-                                players.push(player);
-                            } else {
-                                more = player.match(/(\d+ more)/g);
-                            };
-                        });
-                        playersContainer.innerText = data.data.players.length ? `${players.join(", ")}${more ? " and "+more : ""}` : "";
+                        serverMotd.replaceChildren(makeColors(data.data.motd));
+                        if (data.data.players.length > 0) {
+                            playerList.replaceChildren(makeColors(data.data.players));
+                        } else {
+                            playerList.replaceChildren(makeColors(["&7&oNo data"]))
+                        }                        
                     } catch (err) {
                         console.error("Failed to parse as JSON!", err);
                         alert("Error while parsing received data!", err);
@@ -76,8 +185,11 @@
                 };
                 ws.onerror = (err) => {
                     console.error("WebSocket error!", err);
-                    serverStatus.style.color = "darkred";
-                    serverStatus.innerText = "offline/error";
+                    serverName.innerText = "Failed to fetch!";
+                    serverMotd.replaceChildren(makeColors(["&7This server is offline or doesn't exist"]));
+                    serverStatus.src = failureStatus;
+                    playerCount.innerText = "0/64";
+                    playerList.replaceChildren(makeColors(["&7&oNo data"]))
                 };
                 ws.onclose = () => {
                     console.log("Connection to", addr, "closed");
@@ -86,14 +198,6 @@
                 console.error("WebSocket error!", err);
             };
         };
-
-        address.addEventListener("input", () => {
-            serverStatus.style.color = "unset";
-            serverStatus.innerText = "-";
-            serverName.innerText = "-";
-            playerCount.innerText = "-/-";
-            playersContainer.innerText = "";
-        });
     </script>
     <noscript>
         <div class="warning">
