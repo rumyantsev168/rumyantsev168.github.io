@@ -147,7 +147,7 @@ item-slot[large] .item-slot-durability-bg {
     text-align: left;
     width: fit-content;
     z-index: 9999;
-    white-space: nowrap;
+    white-space: pre-wrap;
     pointer-events: none;
     line-height: 1em;
     box-shadow:

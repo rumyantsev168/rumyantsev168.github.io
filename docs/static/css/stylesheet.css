@@ -106,7 +106,8 @@ footer {
     width: calc(100% - 8px);
     resize: none;
     font-family: Arial;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    word-break: break-all;
 }
 
 .form textarea {

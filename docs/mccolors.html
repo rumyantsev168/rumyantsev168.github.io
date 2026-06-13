@@ -91,22 +91,27 @@
 
         const slot = document.getElementById("slot");
         const text = document.getElementById("tooltip-text");
+        function makeTooltipText(s) {
+            return s
+                .replaceAll("\"", "\'")
+                .replaceAll("\n", "\\n");
+        }
 
         const clearBtn = document.getElementById("clear");
         clearBtn.onclick = () => {
             text.value = "";
         };
 
+        const setTooltipBtn = document.getElementById("set-tooltip");
+        setTooltipBtn.onclick = () => {
+            slot.setAttribute("tooltip", makeTooltipText(text.value));
+        }
+
         const getResultBtn = document.getElementById("get-result");
         const result = document.getElementById("result");
         getResultBtn.onclick = () => {
-            result.innerText = text.value.replaceAll("\n", "\\n").replaceAll(" ", "&nbsp;");
+            result.innerText = `tooltip="${makeTooltipText(text.value)}"`;
         };
-
-        const setTooltipBtn = document.getElementById("set-tooltip");
-        setTooltipBtn.onclick = () => {
-            slot.setAttribute("tooltip", text.value.replaceAll("\n", "\\n").replaceAll(" ", "\u00A0"));
-        }
 
         document.getElementById("template-1").addEventListener("click", () => {
             text.value = `&r&fItem Name (#0000)\n&r&7Enchantment I\n&r&7Enchantment II\n&r&7Enchantment III\n\n&o&5Description\n&r&8minecraft:item_name\n&o&9Minecraft`;
