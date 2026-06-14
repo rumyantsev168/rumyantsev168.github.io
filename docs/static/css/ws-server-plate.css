@@ -1,0 +1,84 @@
+.ws-server-plate-server {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    border: 1px solid black;
+    gap: 5px;
+    height: fit-content;
+    width: 447px;
+    background: linear-gradient(#000000cc, #000000cc), url("https://rumyantsev168.github.io/static/minecraft/dirt.png");
+    background-size: 64px;
+    image-rendering: pixelated;
+    font-family: Minecraft;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: default;
+}
+
+.ws-server-plate-icon {
+    height: 64px;
+}
+
+.ws-server-plate-name-motd {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 21px;
+    overflow: hidden;
+    white-space: pre;
+    word-break: keep-all;
+}
+
+.ws-server-plate-status {
+    position: absolute;
+    top: 0;
+    right: 0;
+    image-rendering: pixelated;
+    height: 16px;
+}
+
+.ws-server-plate-count {
+    color: rgb(190, 190, 190);
+    position: absolute;
+    top: 0;
+    right: 24px;
+}
+
+.ws-server-plate-players {    
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0.2em 0.3em 0.2em 0.4em;
+    background: #1E0F1E;
+    color: #ffffff;
+    font-family: Minecraft;
+    font-size: 1em;
+    text-align: left;
+    width: fit-content;
+    z-index: 9999;
+    white-space: pre-wrap;
+    pointer-events: none;
+    line-height: 1.1em;
+    box-shadow:
+        0 -0.1em 0 0 #1E0F1E,
+        0  0.1em 0 0 #1E0F1E,
+        -0.1em 0 0 0 #1E0F1E,
+        0.1em 0 0 0 #1E0F1E;
+    text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
+}
+
+.ws-server-plate-players::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: 0.1em solid #2B0A5E;
+}
+
+.ws-server-plate-count:hover + .ws-server-plate-players {
+    display: block;
+}

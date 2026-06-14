@@ -19,86 +19,11 @@
             font-family: monospace;
             width: 100%;
         }
-        #server {
-            position: relative;
-            top: 0;
-            left: 0;
-            display: flex;
-            border: 1px solid black;
-            gap: 5px;
-            height: fit-content;
-            width: 511px;
-            background: linear-gradient(#000000cc, #000000cc), url("static/minecraft/dirt.png");
-            background-size: 64px;
-            image-rendering: pixelated;
-            font-family: Minecraft;
-            font-size: 16px;
-            color: white;
-            cursor: default;
-        }
-        #icon {
-            height: 64px;
-        }
-        #name-motd {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 21px;
-            white-space: pre-wrap;
-        }
-        #status {
-            position: absolute;
-            top: 0;
-            right: 0;
-            image-rendering: pixelated;
-            height: 16px;
-        }
-        #count {
-            color: rgb(190, 190, 190);
-            position: absolute;
-            top: 0;
-            right: 24px;
-        }
-        #players {    
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 0.2em 0.3em 0.2em 0.4em;
-            background: #1E0F1E;
-            color: #ffffff;
-            font-family: Minecraft;
-            font-size: 1em;
-            text-align: left;
-            width: fit-content;
-            z-index: 9999;
-            white-space: pre-wrap;
-            pointer-events: none;
-            line-height: 1.1em;
-            box-shadow:
-                0 -0.1em 0 0 #1E0F1E,
-                0  0.1em 0 0 #1E0F1E,
-                -0.1em 0 0 0 #1E0F1E,
-                0.1em 0 0 0 #1E0F1E;
-            text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
-        }
-        #players::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            border: 0.1em solid #2B0A5E;
-        }
-        #count:hover + #players {
-            display: block;
-        }
     </style>
     <title>Minecraft WebSocket</title>
 </head>
 <body>
-    <main style="max-width: 512px">
+    <main style="max-width: fit-content">
         <header>
             <h1>Minecraft WebSocket</h1>
             <hr size="1px">
@@ -107,137 +32,18 @@
             <input id="ws-address" value="wss://" placeholder="wss://">
             <button type="button" id="ping-btn">Ping!</button>
         </div>
-        <div id="server">
-            <img src="static/minecraft/server.png" id="icon">
-            <div id="name-motd">
-                <span id="name">Minecraft Server</span>
-                <span id="motd">&7A Minecraft Server</span>
-            </div>
-            <img src="static/minecraft/failure.png" id="status">
-            <span id="count">0/64</span>
-            <div id="players">&7&oNo data</div>
-        </div>
+        <ws-server-plate id="server-plate"></ws-server-plate>
     </main>
     <script src="static/js/main.js"></script>
     <script src="static/js/min/minecraftColors.min.js"></script>
+    <script> window.WS_SERVER_PLATE_USE_LOCAL_ASSETS = true </script>
+    <script src="static/js/WSServerPlate.js"></script>
     <script>
-        const address = document.getElementById("ws-address");
-        const serverName = document.getElementById("name");
-        const serverIcon = document.getElementById("icon");
-        const serverMotd = document.getElementById("motd");
-        serverMotd.replaceChildren(serverMotd.innerText.replaceColorCodes());
-        const serverStatus = document.getElementById("status");
-        const playerCount = document.getElementById("count");
-        const playerList = document.getElementById("players");
-        playerList.replaceChildren(playerList.innerText.replaceColorCodes());
-
-        document.addEventListener("mousemove", (event) => {
-            try {
-                playerList.style.top = event.clientY - 37 + "px";
-                playerList.style.left = event.clientX + 25 + "px";
-            } catch (err) {}
-        });
-
-        const defaultIcon = "static/minecraft/server.png";
-        const pingingStatus = "static/pinging.gif";
-        const successStatus1 = "static/minecraft/success_1.png";
-        const successStatus2 = "static/minecraft/success_2.png";
-        const successStatus3 = "static/minecraft/success_3.png";
-        const successStatus4 = "static/minecraft/success_4.png";
-        const successStatus5 = "static/minecraft/success_5.png";
-        const failureStatus = "static/minecraft/failure.png";
-
-        function makeColors(lines) {
-            return lines.join("\n").replaceAll("§", "&").replaceColorCodes();
-        }
-        
-        function createImageFromRGBA(data, width, height) {
-            const canvas = document.createElement("canvas");
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext("2d");
-            
-            const imageData = ctx.createImageData(width, height);
-            imageData.data.set(data);
-            ctx.putImageData(imageData, 0, 0);
-            
-            serverIcon.src = canvas.toDataURL("image/png");
-            console.log("Image set successfully!");
-        }
-
+        const wsAddress = document.getElementById("ws-address");
+        const serverPlate = document.getElementById("server-plate");
         document.getElementById("ping-btn").onclick = () => {
-            let addr = address.value;
-            if (!addr || !addr.startsWith("wss://") || addr == "wss://") {
-                alert("Server address must start with 'wss://' and be a valid WebSocket address!");
-                return;
-            }
-            try {
-                serverStatus.src = pingingStatus;
-                serverName.innerText = "Pinging...";
-                serverIcon.src = defaultIcon;
-                serverMotd.replaceChildren(makeColors(["", `&8${addr}`]));
-                playerCount.innerText = "";
-                let ws = new WebSocket(addr);
-                const startTime = Date.now();
-                ws.onopen = () => {
-                    console.log("Connected to", addr);
-                    ws.send("Accept: MOTD");
-                };
-                ws.onmessage = (event) => {
-                    try {
-                        const pingTime = Date.now() - startTime;
-                        console.log(pingTime);
-                        let data = JSON.parse(event.data);
-                        console.log("Received JSON data:", data);
-                        if (0 <= pingTime && pingTime <= 150) {
-                            serverStatus.src = successStatus5;
-                        } else if (150 < pingTime && pingTime <= 300) {
-                            serverStatus.src = successStatus4;
-                        } else if (300 < pingTime && pingTime <= 600) {
-                            serverStatus.src = successStatus3;
-                        } else if (600 < pingTime && pingTime <= 1000) {
-                            serverStatus.src = successStatus2;
-                        } else if (pingTime > 1000) {
-                            serverStatus.src = successStatus1;
-                        }
-                        serverName.replaceChildren(makeColors([data.name]));
-                        playerCount.innerText = `${data.data.online}/${data.data.max}`;
-                        serverMotd.replaceChildren(makeColors(data.data.motd));
-                        if (data.data.players.length > 0) {
-                            playerList.replaceChildren(makeColors(data.data.players));
-                        } else {
-                            playerList.replaceChildren(makeColors(["&7&oNo data"]))
-                        }
-                    } catch (err) {
-                        const blob = event.data;
-                        blob.arrayBuffer().then(buffer => {
-                            const view = new Uint8Array(buffer);
-                            const possibleSizes = [64, 128, 256, 512];
-                            for (const size of possibleSizes) {
-                                const expectedBytes = size * size * 4;
-                                if (view.length === expectedBytes) {
-                                    createImageFromRGBA(view, size, size);
-                                    break;
-                                }
-                            }
-                        });
-                    };
-                };
-                ws.onerror = (err) => {
-                    console.error("WebSocket error!", err);
-                    serverName.innerText = "Failed to fetch!";
-                    serverMotd.replaceChildren(makeColors(["&7This server is offline or doesn't exist"]));
-                    serverStatus.src = failureStatus;
-                    playerCount.innerText = "";
-                    playerList.replaceChildren(makeColors(["&7&oNo data"]))
-                };
-                ws.onclose = () => {
-                    console.log("Connection to", addr, "closed");
-                };
-            } catch (err) {
-                console.error("WebSocket error!", err);
-            };
-        };
+            serverPlate.setAttribute("ws", wsAddress.value);
+        }
     </script>
     <noscript>
         <div class="warning">
