@@ -49,9 +49,9 @@ class WSServerPlate extends HTMLElement {
         WSServerPlate.loadingPromises.push(this.render.bind(this));
 
         loadPromise.then(() => {
-            ItemSlot.assetsLoaded = true;
-            const promises = ItemSlot.loadingPromises;
-            ItemSlot.loadingPromises = [];
+            WSServerPlate.assetsLoaded = true;
+            const promises = WSServerPlate.loadingPromises;
+            WSServerPlate.loadingPromises = [];
             promises.forEach(resolve => resolve());
         }).catch(err => {
             console.error("Failed to load:", err);
