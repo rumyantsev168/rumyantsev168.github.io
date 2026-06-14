@@ -34,7 +34,6 @@
             font-family: Minecraft;
             font-size: 16px;
             color: white;
-            text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
             cursor: default;
         }
         #icon {
@@ -44,7 +43,8 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            line-height: 21.333px;
+            line-height: 21px;
+            white-space: pre-wrap;
         }
         #status {
             position: absolute;
@@ -175,8 +175,8 @@
                 serverStatus.src = pingingStatus;
                 serverName.innerText = "Pinging...";
                 serverIcon.src = defaultIcon;
-                serverMotd.replaceChildren(makeColors(["&7Pinging..."]));
-                playerCount.innerText = "-/-";
+                serverMotd.replaceChildren(makeColors(["", `&8${addr}`]));
+                playerCount.innerText = "";
                 let ws = new WebSocket(addr);
                 const startTime = Date.now();
                 ws.onopen = () => {
