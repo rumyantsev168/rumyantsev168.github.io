@@ -1,29 +1,3 @@
-@font-face {
-    font-family: "Minecraft";
-    font-weight: normal;
-    font-style: normal;
-    src: url("https://rumyantsev168.github.io/static/font/MinecraftRegular.otf");
-}
-@font-face {
-    font-family: "Minecraft";
-    font-weight: bold;
-    font-style: normal;
-    src: url("https://rumyantsev168.github.io/static/font/MinecraftBold.otf");
-}
-@font-face {
-    font-family: "Minecraft";
-    font-weight: normal;
-    font-style: italic;
-    src: url("https://rumyantsev168.github.io/static/font/MinecraftItalic.otf");
-}
-@font-face {
-    font-family: "Minecraft";
-    font-weight: bold;
-    font-style: italic;
-    src: url("https://rumyantsev168.github.io/static/font/MinecraftBoldItalic.otf");
-}
-
-
 item-slot, item-slot-grid {
     display: inline-block;
     vertical-align: middle;

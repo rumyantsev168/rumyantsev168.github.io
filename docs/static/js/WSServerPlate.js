@@ -60,6 +60,15 @@ class WSServerPlate extends HTMLElement {
         return new Promise((resolve, reject) => {
             const useLocal = window.WS_SERVER_PLATE_USE_LOCAL_ASSETS;
             const cssHref = useLocal ? "static/css/ws-server-plate.css" : "https://rumyantsev168.github.io/static/css/ws-server-plate.css";
+            const cssFontHref = useLocal ? "static/css/minecraft-font.css" : "https://rumyantsev168.github.io/static/css/minecraft-font.css";
+
+            let stylesheetFont = document.head.querySelector(`link[href="${cssFontHref}"]`);
+            if (!stylesheetFont) {
+                stylesheetFont = document.createElement("link");
+                stylesheetFont.rel = "stylesheet";
+                stylesheetFont.href = cssFontHref;
+                document.head.appendChild(stylesheetFont);
+            }
 
             let stylesheet = document.head.querySelector(`link[href="${cssHref}"]`);
             if (!stylesheet) {
@@ -70,6 +79,11 @@ class WSServerPlate extends HTMLElement {
             }
 
             Promise.all([
+                new Promise((res, rej) => {
+                    if (stylesheetFont.sheet) res();
+                    stylesheetFont.onload = res;
+                    stylesheetFont.onerror = () => rej(new Error("Failed to load minecraft-font.css"));
+                }),
                 new Promise((res, rej) => {
                     if (stylesheet.sheet) res();
                     stylesheet.onload = res;
