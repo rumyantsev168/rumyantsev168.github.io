@@ -54,6 +54,7 @@
             height: 16px;
         }
         #count {
+            color: rgb(190, 190, 190);
             position: absolute;
             top: 0;
             right: 24px;
@@ -79,8 +80,8 @@
                 0  0.1em 0 0 #1E0F1E,
                 -0.1em 0 0 0 #1E0F1E,
                 0.1em 0 0 0 #1E0F1E;
+            text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
         }
-
         #players::after {
             content: "";
             position: absolute;
@@ -90,7 +91,6 @@
             bottom: 0;
             border: 0.1em solid #2B0A5E;
         }
-
         #count:hover + #players {
             display: block;
         }
@@ -133,7 +133,7 @@
 
         document.addEventListener("mousemove", (event) => {
             try {
-                playerList.style.top = event.clientY + 15 + "px";
+                playerList.style.top = event.clientY - 37 + "px";
                 playerList.style.left = event.clientX + 25 + "px";
             } catch (err) {}
         });
@@ -200,7 +200,7 @@
                         } else if (pingTime > 1000) {
                             serverStatus.src = successStatus1;
                         }
-                        serverName.innerText = data.name;
+                        serverName.replaceChildren(makeColors([data.name]));
                         playerCount.innerText = `${data.data.online}/${data.data.max}`;
                         serverMotd.replaceChildren(makeColors(data.data.motd));
                         if (data.data.players.length > 0) {
@@ -228,7 +228,7 @@
                     serverName.innerText = "Failed to fetch!";
                     serverMotd.replaceChildren(makeColors(["&7This server is offline or doesn't exist"]));
                     serverStatus.src = failureStatus;
-                    playerCount.innerText = "0/64";
+                    playerCount.innerText = "";
                     playerList.replaceChildren(makeColors(["&7&oNo data"]))
                 };
                 ws.onclose = () => {
