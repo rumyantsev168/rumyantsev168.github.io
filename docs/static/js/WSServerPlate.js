@@ -115,7 +115,7 @@ class WSServerPlate extends HTMLElement {
         const players = document.createElement("div");
         players.className = "ws-server-plate-players";
 
-        const moveHandler = (event) => { move(event, players) };
+        const moveHandler = (event) => { movePlayerList(event, players) };
         this._playerListMoveHandler = moveHandler;
         document.addEventListener("mousemove", this._playerListMoveHandler);
 
@@ -222,7 +222,7 @@ class WSServerPlate extends HTMLElement {
 customElements.define("ws-server-plate", WSServerPlate);
 
 // Moves the tooltip and also prevents overflow
-const move = (e, t) => {
+const movePlayerList = (e, t) => {
     try {
         const offsetX = 25;
         const offsetY = -37;

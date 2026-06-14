@@ -135,7 +135,7 @@ class ItemSlot extends HTMLElement {
             itemSlot.appendChild(tooltipDiv);
             this._itemTooltip = tooltipDiv;
 
-            const moveHandler = (event) => { move(event, tooltipDiv) };
+            const moveHandler = (event) => { moveTooltip(event, tooltipDiv) };
             this._tooltipMoveHandler = moveHandler;
             document.addEventListener("mousemove", this._tooltipMoveHandler);
         }
@@ -293,7 +293,7 @@ customElements.define("item-slot", ItemSlot);
 customElements.define("item-slot-grid", ItemSlotGrid);
 
 // Moves the tooltip and also prevents overflow
-const move = (e, t) => {
+const moveTooltip = (e, t) => {
     try {
         const offsetX = 25;
         const offsetY = -37;
