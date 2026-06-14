@@ -52,8 +52,9 @@ class ItemSlot extends HTMLElement {
 
         loadPromise.then(() => {
             ItemSlot.assetsLoaded = true;
-            ItemSlot.loadingPromises.forEach(resolve => resolve());
+            const promises = ItemSlot.loadingPromises;
             ItemSlot.loadingPromises = [];
+            promises.forEach(resolve => resolve()); // Now safe to call
         }).catch(err => {
             console.error("Failed to load:", err);
         }).finally(() => {

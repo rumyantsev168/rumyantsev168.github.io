@@ -49,12 +49,13 @@ class WSServerPlate extends HTMLElement {
         WSServerPlate.loadingPromises.push(this.render.bind(this));
 
         loadPromise.then(() => {
-            WSServerPlate.assetsLoaded = true;
-            WSServerPlate.loadingPromises.forEach(resolve => resolve());
-            WSServerPlate.loadingPromises = [];
+            ItemSlot.assetsLoaded = true;
+            const promises = ItemSlot.loadingPromises;
+            ItemSlot.loadingPromises = [];
+            promises.forEach(resolve => resolve());
         }).catch(err => {
             console.error("Failed to load:", err);
-        });
+        })
     }
 
     // Ensures the necessary files are only loaded once
