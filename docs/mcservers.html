@@ -15,34 +15,34 @@
             gap: 5px;
             margin: 10px 0;
         }
-        #ws-address {
+        #mc-address {
             font-family: monospace;
             width: 100%;
         }
     </style>
-    <title>Minecraft WebSocket</title>
+    <title>Minecraft Server Ping</title>
 </head>
 <body>
     <main style="max-width: fit-content">
         <header>
-            <h1>Minecraft WebSocket</h1>
+            <h1>Minecraft Server Ping</h1>
             <hr size="1px">
         </header>
+        <p class="text-center">This page uses <a href="https://api.mcsrvstat.us">https://api.mcsrvstat.us</a> API</p>
         <div id="input">
-            <input id="ws-address" value="wss://" placeholder="wss://">
+            <input id="mc-address" placeholder="Address">
             <button type="button" id="ping-btn">Ping!</button>
         </div>
-        <ws-server-plate id="server-plate"></ws-server-plate>
+        <mc-server-plate id="server-plate"></mc-server-plate>
     </main>
     <script src="static/js/main.js"></script>
-    <script src="static/js/min/minecraftColors.min.js"></script>
-    <script> window.WS_SERVER_PLATE_USE_LOCAL_ASSETS = true </script>
-    <script src="static/js/WSServerPlate.js"></script>
+    <script> window.MC_SERVER_PLATE_USE_LOCAL_ASSETS = true </script>
+    <script src="static/js/MCServerPlate.js"></script>
     <script>
-        const wsAddress = document.getElementById("ws-address");
+        const mcAddress = document.getElementById("mc-address");
         const serverPlate = document.getElementById("server-plate");
         document.getElementById("ping-btn").onclick = () => {
-            serverPlate.setAttribute("ws", wsAddress.value);
+            serverPlate.setAttribute("address", mcAddress.value);
         }
     </script>
     <noscript>

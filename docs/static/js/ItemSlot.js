@@ -42,6 +42,10 @@ class ItemSlot extends HTMLElement {
         loadingIndicator.style.background = "#f2f2f2";
         loadingIndicator.style.border = "1px solid black";
         loadingIndicator.style.borderRadius = "none";
+        loadingIndicator.style.fontFamily = "Times New Roman";
+        loadingIndicator.style.fontWeight = "normal";
+        loadingIndicator.style.fontStyle = "normal";
+        loadingIndicator.style.fontSize = "16px";
         loadingIndicator.style.width = "fit-content";
         loadingIndicator.style.height = "fit-content";
         loadingIndicator.innerText = "Loading <item-slot> elements...";

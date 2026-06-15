@@ -8,15 +8,16 @@
     <link rel="stylesheet" href="static/css/stylesheet.css">
     <style>
         main > item-slot, 
-        item-slot-grid {
+        item-slot-grid,
+        mc-server-plate {
             margin: 10px 0;
         }
 
-        #embed {
+        #embed1, #embed2 {
             cursor: pointer;
         }
     </style>
-    <title>ItemSlot.js Showcase</title>
+    <title>Minecraft HTML</title>
 </head>
 <body>
     <main style="max-width: 1000px;">
@@ -25,7 +26,15 @@
             <hr>
         </header>
 
-        <p>Here's a simple <code>&lt;item-slot&gt;</code> element.</p>
+        <!-- ItemSlot.js -->
+        <h2 style="margin-bottom: 10px;">1. <code>&lt;item-slot&gt;</code> and <code>&lt;item-slot-grid&gt;</code></h2>
+
+        <p>
+            These elements let you display Minecraft item slots and inventories.
+        </p>
+        <p>
+            Here's a simple <code>&lt;item-slot&gt;</code> element:
+        </p>
 
         <item-slot></item-slot>
 
@@ -35,7 +44,7 @@
                 <li><code>large</code>: Makes it large</li>
                 <li><code>item</code>: Image link</li>
                 <li><code>tooltip</code>: Text, supports Minecraft color codes</li>
-                <li><code>count</code>: Text, also supports Minecraft colors. You can put here any text you want, lol</li>
+                <li><code>count</code>: Text, also supports Minecraft colors</li>
                 <li><code>durability</code>: Any integer, adds a durability bar for the item</li>
             </ul>
         </p>
@@ -52,7 +61,7 @@
         <item-slot item="https://minecraft.wiki/images/Invicon_Map.png" tooltip="Map #1\n\n<img src='https://minecraft.wiki/images/thumb/Map_Zoom_4.png/320px-Map_Zoom_4.png' width='160'>"></item-slot>
 
         <p>
-            <a href="mccolors.html">This page</a> can help you make a <code>tooltip</code> attribute.
+            <a href="mctooltip.html">This page</a> can help you make a <code>tooltip</code> attribute.
         </p>
         <p>
             Also there's an <code>&lt;item-slot-grid&gt;</code> element. You can set it's size using <code>size</code> attribute in format "WxH" where W is width and H is height. Default size is "3x3".
@@ -238,13 +247,49 @@
         </p>
         <p>
             Click to copy -
-            <code id="embed" onclick="copyElement('embed')">&lt;script src="https://rumyantsev168.github.io/static/js/ItemSlot.js"&gt;&lt;/script&gt;</code>
+            <code id="embed1" onclick="copyElement('embed1')">&lt;script src="https://rumyantsev168.github.io/static/js/ItemSlot.js"&gt;&lt;/script&gt;</code>
+        </p>
+
+        <hr>
+
+        <!-- MCServerPlate.js -->
+        <h2 style="margin: 10px 0;">2. <code>&lt;mc-server-plate&gt;</code></h2>
+
+        <p>
+            This element fetches Minecraft server status and displays it in the style of in-game server list. It uses <a href="https://api.mcsrvstat.us">https://api.mcsrvstat.us</a> API.<br>
+        </p>
+        <p>
+            The only attribute you need is <code>address</code>. Here's an example:
+        </p>
+
+        <mc-server-plate address="mc.hypixel.net"></mc-server-plate>
+
+        <p>
+            If the server didn't respond:
+        </p>
+
+        <mc-server-plate address="mc.example.com"></mc-server-plate>
+
+        <p>
+            And if you don't specify the address:
+        </p>
+
+        <mc-server-plate></mc-server-plate>
+
+        <p>
+            The JS script - <a href="static/js/MCServerPlate.js">MCServerPlate.js</a>. 
+        </p>
+        <p>
+            Click to copy -
+            <code id="embed2" onclick="copyElement('embed2')">&lt;script src="https://rumyantsev168.github.io/static/js/MCServerPlate.js"&gt;&lt;/script&gt;</code>
         </p>
     </main>
     <script src="static/js/main.js"></script>
     <script src="static/js/copy.js"></script>
     <script> window.ITEM_SLOT_USE_LOCAL_ASSETS = true; </script>
     <script src="static/js/ItemSlot.js"></script>
+    <script> window.MC_SERVER_PLATE_USE_LOCAL_ASSETS = true; </script>
+    <script src="static/js/MCServerPlate.js"></script>
     <noscript>
         <div class="warning">
             <img src="static/icons/Warning.png" height="20px">

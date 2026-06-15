@@ -15,7 +15,7 @@ class WSServerPlate extends HTMLElement {
     static assetsLoaded = false;
     static loadingPromises = [];
     static get observedAttributes() {
-        return ["ws"];
+        return ["address"];
     }
 
     static defaultIcon = "https://rumyantsev168.github.io/static/minecraft/server.png";
@@ -85,7 +85,7 @@ class WSServerPlate extends HTMLElement {
     render() {
         if (this._rendered) return;
 
-        const address = this.getAttribute("ws");
+        const address = this.getAttribute("address");
 
         const server = document.createElement("div");
         server.className = "ws-server-plate-server";
@@ -113,16 +113,16 @@ class WSServerPlate extends HTMLElement {
 
         if (!address || (!address.startsWith("ws://") && !address.startsWith("wss://")) || address == "ws://" || address == "wss://") {
             console.warn("Address is invalid or unset for a <ws-server-plate> element!");
+            status.src = WSServerPlate.failureStatus;
             icon.src = WSServerPlate.defaultIcon;
             name.innerText = "Minecraft Server";
             motd.replaceChildren(makeColors(["&7A Minecraft Server"]));
-            status.src = WSServerPlate.failureStatus;
             count.innerText = "";
-            players.replaceChildren(makeColors(["&7&oNo data"]));
+            players.innerHTML = "";
         } else {
             try {
                 status.src = WSServerPlate.pingingStatus;
-                name.innerText = "Pinging...";
+                name.innerText = "Connecting...";
                 icon.src = WSServerPlate.defaultIcon;
                 motd.replaceChildren(makeColors(["", `&8${address}`]));
                 count.innerText = "";
@@ -150,16 +150,16 @@ class WSServerPlate extends HTMLElement {
                             status.src = WSServerPlate.successStatusList[0];
                         }
                         name.replaceChildren(makeColors([data.name]));
-                        count.innerText = `${data.data.online}/${data.data.max}`;
                         if (data.data.motd.join("\n").includes("\n")) {
                             motd.replaceChildren(makeColors(data.data.motd));
                         } else {
                             motd.replaceChildren(makeColors([data.data.motd.join(), `&8${address}`]))
                         }
+                        count.innerText = `${data.data.online}/${data.data.max}`;
                         if (data.data.players.length > 0) {
                             players.replaceChildren(makeColors(data.data.players));
                         } else {
-                            players.replaceChildren(makeColors(["&7&oNo data"]))
+                            players.replaceChildren(makeColors(["&7&oNo player data"]))
                         }
                     } catch (err) {
                         const blob = event.data;
@@ -178,11 +178,11 @@ class WSServerPlate extends HTMLElement {
                 };
                 ws.onerror = (err) => {
                     console.error("WebSocket error!", err);
-                    name.innerText = "Failed to fetch!";
-                    motd.replaceChildren(makeColors(["&7This server is offline or doesn't exist", `&8${address}`]));
                     status.src = WSServerPlate.failureStatus;
+                    name.innerText = "Failed to connect!";
+                    motd.replaceChildren(makeColors(["&7This server is offline or doesn't exist", `&8${address}`]));
                     count.innerText = "";
-                    players.replaceChildren(makeColors(["&7&oNo data"]))
+                    players.innerHTML = "";
                 };
                 ws.onclose = () => {
                     console.log("Connection to", address, "closed");
@@ -238,8 +238,10 @@ const movePlayerList = (e, t) => {
     } catch (err) {}
 };
 
-function makeColors(lines) {
-    return lines.join("\n").replaceAll("§", "&").replaceColorCodes();
+if (!makeColors) {
+    function makeColors(lines) {
+        return lines.join("\n").replaceAll("\u00A7", "&").replaceAll("&k", "").replaceColorCodes();
+    }
 }
 
 function createImageFromRGBA(imgEl, data, width, height) {
