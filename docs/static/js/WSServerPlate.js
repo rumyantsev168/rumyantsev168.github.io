@@ -111,7 +111,7 @@ class WSServerPlate extends HTMLElement {
         nameMotd.append(name, motd);
         server.append(icon, nameMotd, status, count, players);
 
-        if (!address || !address.startsWith("wss://") || address == "wss://") {
+        if (!address || (!address.startsWith("ws://") && !address.startsWith("wss://")) || address == "ws://" || address == "wss://") {
             console.warn("Address is invalid or unset for a <ws-server-plate> element!");
             icon.src = WSServerPlate.defaultIcon;
             name.innerText = "Minecraft Server";
@@ -151,7 +151,11 @@ class WSServerPlate extends HTMLElement {
                         }
                         name.replaceChildren(makeColors([data.name]));
                         count.innerText = `${data.data.online}/${data.data.max}`;
-                        motd.replaceChildren(makeColors(data.data.motd));
+                        if (data.data.motd.join("\n").includes("\n")) {
+                            motd.replaceChildren(makeColors(data.data.motd));
+                        } else {
+                            motd.replaceChildren(makeColors([data.data.motd.join(), `&8${address}`]))
+                        }
                         if (data.data.players.length > 0) {
                             players.replaceChildren(makeColors(data.data.players));
                         } else {
