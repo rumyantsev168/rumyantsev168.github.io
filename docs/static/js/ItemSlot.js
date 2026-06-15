@@ -11,6 +11,33 @@ if (!String.prototype.replaceColorCodes) {
 }
 // =====================================================
 
+// ================= Helper functions ==================
+// Moves the tooltip and also prevents overflow
+const moveTooltip = (e, t) => {
+    try {
+        const offsetX = 25;
+        const offsetY = -37;
+        let x = e.clientX + offsetX;
+        let y = Math.max(0, e.clientY + offsetY);
+
+        const tooltipRect = t.getBoundingClientRect();
+        const tooltipWidth = tooltipRect.width;
+        const tooltipHeight = tooltipRect.height;
+
+        const maxX = window.innerWidth - tooltipWidth;
+        if (x > maxX) {
+            x = maxX;
+        }
+
+        const maxY = window.innerHeight - tooltipHeight;
+        y = Math.min(Math.max(0, y), maxY);
+
+        t.style.left = `calc(${x}px - 0.1em)`;
+        t.style.top = `calc(${y}px + 0.1em)`;
+    } catch (err) {}
+}
+// =====================================================
+
 class ItemSlot extends HTMLElement {
     static assetsLoaded = false;
     static loadingPromises = [];
@@ -284,30 +311,4 @@ class ItemSlotGrid extends HTMLElement {
 
 customElements.define("item-slot", ItemSlot);
 customElements.define("item-slot-grid", ItemSlotGrid);
-
-// Moves the tooltip and also prevents overflow
-const moveTooltip = (e, t) => {
-    try {
-        const offsetX = 25;
-        const offsetY = -37;
-        let x = e.clientX + offsetX;
-        let y = Math.max(0, e.clientY + offsetY);
-
-        const tooltipRect = t.getBoundingClientRect();
-        const tooltipWidth = tooltipRect.width;
-        const tooltipHeight = tooltipRect.height;
-
-        const maxX = window.innerWidth - tooltipWidth;
-        if (x > maxX) {
-            x = maxX;
-        }
-
-        const maxY = window.innerHeight - tooltipHeight;
-        y = Math.min(Math.max(0, y), maxY);
-
-        t.style.left = `calc(${x}px - 0.1em)`;
-        t.style.top = `calc(${y}px + 0.1em)`;
-    } catch (err) {}
-};
-
 console.log("This page uses ItemSlot.js!");

@@ -12,6 +12,18 @@ if (!String.prototype.replaceColorCodes) {
 }
 // =====================================================
 
+// ================= Helper functions ==================
+if (typeof makeColors === "undefined") {
+    function makeColors(lines) {
+        return lines
+            .join("\n")
+            .replaceAll("\u00A7", "&")
+            .replaceAll("&k", "")
+            .replaceColorCodes();
+    }
+}
+// =====================================================
+
 class MCServerPlate extends HTMLElement {
     static assetsLoaded = false;
     static loadingPromises = [];
@@ -154,10 +166,4 @@ class MCServerPlate extends HTMLElement {
 }
 
 customElements.define("mc-server-plate", MCServerPlate);
-
-if (!makeColors) {
-    function makeColors(lines) {
-        return lines.join("\n").replaceAll("\u00A7", "&").replaceAll("&k", "").replaceColorCodes();
-    }
-}
-console.log("This page uses MCServerPlate.js!")
+console.log("This page uses MCServerPlate.js!");

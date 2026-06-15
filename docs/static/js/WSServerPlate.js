@@ -11,6 +11,57 @@ if (!String.prototype.replaceColorCodes) {
 }
 // =====================================================
 
+// ================= Helper functions ==================
+// Moves the tooltip and also prevents overflow
+const movePlayerList = (e, t) => {
+    try {
+        const offsetX = 25;
+        const offsetY = -37;
+        let x = e.clientX + offsetX;
+        let y = Math.max(0, e.clientY + offsetY);
+
+        const tooltipRect = t.getBoundingClientRect();
+        const tooltipWidth = tooltipRect.width;
+        const tooltipHeight = tooltipRect.height;
+
+        const maxX = window.innerWidth - tooltipWidth;
+        if (x > maxX) {
+            x = maxX;
+        }
+
+        const maxY = window.innerHeight - tooltipHeight;
+        y = Math.min(Math.max(0, y), maxY);
+
+        t.style.left = `calc(${x}px - 0.1em)`;
+        t.style.top = `calc(${y}px + 0.1em)`;
+    } catch (err) {}
+}
+
+if (typeof makeColors === "undefined") {
+    function makeColors(lines) {
+        return lines
+            .join("\n")
+            .replaceAll("\u00A7", "&")
+            .replaceAll("&k", "")
+            .replaceColorCodes();
+    }
+}
+
+function createImageFromRGBA(imgEl, data, width, height) {
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    
+    const imageData = ctx.createImageData(width, height);
+    imageData.data.set(data);
+    ctx.putImageData(imageData, 0, 0);
+    
+    imgEl.src = canvas.toDataURL("image/png");
+    console.log("Image set successfully!");
+}
+// =====================================================
+
 class WSServerPlate extends HTMLElement {
     static assetsLoaded = false;
     static loadingPromises = [];
@@ -212,50 +263,4 @@ class WSServerPlate extends HTMLElement {
 }
 
 customElements.define("ws-server-plate", WSServerPlate);
-
-// Moves the tooltip and also prevents overflow
-const movePlayerList = (e, t) => {
-    try {
-        const offsetX = 25;
-        const offsetY = -37;
-        let x = e.clientX + offsetX;
-        let y = Math.max(0, e.clientY + offsetY);
-
-        const tooltipRect = t.getBoundingClientRect();
-        const tooltipWidth = tooltipRect.width;
-        const tooltipHeight = tooltipRect.height;
-
-        const maxX = window.innerWidth - tooltipWidth;
-        if (x > maxX) {
-            x = maxX;
-        }
-
-        const maxY = window.innerHeight - tooltipHeight;
-        y = Math.min(Math.max(0, y), maxY);
-
-        t.style.left = `calc(${x}px - 0.1em)`;
-        t.style.top = `calc(${y}px + 0.1em)`;
-    } catch (err) {}
-};
-
-if (!makeColors) {
-    function makeColors(lines) {
-        return lines.join("\n").replaceAll("\u00A7", "&").replaceAll("&k", "").replaceColorCodes();
-    }
-}
-
-function createImageFromRGBA(imgEl, data, width, height) {
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext("2d");
-    
-    const imageData = ctx.createImageData(width, height);
-    imageData.data.set(data);
-    ctx.putImageData(imageData, 0, 0);
-    
-    imgEl.src = canvas.toDataURL("image/png");
-    console.log("Image set successfully!");
-}
-
-console.log("This page uses WSServerPlate.js!")
+console.log("This page uses WSServerPlate.js!");
