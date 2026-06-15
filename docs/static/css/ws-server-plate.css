@@ -1,3 +1,28 @@
+@font-face {
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: normal;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftRegular.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: normal;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftBold.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: italic;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftItalic.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: italic;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftBoldItalic.otf");
+}
+
 .ws-server-plate-server {
     position: relative;
     top: 0;
@@ -32,11 +57,12 @@
 
 .ws-server-plate-name {
     line-height: 16px;
-    margin: 4px 0 4px 0;
+    margin-top: 4px;
 }
 
 .ws-server-plate-motd {
     line-height: 16px;
+    margin: 6px 0;
 }
 
 .ws-server-plate-status {
