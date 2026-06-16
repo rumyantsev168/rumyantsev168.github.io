@@ -174,6 +174,7 @@ class WSServerPlate extends HTMLElement {
             icon.src = WSServerPlate.defaultIcon;
             motd.replaceChildren(makeColors(["&7A Minecraft Server"]));
             count.innerText = "";
+            players.style.display = "none";
             players.innerHTML = "";
         } else {
             try {
@@ -217,9 +218,14 @@ class WSServerPlate extends HTMLElement {
                         }
                         count.innerText = `${data.data.online}/${data.data.max}`;
                         if (data.data.players.length > 0) {
+                            players.style.display = "";
                             players.replaceChildren(makeColors(data.data.players));
-                        } else {
+                        } else if (data.data.online > 0) {
+                            players.style.display = "";
                             players.replaceChildren(makeColors(["&7&oNo player data"]))
+                        } else {
+                            players.style.display = "none";
+                            players.innerHTML = "";
                         }
                     } catch (err) {
                         const blob = event.data;
@@ -242,6 +248,7 @@ class WSServerPlate extends HTMLElement {
                     name.innerText = "Failed to connect!";
                     motd.replaceChildren(makeColors(["&7This server is offline or doesn't exist", `&8${address}`]));
                     count.innerText = "";
+                    players.style.display = "none";
                     players.innerHTML = "";
                 };
                 ws.onclose = () => {
