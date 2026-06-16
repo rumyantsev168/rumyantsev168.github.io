@@ -256,23 +256,36 @@
         <h2 style="margin: 10px 0;">2. <code>&lt;mc-server-plate&gt;</code></h2>
 
         <p>
-            This element fetches Minecraft server status and displays it in the style of in-game server list. It uses <a href="https://api.mcsrvstat.us">https://api.mcsrvstat.us</a> API.<br>
+            This element fetches Minecraft server status and displays it in the style of in-game server list.<br>
+            It uses <a href="https://api.mcsrvstat.us">https://api.mcsrvstat.us</a> API.<br>
         </p>
         <p>
-            The only attribute you need is <code>address</code>. Here's an example:
+            The only attributes are <code>address</code> and <code>displayname</code>. Here's an example:
         </p>
 
-        <mc-server-plate address="mc.hypixel.net"></mc-server-plate>
+        <code class="code-block">
+&lt;mc-server-plate address="mc.hypixel.net" displayname="&cHypixel"&gt;&lt;/mc-server-plate&gt;
+        </code>
+
+        <mc-server-plate address="mc.hypixel.net" displayname="&cHypixel"></mc-server-plate>
 
         <p>
             If the server didn't respond:
         </p>
 
-        <mc-server-plate address="mc.example.com"></mc-server-plate>
+        <code class="code-block">
+&lt;mc-server-plate address="mc.example.com" displayname="Example Server"&gt;&lt;/mc-server-plate&gt;
+        </code>
+
+        <mc-server-plate address="mc.example.com" displayname="Example Server"></mc-server-plate>
 
         <p>
-            And if you don't specify the address:
+            And if you don't specify both address and name:
         </p>
+
+        <code class="code-block">
+&lt;mc-server-plate&gt;&lt;/mc-server-plate&gt;
+        </code>
 
         <mc-server-plate></mc-server-plate>
 

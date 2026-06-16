@@ -93,6 +93,7 @@ class MCServerPlate extends HTMLElement {
         if (this._rendered) return;
 
         const address = this.getAttribute("address");
+        const displayName = this.getAttribute("displayname");
 
         const server = document.createElement("div");
         server.className = "mc-server-plate-server";
@@ -102,7 +103,11 @@ class MCServerPlate extends HTMLElement {
         nameMotd.className = "mc-server-plate-name-motd";
         const name = document.createElement("span");
         name.className = "mc-server-plate-name";
-        name.innerText = "Minecraft Server";
+        if (displayName) {
+            name.replaceChildren(makeColors([displayName]));
+        } else {
+            name.innerText = "Minecraft Server";
+        }
         const motd = document.createElement("span");
         motd.className = "mc-server-plate-motd";
         const status = document.createElement("img");
@@ -114,10 +119,10 @@ class MCServerPlate extends HTMLElement {
         server.append(icon, nameMotd, status, count);
 
         if (!address) {
-            console.warn("Address is unset for a <mc-server-plate> element!");
+            console.warn("Address is unset for an <mc-server-plate> element!");
+            status.src = MCServerPlate.failureStatus;
             icon.src = MCServerPlate.defaultIcon;
             motd.replaceChildren(makeColors(["&7A Minecraft Server"]));
-            status.src = MCServerPlate.failureStatus;
             count.innerText = "";
         } else {
             status.src = MCServerPlate.pingingStatus;
@@ -131,7 +136,11 @@ class MCServerPlate extends HTMLElement {
                 console.log("Received JSON data:", data)
                 if (data.online) {
                     status.src = MCServerPlate.successStatus;
-                    name.innerText = "Minecraft Server";
+                    if (displayName) {
+                        name.replaceChildren(makeColors([displayName]));
+                    } else {
+                        name.innerText = "Minecraft Server";
+                    }
                     if (data.motd.raw.join("\n").includes("\n")) {
                         motd.replaceChildren(makeColors(data.motd.raw));
                     } else {
@@ -159,9 +168,22 @@ class MCServerPlate extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue === newValue) return;
-        this.innerHTML = "";
-        this._rendered = false;
-        this.render();
+
+        switch (name) {
+            case "name":
+                const nameEl = this.getElementsByClassName("mc-server-plate-name")[0];
+                if (newValue) {
+                    nameEl.replaceChildren(makeColors([newValue]))
+                } else {
+                    nameEl.innerText = "Minecraft Server";
+                }
+                break;
+            case "address":
+                this.innerHTML = "";
+                this._rendered = false;
+                this.render();
+                break;
+        }
     }
 }
 

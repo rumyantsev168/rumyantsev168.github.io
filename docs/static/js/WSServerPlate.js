@@ -137,6 +137,7 @@ class WSServerPlate extends HTMLElement {
         if (this._rendered) return;
 
         const address = this.getAttribute("address");
+        const displayName = this.getAttribute("displayname");
 
         const server = document.createElement("div");
         server.className = "ws-server-plate-server";
@@ -146,6 +147,11 @@ class WSServerPlate extends HTMLElement {
         nameMotd.className = "ws-server-plate-name-motd";
         const name = document.createElement("span");
         name.className = "ws-server-plate-name";
+        if (displayName) {
+            name.replaceChildren(makeColors([displayName]));
+        } else {
+            name.innerText = "Minecraft Server";
+        }
         const motd = document.createElement("span");
         motd.className = "ws-server-plate-motd";
         const status = document.createElement("img");
@@ -166,7 +172,6 @@ class WSServerPlate extends HTMLElement {
             console.warn("Address is invalid or unset for a <ws-server-plate> element!");
             status.src = WSServerPlate.failureStatus;
             icon.src = WSServerPlate.defaultIcon;
-            name.innerText = "Minecraft Server";
             motd.replaceChildren(makeColors(["&7A Minecraft Server"]));
             count.innerText = "";
             players.innerHTML = "";
@@ -200,7 +205,11 @@ class WSServerPlate extends HTMLElement {
                         } else if (pingTime > 1000) {
                             status.src = WSServerPlate.successStatusList[0];
                         }
-                        name.replaceChildren(makeColors([data.name]));
+                        if (displayName) {
+                            name.replaceChildren(makeColors([displayName]));
+                        } else {
+                            name.replaceChildren(makeColors([data.name]));
+                        }
                         if (data.data.motd.join("\n").includes("\n")) {
                             motd.replaceChildren(makeColors(data.data.motd));
                         } else {
@@ -255,10 +264,22 @@ class WSServerPlate extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue === newValue) return;
-        this.innerHTML = "";
-        this.disconnectedCallback();
-        this._rendered = false;
-        this.render();
+
+        switch (name) {
+            case "name":
+                const nameEl = this.getElementsByClassName("ws-server-plate-name")[0];
+                if (newValue) {
+                    nameEl.replaceChildren(makeColors([newValue]))
+                } else {
+                    nameEl.innerText = "Minecraft Server";
+                }
+                break;
+            case "address":
+                this.innerHTML = "";
+                this._rendered = false;
+                this.render();
+                break;
+        }
     }
 }
 
