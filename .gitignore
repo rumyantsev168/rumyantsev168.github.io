@@ -1,4 +1,5 @@
-/.idea/
-/docs/static/js/get_time_date_formatted.js
-/docs/test/canvas-test.html
-/docs/item-slot.html
+.idea/
+docs/static/js/get_time_date_formatted.js
+docs/test/canvas-test.html
+docs/static/js/PlayerDisplay.js
+docs/static/css/player-display.css
