@@ -1,10 +1,63 @@
-<p style="margin: 5px 0px;">Preview of every widget</p>
-<rumyantsev168-widget size="full" theme="light"></rumyantsev168-widget> 
-<rumyantsev168-widget size="full" theme="dark"></rumyantsev168-widget><br>
-<rumyantsev168-widget size="small" theme="light"></rumyantsev168-widget>
-<rumyantsev168-widget size="small" theme="dark"></rumyantsev168-widget>
-
-<p style="margin: 5px 0px;">Here's one with 'auto' theme. It adjusts based on your browser settings.</p>
-<rumyantsev168-widget size="full" theme="auto"></rumyantsev168-widget>
-
-<script src="../static/js/Widget.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="Widget">
+    <link rel="icon" href="static/icons/Page.png">
+    <link rel="stylesheet" href="static/css/stylesheet.css">
+    <style>
+        rumyantsev168-widget {
+            margin: 10px 0;
+        }
+    </style>
+    <title>Widget</title>
+</head>
+<body>
+    <main style="max-width: 1000px;">
+        <header>
+            <center><h1>Widget for this website!</h1></center>
+            <hr>
+        </header>
+        <p>
+            There are widgets that link to this site!
+        </p>
+        <p>
+            Possible variants:
+        </p>
+        <p>
+            Default, uses browser's theme: <code>&lt;rumyantsev168-widget&gt;&lt;/rumyantsev168-widget&gt;</code><br>
+            <rumyantsev168-widget></rumyantsev168-widget>
+        </p>
+        <p>
+            Full size + light theme: <code>&lt;rumyantsev168-widget size="full" theme="light"&gt;&lt;/rumyantsev168-widget&gt;</code><br>
+            <rumyantsev168-widget size="full" theme="light"></rumyantsev168-widget>
+        </p>
+        <p>
+            Full size + dark theme: <code>&lt;rumyantsev168-widget size="full" theme="dark"&gt;&lt;/rumyantsev168-widget&gt;</code><br>
+            <rumyantsev168-widget size="full" theme="dark"></rumyantsev168-widget>
+        </p>
+        <p>
+            Small size + light theme: <code>&lt;rumyantsev168-widget size="small" theme="light"&gt;&lt;/rumyantsev168-widget&gt;</code><br>
+            <rumyantsev168-widget size="small" theme="light"></rumyantsev168-widget>
+        </p>
+        <p>
+            Small size + dark theme: <code>&lt;rumyantsev168-widget size="small" theme="dark"&gt;&lt;/rumyantsev168-widget&gt;</code><br>
+            <rumyantsev168-widget size="small" theme="dark"></rumyantsev168-widget>
+        </p>
+        <p>
+            The script is <a href="static/js/Widget.js">Widget.js</a>.
+        </p>
+    </main>
+    <script src="static/js/main.js"></script>
+    <script src="static/js/Widget.js"></script>
+    <noscript>
+        <div class="warning">
+            <img src="static/icons/Warning.png" height="20px">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
+</body>
+</html>

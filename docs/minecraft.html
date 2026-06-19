@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-    <meta name="description" content="secret page lol">
+    <meta name="description" content="Minecraft-style HTML elements">
     <link rel="icon" href="static/icons/Page.png">
     <link rel="stylesheet" href="static/css/stylesheet.css">
     <style>
         main > item-slot, 
         item-slot-grid,
-        mc-server-plate {
+        mc-server-plate,
+        player-display {
             margin: 10px 0;
         }
 
-        #embed1, #embed2 {
+        #embed1, #embed2, #embed3 {
             cursor: pointer;
         }
     </style>
@@ -296,6 +297,33 @@
             Click to copy -
             <code id="embed2" onclick="copyElement('embed2')">&lt;script src="https://rumyantsev168.github.io/static/js/MCServerPlate.js"&gt;&lt;/script&gt;</code>
         </p>
+
+        <hr>
+
+        <!-- PlayerDisplay.js -->
+        <h2 style="margin: 10px 0;">3. <code>&lt;player-display&gt;</code></h2>
+
+        <p>
+            This element renders a Minecraft skin as a Mob Vote style avatar!<br>
+            You can set either a <code>skinsrc</code> (skin file path) or <code>username</code> (registered minecraft account name) attribute.<br>
+            Also there's <code>displayname</code>, that supports color codes, and you can disable skin overlay by adding <code>nooverlay</code>
+        </p>
+        <p>
+            It renders 'Steve' profile by default.
+        </p>
+
+        <player-display></player-display>
+        <player-display username="jeb_"></player-display>
+        <player-display username="Notch" displayname="&eNotch" nooverlay></player-display>
+        <player-display skinsrc="static/minecraft/Cool_Bear_Skin.png"></player-display>
+
+        <p>
+            Script is <a href="static/js/PlayerDisplay.js">PlayerDisplay.js</a>
+        </p>
+        <p>
+            Click to copy -
+            <code id="embed3" onclick="copyElement('embed3')">&lt;script src="https://rumyantsev168.github.io/static/js/PlayerDisplay.js"&gt;&lt;/script&gt;</code>
+        </p>
     </main>
     <script src="static/js/main.js"></script>
     <script src="static/js/copy.js"></script>
@@ -303,6 +331,8 @@
     <script src="static/js/ItemSlot.js"></script>
     <script> window.MC_SERVER_PLATE_USE_LOCAL_ASSETS = true; </script>
     <script src="static/js/MCServerPlate.js"></script>
+    <script> window.PLAYER_DISPLAY_USE_LOCAL_ASSETS = true; </script>
+    <script src="static/js/PlayerDisplay.js"></script>
     <noscript>
         <div class="warning">
             <img src="static/icons/Warning.png" height="20px">

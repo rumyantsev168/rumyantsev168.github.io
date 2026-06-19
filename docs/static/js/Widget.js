@@ -30,7 +30,7 @@ function getFullTemplate(theme) {
                         <li><a href="https://rumyantsev168.github.io/uri.html">URI Encoder/Decoder</a></li>        
                         <li><a href="https://rumyantsev168.github.io/binary.html">Text to Binary Converter</a></li>        
                         <li><a href="https://rumyantsev168.github.io/charcount.html">Character Counter</a></li>        
-                        <li><a href="https://rumyantsev168.github.io/keylogger.html">Key Logger</a></li>        
+                        <li><a href="https://rumyantsev168.github.io/minecraft.html">Minecraft HTML elements</a></li>        
                     </ul>
                 </div>
             </div>
@@ -47,7 +47,7 @@ function getSmallTemplate(theme) {
     } else if (theme == "dark") {
         gifData = preaniGif;
     } else if (theme == "auto") {
-        gifData = prefersDark() ? preaniGif : hddGif;
+        gifData = prefersDark ? preaniGif : hddGif;
     }
     return `
     <div class="rumyantsev168-widget">
@@ -72,6 +72,7 @@ function getStyles(theme) {
             border: 2px solid;
             border-radius: none;
             font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
             height: fit-content;
             margin: 0px;
             padding: 10px;
@@ -80,7 +81,7 @@ function getStyles(theme) {
         .rumyantsev168-widget-text {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 2px;
             width: fit-content;
         }
         .rumyantsev168-widget h1,

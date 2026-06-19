@@ -1,5 +1,4 @@
 .idea/
 docs/static/js/get_time_date_formatted.js
 docs/test/canvas-test.html
-docs/static/js/PlayerDisplay.js
-docs/static/css/player-display.css
+docs/test.html

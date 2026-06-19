@@ -1,0 +1,52 @@
+@font-face {
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: normal;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftRegular.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: normal;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftBold.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: italic;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftItalic.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: italic;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftBoldItalic.otf");
+}
+
+player-display {
+    display: inline-block;
+    vertical-align: middle;
+    font-family: Minecraft;
+    font-size: 16px;
+}
+
+.player-display-container {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+.player-display-player-name {
+    padding: 0 0.2em;
+    position: absolute;
+    top: 0em;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00000080;
+    color: #ffffff;
+}
+
+.player-display-avatar-canvas {
+    image-rendering: pixelated;
+    height: 10em;
+}
