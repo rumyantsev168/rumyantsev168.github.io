@@ -297,7 +297,7 @@ class OverlayLayer {
 
     paintHead(legacy) {
         this.painter.compressColumns(2, 5, 16, 21, 40, 8, 48, 16, true);
-        this.painter.expandRectWithTransparency(16, 5, 25, 21, 48, 8, 56, 16, 0.78);
+        this.painter.expandRectWithTransparency(16, 5, 24, 21, 48, 8, 56, 16, 0.78);
     }
 
     paintTorso(legacy) {
