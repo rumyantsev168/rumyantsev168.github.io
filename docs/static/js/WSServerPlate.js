@@ -66,7 +66,7 @@ class WSServerPlate extends HTMLElement {
     static assetsLoaded = false;
     static loadingPromises = [];
     static get observedAttributes() {
-        return ["address"];
+        return ["address", "displayname"];
     }
 
     static defaultIcon = "https://rumyantsev168.github.io/static/minecraft/server.png";
@@ -273,7 +273,7 @@ class WSServerPlate extends HTMLElement {
         if (oldValue === newValue) return;
 
         switch (name) {
-            case "name":
+            case "displayname":
                 const nameEl = this.getElementsByClassName("ws-server-plate-name")[0];
                 if (newValue) {
                     nameEl.replaceChildren(makeColors([newValue]))
