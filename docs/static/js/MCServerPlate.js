@@ -38,6 +38,7 @@ class MCServerPlate extends HTMLElement {
 
     constructor() {
         super()
+        this._fetching = false;
         this._rendered = false;
     }
 
@@ -103,6 +104,7 @@ class MCServerPlate extends HTMLElement {
         nameMotd.className = "mc-server-plate-name-motd";
         const name = document.createElement("span");
         name.className = "mc-server-plate-name";
+        this._nameEl = name;
         if (displayName) {
             name.replaceChildren(makeColors([displayName]));
         } else {
@@ -126,6 +128,7 @@ class MCServerPlate extends HTMLElement {
             count.innerText = "";
         } else {
             status.src = MCServerPlate.pingingStatus;
+            this._fetching = true;
             name.innerText = "Fetching...";
             icon.src = MCServerPlate.defaultIcon;
             motd.replaceChildren(makeColors(["", `&8${address}`]));
@@ -163,6 +166,7 @@ class MCServerPlate extends HTMLElement {
         }
 
         this.appendChild(server);
+        this._fetching = false;
         this._rendered = true;
     }
 
@@ -171,11 +175,12 @@ class MCServerPlate extends HTMLElement {
 
         switch (name) {
             case "displayname":
-                const nameEl = this.getElementsByClassName("mc-server-plate-name")[0];
-                if (newValue) {
-                    nameEl.replaceChildren(makeColors([newValue]))
-                } else {
-                    nameEl.innerText = "Minecraft Server";
+                if (!this._fetching) {
+                    if (newValue) {
+                        this._nameEl.replaceChildren(makeColors([newValue]))
+                    } else {
+                        this._nameEl.innerText = "Minecraft Server";
+                    }
                 }
                 break;
             case "address":

@@ -82,6 +82,7 @@ class WSServerPlate extends HTMLElement {
 
     constructor() {
         super()
+        this._connecting = false;
         this._rendered = false;
     }
 
@@ -147,6 +148,7 @@ class WSServerPlate extends HTMLElement {
         nameMotd.className = "ws-server-plate-name-motd";
         const name = document.createElement("span");
         name.className = "ws-server-plate-name";
+        this._nameEl = name;
         if (displayName) {
             name.replaceChildren(makeColors([displayName]));
         } else {
@@ -179,6 +181,7 @@ class WSServerPlate extends HTMLElement {
         } else {
             try {
                 status.src = WSServerPlate.pingingStatus;
+                this._connecting = true;
                 name.innerText = "Connecting...";
                 icon.src = WSServerPlate.defaultIcon;
                 motd.replaceChildren(makeColors(["", `&8${address}`]));
@@ -260,6 +263,7 @@ class WSServerPlate extends HTMLElement {
         }
 
         this.appendChild(server);
+        this._connecting = false;
         this._rendered = true;
     }
     
@@ -274,11 +278,12 @@ class WSServerPlate extends HTMLElement {
 
         switch (name) {
             case "displayname":
-                const nameEl = this.getElementsByClassName("ws-server-plate-name")[0];
-                if (newValue) {
-                    nameEl.replaceChildren(makeColors([newValue]))
-                } else {
-                    nameEl.innerText = "Minecraft Server";
+                if (!this._connecting){
+                    if (newValue) {
+                        this._nameEl.replaceChildren(makeColors([newValue]))
+                    } else {
+                        this._nameEl.innerText = "Minecraft Server";
+                    }
                 }
                 break;
             case "address":

@@ -29,10 +29,10 @@ class AvatarSkinProcessor {
     }
 
     extractSkinData() {
-        const tempDiv = document.createElement('canvas');
+        const tempDiv = document.createElement("canvas");
         tempDiv.width = AVATAR_CONFIG.inputSize;
         tempDiv.height = AVATAR_CONFIG.inputSize;
-        const tempContext = tempDiv.getContext('2d');
+        const tempContext = tempDiv.getContext("2d");
         tempContext.imageSmoothingEnabled = false;
         tempContext.drawImage(this.skinImage, 0, 0);
         return tempContext.getImageData(0, 0, AVATAR_CONFIG.inputSize, AVATAR_CONFIG.inputSize);
@@ -46,10 +46,10 @@ class AvatarSkinProcessor {
 
 class PixelCanvas {
     constructor(w, h) {
-        this.canvas = document.createElement('canvas');
+        this.canvas = document.createElement("canvas");
         this.canvas.width = w;
         this.canvas.height = h;
-        this.ctx = this.canvas.getContext('2d');
+        this.ctx = this.canvas.getContext("2d");
         this.imgData = this.ctx.createImageData(w, h);
         this.w = w;
         this.h = h;
@@ -218,7 +218,7 @@ class TorsoRenderer {
     }
 
     paint() {
-        this.painter.expandRect(6, 21, 17, 25, 20, 20, 28, 32);
+        this.painter.expandRect(7, 21, 17, 25, 20, 20, 28, 32);
         this.painter.darkenBorders(3, 21, 6, 26);
         this.painter.darkenBorders(17, 21, 24, 26);
     }
@@ -241,8 +241,8 @@ class LimbsLayer {
     }
 
     renderLeftArm(legacy) {
-        this.painter.expandRect(3, 21, 6, 25, 44, 20, 48, 31);
-        this.painter.expandRect(3, 25, 6, 26, 44, 31, 48, 32);
+        this.painter.expandRect(3, 21, 7, 25, 44, 20, 48, 31);
+        this.painter.expandRect(3, 25, 7, 26, 44, 31, 48, 32);
     }
 
     renderRightArm(legacy) {
@@ -256,8 +256,8 @@ class LimbsLayer {
     }
 
     renderLeftLeg(legacy) {
-        this.painter.expandRect(6, 25, 12, 27, 4, 20, 8, 31);
-        this.painter.expandRect(6, 27, 12, 28, 4, 31, 8, 32);
+        this.painter.expandRect(7, 25, 12, 27, 4, 20, 8, 31);
+        this.painter.expandRect(7, 27, 12, 28, 4, 31, 8, 32);
     }
 
     renderRightLeg(legacy) {
@@ -301,12 +301,12 @@ class OverlayLayer {
     }
 
     paintTorso(legacy) {
-        this.painter.expandRectWithTransparency(6, 21, 17, 25, 20, 36, 28, 48);
+        this.painter.expandRectWithTransparency(7, 21, 17, 25, 20, 36, 28, 48);
     }
 
     paintLeftArm(legacy) {
-        this.painter.expandRectWithTransparency(3, 21, 6, 25, 44, 36, 48, 47);
-        this.painter.expandRectWithTransparency(3, 25, 6, 26, 44, 47, 48, 48);
+        this.painter.expandRectWithTransparency(3, 21, 7, 25, 44, 36, 48, 47);
+        this.painter.expandRectWithTransparency(3, 25, 7, 26, 44, 47, 48, 48);
     }
 
     paintRightArm(legacy) {
@@ -320,8 +320,8 @@ class OverlayLayer {
     }
 
     paintLeftLeg(legacy) {
-        this.painter.expandRectWithTransparency(6, 25, 12, 27, 4, 36, 8, 47);
-        this.painter.expandRectWithTransparency(6, 27, 12, 28, 4, 47, 8, 48);
+        this.painter.expandRectWithTransparency(7, 25, 12, 27, 4, 36, 8, 47);
+        this.painter.expandRectWithTransparency(7, 27, 12, 28, 4, 47, 8, 48);
     }
 
     paintRightLeg(legacy) {
@@ -436,6 +436,7 @@ class PlayerDisplay extends HTMLElement {
         mainContainer.className = "player-display-container";
         const playerName = document.createElement("span");
         playerName.className = "player-display-player-name";
+        this._nameEl = playerName;
 
         let skinSrc, userName, displayName;
         skinSrc = this.getAttribute("skinsrc");
@@ -473,11 +474,8 @@ class PlayerDisplay extends HTMLElement {
 
         switch (name) {
             case "displayname":
-                const nameEl = this.getElementsByClassName("player-display-player-name")[0];
                 if (newValue) {
-                    nameEl.replaceChildren(newValue.replaceColorCodes());
-                } else {
-                    nameEl.innerText = "Steve";
+                    this._nameEl.replaceChildren(newValue.replaceColorCodes());
                 }
                 break;
             case "skinsrc":
