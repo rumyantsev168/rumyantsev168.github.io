@@ -30,6 +30,7 @@ item-slot, item-slot-grid {
     font-size: 16px;
 }
 
+/* Item Slot */
 .item-slot {
     position: relative;
     background: #8B8B8B no-repeat center center / 2em 2em;
@@ -42,7 +43,6 @@ item-slot, item-slot-grid {
     text-align: center;
     box-sizing: content-box;
 }
-
 .item-slot::before, .item-slot::after {
     content: "";
     position: absolute;
@@ -51,21 +51,17 @@ item-slot, item-slot-grid {
     width: 0.1em;
     pointer-events: none;
 }
-
 .item-slot::before {
     bottom: -0.1em;
     left: -0.1em;
 }
-
 .item-slot::after {
     top: -0.1em;
     right: -0.1em;
 }
-
 item-slot[large] > .item-slot {
     padding: 0.3em;
 }
-
 .item-slot > span {
     position: absolute;
     bottom: -0.1em;
@@ -77,18 +73,15 @@ item-slot[large] > .item-slot {
     text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
     z-index: 100;
 }
-
 item-slot[large] > .item-slot > span {
     bottom: 0.2em;
     right: 0.2em;
 }
-
 .item-slot > img.item-image {
     width: 2em;
     height: 2em;
     object-fit: contain;
 }
-
 .item-slot-hover-overlay {
     display: none;
     position: absolute;
@@ -102,11 +95,9 @@ item-slot[large] > .item-slot > span {
     background: #FFFFFF50;
     z-index: 999;
 }
-
 .item-slot:hover > .item-slot-hover-overlay {
     display: block;
 }
-
 .item-slot-durability {
     position: absolute;
     bottom: 0.2em;
@@ -114,13 +105,11 @@ item-slot[large] > .item-slot > span {
     height: 0.1em;
     z-index: 50;
 }
-
 item-slot[large] .item-slot-durability {
     bottom: 0.5em;
     left: 0.5em;
     z-index: 49;
 }
-
 .item-slot-durability-bg {
     position: absolute;
     bottom: 0.1em;
@@ -129,12 +118,10 @@ item-slot[large] .item-slot-durability {
     height: 0.2em;
     background-color: #1E0F1E;
 }
-
 item-slot[large] .item-slot-durability-bg {
     bottom: 0.4em;
     left: 0.5em;
 }
-
 .item-slot-tooltip {
     display: none;
     position: fixed;
@@ -157,7 +144,6 @@ item-slot[large] .item-slot-durability-bg {
         0.1em 0 0 0 #1E0F1E;
     text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
 }
-
 .item-slot-tooltip::after {
     content: "";
     position: absolute;
@@ -167,11 +153,11 @@ item-slot[large] .item-slot-durability-bg {
     bottom: 0;
     border: 0.1em solid #2B0A5E;
 }
-
 .item-slot:hover .item-slot-tooltip {
     display: block;
 }
 
+/* Item Slot Grid */
 .item-slot-mcui {
     background-color: #C6C6C6;
     border: 0.1em solid;
@@ -184,33 +170,28 @@ item-slot[large] .item-slot-durability-bg {
     height: fit-content;
     color: #373737;
 }
-
 .item-slot-crafting-ui {
     display: flex;
     align-items: center;
     gap: 0.5em;
     width: fit-content;
 }
-
 .item-slot-grid {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
 }
-
 .item-slot-row {
     display: flex;
     align-items: center;
 }
-
 .item-slot-crafting-arrow-yes {
     image-rendering: pixelated;
     background: url("https://rumyantsev168.github.io/static/minecraft/Crafting_Arrow.png") no-repeat;
     min-width: 2em;
     height: 1.6em;
 }
-
 .item-slot-crafting-arrow-no {
     image-rendering: pixelated;
     background: url("https://rumyantsev168.github.io/static/minecraft/Crafting_Arrow_Error.png") no-repeat;

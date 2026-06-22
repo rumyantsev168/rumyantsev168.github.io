@@ -10,11 +10,12 @@
         main > item-slot, 
         item-slot-grid,
         mc-server-plate,
-        player-display {
+        player-display,
+        button, input {
             margin: 10px 0;
         }
 
-        #embed1, #embed2, #embed3 {
+        #embed1, #embed2, #embed3, #embed4 {
             cursor: pointer;
         }
     </style>
@@ -244,11 +245,11 @@
         </item-slot-grid>
 
         <p>
-            Everything gets added with just one JS script - <a href="static/js/ItemSlot.js">ItemSlot.js</a>. Add it to your page and use all of the above features!
+            Everything gets added with just one JS script - <a href="static/js/minecraft/ItemSlot.js">ItemSlot.js</a>. Add it to your page and use all of the above features!
         </p>
         <p>
             Click to copy -
-            <code id="embed1" onclick="copyElement('embed1')">&lt;script src="https://rumyantsev168.github.io/static/js/ItemSlot.js"&gt;&lt;/script&gt;</code>
+            <code id="embed1" onclick="copyElement('embed1')">&lt;script src="https://rumyantsev168.github.io/static/js/minecraft/ItemSlot.js"&gt;&lt;/script&gt;</code>
         </p>
 
         <hr>
@@ -291,11 +292,11 @@
         <mc-server-plate></mc-server-plate>
 
         <p>
-            The JS script - <a href="static/js/MCServerPlate.js">MCServerPlate.js</a>. 
+            The JS script - <a href="static/js/minecraft/MCServerPlate.js">MCServerPlate.js</a>. 
         </p>
         <p>
             Click to copy -
-            <code id="embed2" onclick="copyElement('embed2')">&lt;script src="https://rumyantsev168.github.io/static/js/MCServerPlate.js"&gt;&lt;/script&gt;</code>
+            <code id="embed2" onclick="copyElement('embed2')">&lt;script src="https://rumyantsev168.github.io/static/js/minecraft/MCServerPlate.js"&gt;&lt;/script&gt;</code>
         </p>
 
         <hr>
@@ -318,21 +319,50 @@
         <player-display skinsrc="static/minecraft/Cool_Bear_Skin.png"></player-display>
 
         <p>
-            Script is <a href="static/js/PlayerDisplay.js">PlayerDisplay.js</a>
+            The script is <a href="static/js/minecraft/PlayerDisplay.js">PlayerDisplay.js</a>
         </p>
         <p>
             Click to copy -
-            <code id="embed3" onclick="copyElement('embed3')">&lt;script src="https://rumyantsev168.github.io/static/js/PlayerDisplay.js"&gt;&lt;/script&gt;</code>
+            <code id="embed3" onclick="copyElement('embed3')">&lt;script src="https://rumyantsev168.github.io/static/js/minecraft/PlayerDisplay.js"&gt;&lt;/script&gt;</code>
+        </p>
+
+        <hr>
+
+        <!-- Various UI elements -->
+        <h2 style="margin: 10px 0;">3. Styled UI Elements</h2>
+        
+        <p>
+            Button:
+        </p>
+
+        <button is="mc-button" type="button">Click me!</button>
+
+        <p>
+            Input field:
+        </p>
+
+        <input is="mc-input" type="text" placeholder="Enter something...">
+
+        <p>
+            Checkbox and Radio button:
+            <input is="mc-input" type="checkbox">
+            <input is="mc-input" type="radio">
+        </p>
+
+        <p>
+            The script is <a href="static/js/minecraft/MCUI.js">MCUI.js</a>. It only contains the stylesheet loader.
+        </p>
+        <p>
+            Click to copy -
+            <code id="embed4" onclick="copyElement('embed4')">&lt;script src="https://rumyantsev168.github.io/static/js/minecraft/MCUI.js"&gt;&lt;/script&gt;</code>
         </p>
     </main>
     <script src="static/js/main.js"></script>
     <script src="static/js/copy.js"></script>
-    <script> window.ITEM_SLOT_USE_LOCAL_ASSETS = true; </script>
-    <script src="static/js/ItemSlot.js"></script>
-    <script> window.MC_SERVER_PLATE_USE_LOCAL_ASSETS = true; </script>
-    <script src="static/js/MCServerPlate.js"></script>
-    <script> window.PLAYER_DISPLAY_USE_LOCAL_ASSETS = true; </script>
-    <script src="static/js/PlayerDisplay.js"></script>
+    <script src="static/js/minecraft/ItemSlot.js" localassets></script>
+    <script src="static/js/minecraft/MCServerPlate.js" localassets></script>
+    <script src="static/js/minecraft/PlayerDisplay.js" localassets></script>
+    <script src="static/js/minecraft/MCUI.js" localassets></script>
     <noscript>
         <div class="warning">
             <img src="static/icons/Warning.png" height="20px">

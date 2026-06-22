@@ -1,0 +1,145 @@
+@font-face {
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: normal;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftRegular.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: normal;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftBold.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: normal;
+    font-style: italic;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftItalic.otf");
+}
+@font-face {
+    font-family: "Minecraft";
+    font-weight: bold;
+    font-style: italic;
+    src: url("https://rumyantsev168.github.io/static/font/MinecraftBoldItalic.otf");
+}
+
+/* Button */
+button[is="mc-button"] {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: Minecraft;
+    font-size: 16px;
+    color: #ffffff;
+    text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
+    background-color: #6f6f6f;
+    min-width: fit-content;
+    min-height: fit-content;
+    padding: 0.4em 0.8em;
+    outline: 0.1em solid black;
+    border: 0.1em solid;
+    border-color: darkgray gray gray darkgray;
+    word-break: keep-all;
+    cursor: pointer;
+}
+button[is="mc-button"]::before,
+button[is="mc-button"]::after {
+    content: "";
+    position: absolute;
+    background-color: inherit;
+    height: 0.1em;
+    width: 0.1em;
+    pointer-events: none;
+}
+button[is="mc-button"]::before {
+    bottom: -0.1em;
+    left: -0.1em;
+}
+button[is="mc-button"]::after {
+    top: -0.1em;
+    right: -0.1em;
+}
+button[is="mc-button"]:hover {
+    background: #7e88bf;
+    border-color: #C3C7E0 #5F68AA #5F68AA #C3C7E0;
+}
+button[is="mc-button"]:active,
+button[is="mc-button"]:disabled {
+    background-color: #2b2b2b;
+    border-color: #434343 #373737 #373737 #434343;
+    transform: translateY(0.1em);
+}
+button[is="mc-button"]:disabled {
+    cursor: not-allowed;
+}
+
+/* Input */
+/* Text */
+input[is="mc-input"] {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: Minecraft;
+    font-size: 16px;
+    color: #ffffff;
+    text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
+    background-color: black;
+    min-width: fit-content;
+    min-height: fit-content;
+    padding: 0.4em 0.6em;
+    outline: 0.1em solid darkgray;
+    border: 0.1em solid black;
+    word-break: keep-all;
+    cursor: pointer;
+    caret-shape: underscore;
+}
+input[is="mc-input"]::selection {
+    background-color: #0000ff;
+}
+input[is="mc-input"]::placeholder {
+    color: #3f3f3f;
+}
+input[is="mc-input"]:disabled {
+    cursor: not-allowed;
+    color: #bebebe;
+}
+/* Checkbox and Radio Button */
+input[type="checkbox"],
+input[type="radio"] {
+    appearance: none;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    outline: 0.1em solid darkgray;
+    border: 0.1em solid black;
+    background: black;
+    cursor: pointer;
+}
+input[type="checkbox"]:checked::before {
+    content: "";
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAeSURBVChTY2CgGfj///9/7BwsfBRBrJIwgFeSbAAAVVwX6Qahj48AAAAASUVORK5CYII=");
+}
+input[type="radio"]:checked::before {
+    content: "";
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIj48dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCjw/eHBhY2tldCBlbmQ9J3cnPz4slJgLAAAAJUlEQVQoU2NgoBQwwhj/////jyLByMjIwMDAwIQsiA1QroByAADyxAQIMMhrnwAAAABJRU5ErkJggg==");
+}
+input[type="checkbox"]:checked::before,
+input[type="radio"]:checked::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.8em;
+    height: 0.8em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+    display: block;
+}
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled {
+    cursor: not-allowed;
+    color: #bebebe;
+}

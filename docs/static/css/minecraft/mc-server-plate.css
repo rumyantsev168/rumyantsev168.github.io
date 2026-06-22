@@ -30,6 +30,7 @@ mc-server-plate {
     font-size: 16px;
 }
 
+/* MC Server Plate */
 .mc-server-plate-server {
     position: relative;
     top: 0;
@@ -46,11 +47,9 @@ mc-server-plate {
     cursor: default;
     text-align: left;
 }
-
 .mc-server-plate-icon {
     height: 64px;
 }
-
 .mc-server-plate-name-motd {
     display: flex;
     flex-direction: column;
@@ -59,17 +58,14 @@ mc-server-plate {
     white-space: pre;
     word-break: keep-all;
 }
-
 .mc-server-plate-name {
     line-height: 16px;
     margin-top: 4px;
 }
-
 .mc-server-plate-motd {
     line-height: 16px;
     margin: 6px 0;
 }
-
 .mc-server-plate-status {
     position: absolute;
     top: 0;
@@ -77,7 +73,6 @@ mc-server-plate {
     image-rendering: pixelated;
     height: 1em;
 }
-
 .mc-server-plate-count {
     color: rgb(190, 190, 190);
     position: absolute;

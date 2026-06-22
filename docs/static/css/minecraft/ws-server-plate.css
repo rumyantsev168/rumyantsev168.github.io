@@ -30,6 +30,7 @@ ws-server-plate {
     font-size: 16px;
 }
 
+/* WS Server Plate */
 .ws-server-plate-server {
     position: relative;
     top: 0;
@@ -47,11 +48,9 @@ ws-server-plate {
     cursor: default;
     text-align: left;
 }
-
 .ws-server-plate-icon {
     height: 64px;
 }
-
 .ws-server-plate-name-motd {
     display: flex;
     flex-direction: column;
@@ -60,17 +59,14 @@ ws-server-plate {
     white-space: pre;
     word-break: keep-all;
 }
-
 .ws-server-plate-name {
     line-height: 16px;
     margin-top: 4px;
 }
-
 .ws-server-plate-motd {
     line-height: 16px;
     margin: 6px 0;
 }
-
 .ws-server-plate-status {
     position: absolute;
     top: 0;
@@ -78,14 +74,12 @@ ws-server-plate {
     image-rendering: pixelated;
     height: 1em;
 }
-
 .ws-server-plate-count {
     color: rgb(190, 190, 190);
     position: absolute;
     top: 0;
     right: 24px;
 }
-
 .ws-server-plate-players {    
     display: none;
     position: fixed;
@@ -108,7 +102,6 @@ ws-server-plate {
         0.1em 0 0 0 #1E0F1E;
     text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
 }
-
 .ws-server-plate-players::after {
     content: "";
     position: absolute;
@@ -118,7 +111,6 @@ ws-server-plate {
     bottom: 0;
     border: 0.1em solid #2B0A5E;
 }
-
 .ws-server-plate-count:hover + .ws-server-plate-players {
     display: block;
 }

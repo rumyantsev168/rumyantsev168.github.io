@@ -30,12 +30,12 @@ player-display {
     font-size: 16px;
 }
 
+/* Player Display */
 .player-display-container {
     position: relative;
     width: fit-content;
     height: fit-content;
 }
-
 .player-display-player-name {
     padding: 0 0.2em;
     position: absolute;
@@ -45,7 +45,6 @@ player-display {
     background: #00000080;
     color: #ffffff;
 }
-
 .player-display-avatar-canvas {
     image-rendering: pixelated;
     height: 10em;
