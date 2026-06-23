@@ -68,7 +68,7 @@ class MCServerPlate extends HTMLElement {
     // Ensures the necessary files are only loaded once
     loadAssets() {
         return new Promise((resolve, reject) => {
-            const useLocal = document.currentScript.hasAttribute("localassets");
+            const useLocal = document.currentScript?.hasAttribute("localassets");
             const cssHref = useLocal ? "static/css/minecraft/mc-server-plate.css" : "https://rumyantsev168.github.io/static/css/minecraft/mc-server-plate.css";
 
             let stylesheet = document.head.querySelector(`link[href="${cssHref}"]`);
@@ -168,16 +168,14 @@ class MCServerPlate extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (oldValue === newValue || !oldValue) return;
+        if (oldValue === newValue || !this._rendered) return;
 
         switch (name) {
             case "displayname":
-                if (this._rendered) {
-                    if (newValue) {
-                        this._nameEl.replaceChildren(makeColors([newValue]))
-                    } else {
-                        this._nameEl.innerText = "Minecraft Server";
-                    }
+                if (newValue) {
+                    this._nameEl.replaceChildren(makeColors([newValue]))
+                } else {
+                    this._nameEl.innerText = "Minecraft Server";
                 }
                 break;
             case "address":

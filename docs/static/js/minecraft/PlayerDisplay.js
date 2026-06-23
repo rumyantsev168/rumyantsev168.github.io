@@ -407,7 +407,7 @@ class PlayerDisplay extends HTMLElement {
     // Ensures the necessary files are only loaded once
     loadAssets() {
         return new Promise((resolve, reject) => {
-            const useLocal = document.currentScript.hasAttribute("localassets");
+            const useLocal = document.currentScript?.hasAttribute("localassets");
             const cssHref = useLocal ? "static/css/minecraft/player-display.css" : "https://rumyantsev168.github.io/static/css/minecraft/player-display.css";
 
             let stylesheet = document.head.querySelector(`link[href="${cssHref}"]`);

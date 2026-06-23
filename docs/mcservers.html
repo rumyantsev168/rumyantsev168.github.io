@@ -33,11 +33,10 @@
             <input id="mc-address" placeholder="Address">
             <button type="button" id="ping-btn">Ping!</button>
         </div>
-        <mc-server-plate id="server-plate"></mc-server-plate>
+        <mc-server-plate id="server-plate" displayname="test"></mc-server-plate>
     </main>
     <script src="static/js/main.js"></script>
-    <script> window.MC_SERVER_PLATE_USE_LOCAL_ASSETS = true </script>
-    <script src="static/js/MCServerPlate.js"></script>
+    <script src="static/js/minecraft/MCServerPlate.js" localassets></script>
     <script>
         const mcAddress = document.getElementById("mc-address");
         const serverPlate = document.getElementById("server-plate");
