@@ -17,7 +17,7 @@
         </header>
         <div style="display: flex; flex-direction: column; gap: 10px;">
             <div style="display: flex; gap: 5px;">
-                <input required id="music-url" placeholder="domain.com/song.mp3" style="flex-grow: 1">
+                <input type="url" required id="music-url" placeholder="domain.com/song.mp3" style="flex-grow: 1">
                 <button onclick="fetchMusic()">Play</button>
             </div>
             <audio id="music-display" controls src=""></audio>
@@ -35,7 +35,7 @@
     </script>
     <noscript>
         <div class="warning">
-            <img src="static/icons/Warning.png" height="20px">
+            <img src="static/icons/Warning.png" height="20">
             <p>
                 Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
             </p>
