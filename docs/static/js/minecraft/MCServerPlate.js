@@ -69,7 +69,9 @@ class MCServerPlate extends HTMLElement {
     loadAssets() {
         return new Promise((resolve, reject) => {
             const useLocal = document.currentScript?.hasAttribute("localassets");
-            const cssHref = useLocal ? "static/css/minecraft/mc-server-plate.css" : "https://rumyantsev168.github.io/static/css/minecraft/mc-server-plate.css";
+            const cssHref = useLocal 
+                ? "static/css/minecraft/mc-server-plate.css" 
+                : "https://rumyantsev168.github.io/static/css/minecraft/mc-server-plate.css";
 
             let stylesheet = document.head.querySelector(`link[href="${cssHref}"]`);
             if (!stylesheet) {

@@ -12,7 +12,7 @@ if (!String.prototype.replaceColorCodes) {
 
 /* Helper functions */
 // Moves the tooltip and also prevents overflow
-const moveTooltip = (e, t) => {
+const moveItemTooltip = (e, t) => {
     try {
         const offsetX = 25;
         const offsetY = -37;
@@ -97,7 +97,9 @@ class ItemSlot extends HTMLElement {
     loadAssets() {
         return new Promise((resolve, reject) => {
             const useLocal = document.currentScript?.hasAttribute("localassets");
-            const cssHref = useLocal ? "static/css/minecraft/item-slot.css" : "https://rumyantsev168.github.io/static/css/minecraft/item-slot.css";
+            const cssHref = useLocal 
+                ? "static/css/minecraft/item-slot.css" 
+                : "https://rumyantsev168.github.io/static/css/minecraft/item-slot.css";
 
             let stylesheet = document.head.querySelector(`link[href="${cssHref}"]`);
             if (!stylesheet) {
@@ -154,7 +156,7 @@ class ItemSlot extends HTMLElement {
             itemSlot.appendChild(tooltipDiv);
             this._itemTooltip = tooltipDiv;
 
-            const moveHandler = (event) => { moveTooltip(event, tooltipDiv) };
+            const moveHandler = (event) => { moveItemTooltip(event, tooltipDiv) };
             this._tooltipMoveHandler = moveHandler;
             document.addEventListener("mousemove", this._tooltipMoveHandler);
         }

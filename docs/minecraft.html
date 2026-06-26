@@ -15,7 +15,7 @@
             margin: 10px 0;
         }
 
-        #embed1, #embed2, #embed3, #embed4 {
+        #embed1, #embed2, #embed3, #embed4, #embed5 {
             cursor: pointer;
         }
     </style>
@@ -368,11 +368,48 @@
         <input is="mc-input" type="range" label="Custom label">
         
         <p>
+            The slider is not properly styled in Firefox. I'm working on it.
+        </p>
+        <p>
             The script is <a href="static/js/minecraft/MCUI.js">MCUI.js</a>. It only contains the stylesheet loader.
         </p>
         <p>
             Click to copy -
             <code id="embed4" onclick="copyElement('embed4')">&lt;script src="https://rumyantsev168.github.io/static/js/minecraft/MCUI.js"&gt;&lt;/script&gt;</code>
+        </p>
+
+        <hr>
+
+        <!-- Tooltip -->
+        <h2 style="margin: 10px 0;">5. Tooltip</h2>
+
+        <p>
+            With this, you can add a Minecraft tooltip to any other HTML element!<br>
+            Just set an <code>mc-tooltip</code> attribute for the desired element like this:
+        </p>
+
+        <code class="code-block">
+&lt;p mc-tooltip="hello"&gt;This text has a tooltip!&lt;/p&gt;
+        </code>
+
+        <p mc-tooltip="hello">This text has a tooltip</p>
+
+        <code class="code-block">
+&lt;button is="mc-button" type="button" mc-tooltip="&a&oI'm just a button!" style="width: 250px"&gt;Button&lt;/button&gt;
+        </code>
+
+        <button is="mc-button" type="button" mc-tooltip="&a&oI'm just a button!" style="width: 250px">Button</button>
+
+        <p>
+            Basically it's the same tooltip, that's used in <code>&lt;item-slot&gt;</code> element. It supports colors and other HTML elements inside it too.<br>
+            And also it won't render <code>mc-tooltip</code> for <code>&lt;item-slot&gt;</code> and <code>&lt;item-slot-grid&gt;</code>
+        </p>
+        <p>
+            The script is <a href="static/js/minecraft/Tooltip.js">Tooltip.js</a>
+        </p>
+        <p>
+            Click to copy -
+            <code id="embed5" onclick="copyElement('embed5')">&lt;script src="https://rumyantsev168.github.io/static/js/minecraft/Tooltip.js"&gt;&lt;/script&gt;</code>
         </p>
     </main>
     <script src="static/js/main.js"></script>
@@ -381,6 +418,7 @@
     <script src="static/js/minecraft/MCServerPlate.js" localassets></script>
     <script src="static/js/minecraft/PlayerDisplay.js" localassets></script>
     <script src="static/js/minecraft/MCUI.js" localassets></script>
+    <script src="static/js/minecraft/Tooltip.js" localassets></script>
     <noscript>
         <div class="warning">
             <img src="static/icons/Warning.png" height="20">

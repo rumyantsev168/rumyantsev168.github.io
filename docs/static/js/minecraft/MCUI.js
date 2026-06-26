@@ -4,7 +4,7 @@
 // Source: https://rumyantsev168.github.io/static/js/minecraft/MCUI.js
 
 /* Asset Loader */
-const MCUI = {
+const MCUIStyleLoader = {
     _loaded: false,
     _loadingPromises: [],
     _cssHref: null,
@@ -43,18 +43,9 @@ const MCUI = {
 
             if (stylesheet.sheet) onComplete();
         });
-    },
-
-    withStyles(renderFn) {
-        return () => {
-            if (MCUI._loaded) return renderFn();
-            MCUI._loadingPromises.push(renderFn);
-            MCUI.loadStyles().catch(err => console.error(err));
-        };
     }
 };
-
-MCUI.loadStyles();
+MCUIStyleLoader.loadStyles();
 
 document.querySelectorAll("input[is='mc-input'][type='range']").forEach(el => {
     el.dataset.label = el.hasAttribute("label") ? `${el.getAttribute("label")}: ${el.value}` : el.value;
