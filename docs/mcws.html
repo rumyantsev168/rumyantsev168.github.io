@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-    <meta name="description" content="Get info about Minecraft servers">
+    <meta name="description" content="Get info about Minecraft servers via WebSocket">
     <link rel="icon" href="static/icons/Page.png">
     <link rel="stylesheet" href="static/css/stylesheet.css">
     <!-- <link rel="stylesheet" href="static/css/custom-cursor.css"> -->
@@ -15,33 +15,32 @@
             gap: 5px;
             margin: 10px 0;
         }
-        #mc-address {
+        #ws-address {
             font-family: monospace;
             width: 100%;
         }
     </style>
-    <title>Minecraft Server Ping</title>
+    <title>Minecraft Server Ping via WebSocket</title>
 </head>
 <body>
     <main style="max-width: fit-content">
         <header>
-            <h1><a href="mcws.html" style="color: initial; text-decoration: none;">Minecraft Server Ping</a></h1>
+            <h1>Minecraft Server Ping</h1>
             <hr size="1px">
         </header>
-        <p class="text-center">This page uses <a href="https://api.mcsrvstat.us">https://api.mcsrvstat.us</a> API</p>
         <div id="input">
-            <input type="url" id="mc-address" placeholder="Address">
+            <input type="url" id="ws-address" placeholder="WebSocket Address" value="wss://">
             <button type="button" id="ping-btn">Ping!</button>
         </div>
-        <mc-server-plate id="server-plate"></mc-server-plate>
+        <ws-server-plate id="server-plate"></ws-server-plate>
     </main>
     <script src="static/js/main.js"></script>
-    <script src="static/js/minecraft/MCServerPlate.js" localassets></script>
+    <script src="static/js/minecraft/WSServerPlate.js" localassets></script>
     <script>
-        const mcAddress = document.getElementById("mc-address");
+        const wsAddress = document.getElementById("ws-address");
         const serverPlate = document.getElementById("server-plate");
         document.getElementById("ping-btn").onclick = () => {
-            serverPlate.setAttribute("address", mcAddress.value);
+            serverPlate.setAttribute("address", wsAddress.value);
         }
     </script>
     <noscript>

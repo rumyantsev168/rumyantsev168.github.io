@@ -272,7 +272,7 @@ class WSServerPlate extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (oldValue === newValue || !oldValue) return;
+        if (oldValue === newValue || !this._rendered) return;
 
         switch (name) {
             case "displayname":
