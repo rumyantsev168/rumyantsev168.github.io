@@ -169,6 +169,12 @@ item-slot[large] .item-slot-durability-bg {
     width: fit-content;
     height: fit-content;
     color: #373737;
+    box-sizing: content-box;
+    border-width: 0.5em;
+    border-style: solid;
+    border-radius: 0;
+    background-clip: padding-box;
+    border-image: url("https://rumyantsev168.github.io/static/minecraft/container_border.png") 4 fill repeat;
 }
 .item-slot-crafting-ui {
     display: flex;

@@ -372,7 +372,7 @@ class PlayerDisplay extends HTMLElement {
     static assetsLoaded = false;
     static loadingPromises = [];
     static get observedAttributes() {
-        return ["skinsrc", "username", "displayname"];
+        return ["skinsrc", "username", "displayname", "nooverlay", "nodisplayname"];
     }
 
     constructor() {
@@ -451,7 +451,7 @@ class PlayerDisplay extends HTMLElement {
         }
         displayName = this.getAttribute("displayname");
         if (!displayName) {
-            playerName.innerText = userName ? userName : "";
+            playerName.innerText = (userName && !this.hasAttribute("nodisplayname")) ? userName : "";
         } else {
             playerName.replaceChildren(displayName.replaceAll("&k", "").replaceColorCodes());
         }
@@ -473,19 +473,9 @@ class PlayerDisplay extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue === newValue) return;
 
-        switch (name) {
-            case "displayname":
-                if (newValue) {
-                    this._nameEl.replaceChildren(newValue.replaceAll("&k", "").replaceColorCodes());
-                }
-                break;
-            case "skinsrc":
-            case "username":
-                this.innerHTML = "";
-                this._rendered = false;
-                this.render();
-                break;
-        }
+        this.innerHTML = "";
+        this._rendered = false;
+        this.render();
     }
 }
 
