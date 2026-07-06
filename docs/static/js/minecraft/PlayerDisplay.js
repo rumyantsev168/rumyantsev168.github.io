@@ -378,6 +378,7 @@ class PlayerDisplay extends HTMLElement {
     constructor() {
         super()
         this._rendered = false;
+        this._pendingImage = false;
     }
 
     connectedCallback() {
@@ -431,7 +432,7 @@ class PlayerDisplay extends HTMLElement {
     }
 
     render() {
-        if (this._rendered) return;
+        if (this._rendered || this._pendingImage) return;
         
         const mainContainer = document.createElement("div");
         mainContainer.className = "player-display-container";
@@ -458,16 +459,22 @@ class PlayerDisplay extends HTMLElement {
         
         const skinImg = new Image();
         skinImg.crossOrigin = "anonymous";
-        skinImg.src = skinSrc;
+
+        this._pendingImage = true;
         skinImg.onload = () => {
             const avatarCanvas = renderAvatar(skinImg, !this.hasAttribute("nooverlay"));
             avatarCanvas.className = "player-display-avatar-canvas";
             mainContainer.appendChild(playerName);
             mainContainer.appendChild(avatarCanvas);
             this.appendChild(mainContainer);
-        }
+            this._rendered = true;
+        };
+        skinImg.onerror = () => {
+            console.warn("Failed to load skin:", skinSrc);
+            this._rendered = true;
+        };
+        skinImg.src = skinSrc;
 
-        this._rendered = true;
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
