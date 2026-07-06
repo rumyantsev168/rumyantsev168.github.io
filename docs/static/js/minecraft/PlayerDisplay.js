@@ -468,10 +468,12 @@ class PlayerDisplay extends HTMLElement {
             mainContainer.appendChild(avatarCanvas);
             this.appendChild(mainContainer);
             this._rendered = true;
+            this._pendingImage = false;
         };
         skinImg.onerror = () => {
             console.warn("Failed to load skin:", skinSrc);
             this._rendered = true;
+            this._pendingImage = false;
         };
         skinImg.src = skinSrc;
 

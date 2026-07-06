@@ -282,7 +282,7 @@ class ItemSlotGrid extends HTMLElement {
         if (title) {
             const titleSpan = document.createElement("span");
             titleSpan.innerText = title;
-            mainContainer.style.paddingTop = "0.1em";
+            mainContainer.style.paddingTop = "0";
             mainContainer.appendChild(titleSpan);
         }
 

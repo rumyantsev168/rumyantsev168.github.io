@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="Make a custom Minecraft player card about you!">
+    <link rel="icon" href="static/icons/Page.png">
+    <link rel="stylesheet" href="static/css/stylesheet.css">
+    <link rel="stylesheet" href="static/css/minecraft/minecraft-font.css">
+    <!-- <link rel="stylesheet" href="static/css/custom-cursor.css"> -->
+    <style>
+        #player-card {
+            margin: 0 auto;
+            font-size: 20px;
+            padding: 0.5em;
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            width: 18em;
+            height: 160px;
+            overflow: hidden;
+            word-break: break-word;
+            font-family: Minecraft;
+            text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
+            color: #ffffff;
+            background-color: #c6c6c6;
+            box-sizing: content-box;
+            border-width: 0.4em;
+            border-style: solid;
+            border-radius: 0;
+            background-clip: padding-box;
+            border-image: url("https://rumyantsev168.github.io/static/minecraft/container_border.png") 4 fill repeat;
+            image-rendering: pixelated;
+            cursor: default;
+        }
+        #player-name {
+            text-align: center;
+        }
+        #player-motd {
+            white-space: pre-wrap;
+        }
+    </style>
+    <title>Minecraft Player Card</title>
+</head>
+<body>
+    <main style="max-width: fit-content">
+        <header>
+            <h1>Minecraft Player Card</h1>
+            <hr size="1px">
+        </header>
+        <p>
+            Enter a Minecraft username to fetch its skin automatically.<br>
+            Alternatively, upload a custom skin image.
+        </p>
+        <p>
+            The preview updates as you edit fields below!<br>
+        </p>
+        <p style="margin: 5px 0; display: flex; justify-content: space-around;">
+            <span class="a" onclick="helpSaveImage()">How to save card image?</span>
+        </p>
+        <form id="form" class="form">
+            <div>
+                <label for="usernameInp">Minecraft username</label>
+                <div style="display: flex; gap: 5px;">
+                    <input type="text" id="usernameInp" value="Steve">
+                    <select id="usernameClr"style="font-family: Minecraft">
+                        <option value="&0" style="color: #000000">&0</option>
+                        <option value="&1" style="color: #0000be">&1</option>
+                        <option value="&2" style="color: #00be00">&2</option>
+                        <option value="&3" style="color: #00bebe">&3</option>
+                        <option value="&4" style="color: #be0000">&4</option>
+                        <option value="&5" style="color: #be00be">&5</option>
+                        <option value="&6" style="color: #d9a334">&6</option>
+                        <option value="&7" style="color: #bebebe">&7</option>
+                        <option value="&8" style="color: #3f3f3f">&8</option>
+                        <option value="&9" style="color: #3f3ffe">&9</option>
+                        <option value="&a" style="color: #3ffe3f">&a</option>
+                        <option value="&b" style="color: #3ffefe">&b</option>
+                        <option value="&c" style="color: #fe3f3f">&c</option>
+                        <option value="&d" style="color: #fe3ffe">&d</option>
+                        <option value="&e" style="color: #fefe3f" selected>&e</option>
+                        <option value="&f" style="color: #ffffff">&f</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="skinsrcInp">Skin image (optional)</label>
+                <div style="display: flex; gap: 5px;">
+                    <button type="button" onclick="this.nextElementSibling.value = ''">Clear</button>
+                    <input type="file" accept="image/jpeg, image/png" id="skinsrcInp">
+                </div>
+            </div>
+            <div>
+                <label for="motdInp">Your MOTD</label>
+                <textarea id="motdInp" style="height: 6em; resize: none;">I play Minecraft!</textarea>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between">
+                <div style="display: flex; align-items: center; gap: 3px;">
+                    <input type="checkbox" id="overlayChk">
+                    <label for="overlayChk">No skin overlay</label>
+                </div>
+                <button type="submit">Get my card!</button>
+            </div>
+        </form>
+        <div id="player-card">
+            <div style="width: 10em">
+                <h3 id="player-name"></h3>
+                <p id="player-motd"></p>
+            </div>
+            <player-display id="player-display" nodisplayname></player-display>
+        </div>
+    </main>
+    <script src="static/js/main.js"></script>
+    <script src="static/js/min/minecraftColors.min.js"></script>
+    <script src="static/js/minecraft/PlayerDisplay.js" localassets></script>
+    <script>
+        const form = document.getElementById("form");
+        const cardContainer = document.getElementById("player-card");
+        const playerName = document.getElementById("player-name");
+        const playerMotd = document.getElementById("player-motd");
+        const playerDisplay = document.getElementById("player-display");
+
+        let currentSkinBlobUrl = null;
+        let debounceTimer = null;
+
+        function makeCard() {
+            const usernameInput = form.elements.usernameInp;
+            const usernameColor = form.elements.usernameClr;
+            const skinFileInput = form.elements.skinsrcInp;
+            const motdInput = form.elements.motdInp;
+            const overlayChk = form.elements.overlayChk;
+
+            if (currentSkinBlobUrl) {
+                URL.revokeObjectURL(currentSkinBlobUrl);
+            }
+
+            if (skinFileInput.files.length > 0) {
+                const file = skinFileInput.files[0];
+                currentSkinBlobUrl = URL.createObjectURL(file);
+                playerDisplay.setAttribute("skinsrc", currentSkinBlobUrl);
+            } else {
+                playerDisplay.removeAttribute("skinsrc");
+            }
+
+            if (overlayChk.checked) {
+                playerDisplay.setAttribute("nooverlay", "");
+            } else {
+                playerDisplay.removeAttribute("nooverlay");
+            }
+
+            playerDisplay.setAttribute("username", usernameInput.value);
+            playerName.replaceChildren((usernameColor.value + "&l" + usernameInput.value).replaceColorCodes());
+            playerMotd.replaceChildren(motdInput.value.replaceColorCodes());
+        }
+
+        function debounce(fn, wait = 300) {
+            let timer = null;
+            return function(...args) {
+                clearTimeout(timer);
+                timer = setTimeout(() => fn.apply(this, args), wait);
+            };
+        }
+
+        const debouncedMakeCard = debounce(makeCard, 300);
+
+        document.addEventListener("DOMContentLoaded", () => { makeCard() });
+
+        form.addEventListener("input", function(e) {
+            if (e.target.tagName === "INPUT" && (e.target.type === "text" || e.target.type === "file")) return;
+            if (e.target.tagName === "TEXTAREA") return;
+            debouncedMakeCard();
+        });
+
+        form.addEventListener("change", function(e) {
+            if (e.target.type === "file" || e.target.type === "checkbox") {
+                makeCard();
+            } else {
+                debouncedMakeCard();
+            }
+        });
+
+        form.onsubmit = (event) => {
+            event.preventDefault();
+            debouncedMakeCard();
+        };
+
+        function helpSaveImage() {
+            alert(`1. Open your browser's DevTools (F12)
+2. Find the card element in the HTML view. It has the #player-card id
+3. Right click the card element
+4. Select 'Capture node screenshot' and save the captured image on your device
+
+Right now the only way to save image is via DevTools. I'm working on it...`);
+        }
+    </script>
+    <noscript>
+        <div class="warning">
+            <img src="static/icons/Warning.png" height="20">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
+</body>
+</html>

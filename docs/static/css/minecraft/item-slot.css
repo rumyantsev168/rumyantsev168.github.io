@@ -175,6 +175,7 @@ item-slot[large] .item-slot-durability-bg {
     border-radius: 0;
     background-clip: padding-box;
     border-image: url("https://rumyantsev168.github.io/static/minecraft/container_border.png") 4 fill repeat;
+    image-rendering: pixelated;
 }
 .item-slot-crafting-ui {
     display: flex;
