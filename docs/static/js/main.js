@@ -8,6 +8,18 @@ if (file !== "index.html" && file !== "") {
     main.appendChild(footer);
 };
 
+// Add page view counter (using GoatCounter)
+const pageHeader = document.querySelector("body > main > header > h1");
+const viewsCount = document.createElement("span");
+viewsCount.className = "views-counter";
+fetch(`https://rumyantsev168.goatcounter.com/counter/${location.href}.json`)
+.then(res => res.json())
+.then(data => {
+    viewsCount.innerText = `This page has been viewed ${data.count} times!`;
+    viewsCount.title = "Stats by goatcounter.com!"
+    pageHeader.after(viewsCount);
+})
+
 // Trim newline characters inside code.code-block elements
 document.querySelectorAll("code.code-block").forEach(el => {
     el.innerText = el.innerText.trim();

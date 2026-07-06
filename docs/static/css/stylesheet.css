@@ -205,3 +205,9 @@ label {
     text-decoration: underline;
     cursor: pointer;
 }
+
+.views-counter {
+    font-family: monospace;
+    font-size: 14px;
+    cursor: default;
+}
