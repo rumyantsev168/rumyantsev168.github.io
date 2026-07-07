@@ -12,7 +12,7 @@ if (file !== "index.html" && file !== "") {
 const pageHeader = document.querySelector("body > main > header > h1");
 const viewsCount = document.createElement("span");
 viewsCount.className = "views-counter";
-fetch(`https://rumyantsev168.goatcounter.com/counter/${location.href}.json`)
+fetch(`https://rumyantsev168.goatcounter.com/counter/${encodeURI(location.pathname)}.json`)
 .then(res => res.json())
 .then(data => {
     viewsCount.innerText = `This page has been viewed ${data.count} times!`;
