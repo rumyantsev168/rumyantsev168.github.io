@@ -441,9 +441,9 @@ class PlayerDisplay extends HTMLElement {
         this._nameEl = playerName;
 
         let skinSrc, userName, displayName;
-        skinSrc = this.getAttribute("skinsrc");
+        skinSrc = (this.getAttribute("skinsrc") || "").trim();
         if (!skinSrc) {
-            userName = this.getAttribute("username");
+            userName = (this.getAttribute("username") || "").trim();
             if (!userName) {
                 console.warn("Skin source unset for a <player-display> element!");
                 userName = "Steve";

@@ -62,8 +62,8 @@
             <div>
                 <label for="usernameInp">Minecraft username</label>
                 <div style="display: flex; gap: 5px;">
-                    <input type="text" id="usernameInp" value="Steve">
-                    <select id="usernameClr"style="font-family: Minecraft">
+                    <input type="text" id="usernameInp" value="Steve" required>
+                    <select id="usernameClr"style="font-family: Minecraft" required>
                         <option value="&0" style="color: #000000">&0</option>
                         <option value="&1" style="color: #0000be">&1</option>
                         <option value="&2" style="color: #00be00">&2</option>
@@ -94,8 +94,8 @@
                 <label for="motdInp">Your MOTD</label>
                 <textarea id="motdInp" style="height: 6em; resize: none;">I play Minecraft!</textarea>
             </div>
-            <div style="display: flex; align-items: center; justify-content: space-between">
-                <div style="display: flex; align-items: center; gap: 3px;">
+            <div class="form-controls">
+                <div class="checkbox">
                     <input type="checkbox" id="overlayChk">
                     <label for="overlayChk">No skin overlay</label>
                 </div>

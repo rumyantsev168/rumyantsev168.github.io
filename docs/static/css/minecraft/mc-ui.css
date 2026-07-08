@@ -24,7 +24,7 @@
 }
 
 /* Button */
-button[is="mc-button"] {
+button[minecraft] {
     position: relative;
     display: inline-block;
     vertical-align: middle;
@@ -45,8 +45,8 @@ button[is="mc-button"] {
     cursor: pointer;
 }
 /*
-button[is="mc-button"]::before,
-button[is="mc-button"]::after {
+button[minecraft]::before,
+button[minecraft]::after {
     content: "";
     position: absolute;
     background-color: inherit;
@@ -54,36 +54,36 @@ button[is="mc-button"]::after {
     width: 0.1em;
     pointer-events: none;
 }
-button[is="mc-button"]::before {
+button[minecraft]::before {
     height: 0.2em;
 }
-button[is="mc-button"]::before {
+button[minecraft]::before {
     bottom: -0.2em;
     left: -0.1em;
 }
-button[is="mc-button"]::after {
+button[minecraft]::after {
     top: -0.1em;
     right: -0.1em;
 }
 */
-button[is="mc-button"]:hover {
+button[minecraft]:hover {
     background: #7e88bf;
     border-color: #C3C7E0 #5F68AA #5F68AA #C3C7E0;
     color: #ffff55;
 }
-button[is="mc-button"]:active,
-button[is="mc-button"]:disabled {
+button[minecraft]:active,
+button[minecraft]:disabled {
     background-color: #2b2b2b;
     border-color: #434343 #373737 #373737 #434343;
     transform: translateY(0.1em);
 }
-button[is="mc-button"]:disabled {
+button[minecraft]:disabled {
     cursor: not-allowed;
 }
 
 /* Input */
 /* Text */
-input[is="mc-input"] {
+input[minecraft] {
     position: relative;
     display: inline-block;
     vertical-align: middle;
@@ -101,19 +101,19 @@ input[is="mc-input"] {
     cursor: text;
     caret-shape: underscore;
 }
-input[is="mc-input"]::selection {
+input[minecraft]::selection {
     background-color: #0000ff;
 }
-input[is="mc-input"]::placeholder {
+input[minecraft]::placeholder {
     color: #3f3f3f;
 }
-input[is="mc-input"]:disabled {
+input[minecraft]:disabled {
     cursor: not-allowed;
     color: #bebebe;
 }
 /* Checkbox and Radio Button */
-input[is="mc-input"][type="checkbox"],
-input[is="mc-input"][type="radio"] {
+input[minecraft][type="checkbox"],
+input[minecraft][type="radio"] {
     appearance: none;
     width: 1em;
     height: 1em;
@@ -125,16 +125,16 @@ input[is="mc-input"][type="radio"] {
     background: black;
     cursor: pointer;
 }
-input[is="mc-input"][type="checkbox"]:checked::before {
+input[minecraft][type="checkbox"]:checked::before {
     content: "";
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIj48dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCjw/eHBhY2tldCBlbmQ9J3cnPz4slJgLAAAAI0lEQVQoU2NgoCn4////fwiBBaCIoytC56MIYpWEAbySuAAAY2of4amvMJcAAAAASUVORK5CYII=");
 }
-input[is="mc-input"][type="radio"]:checked::before {
+input[minecraft][type="radio"]:checked::before {
     content: "";
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIj48dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCjw/eHBhY2tldCBlbmQ9J3cnPz4slJgLAAAAJUlEQVQoU83KIQIAAAjCwM3//xk7xerFARwESJIeAFSnY/twOC2I5AQMzYTUsQAAAABJRU5ErkJggg==");
 }
-input[is="mc-input"][type="checkbox"]:checked::before,
-input[is="mc-input"][type="radio"]:checked::before {
+input[minecraft][type="checkbox"]:checked::before,
+input[minecraft][type="radio"]:checked::before {
     position: absolute;
     top: 0;
     left: 0;
@@ -146,13 +146,13 @@ input[is="mc-input"][type="radio"]:checked::before {
     image-rendering: pixelated;
     display: block;
 }
-input[is="mc-input"][type="checkbox"]:disabled,
-input[is="mc-input"][type="radio"]:disabled {
+input[minecraft][type="checkbox"]:disabled,
+input[minecraft][type="radio"]:disabled {
     cursor: not-allowed;
     color: #bebebe;
 }
 /* Range input (Slider) */
-input[is="mc-input"][type="range"] {
+input[minecraft][type="range"] {
     appearance: none;
     padding: 0;
     min-width: 10em;
@@ -166,7 +166,7 @@ input[is="mc-input"][type="range"] {
     cursor: unset;
 }
 
-input[is="mc-input"][type="range"]::-webkit-slider-thumb {
+input[minecraft][type="range"]::-webkit-slider-thumb {
     appearance: none;
     height: 2.3em;
     width: 0.8em;
@@ -178,22 +178,22 @@ input[is="mc-input"][type="range"]::-webkit-slider-thumb {
     border-color: darkgray gray gray darkgray;
     border-radius: 0;
 }
-input[is="mc-input"][type="range"]::-webkit-slider-thumb:hover {
+input[minecraft][type="range"]::-webkit-slider-thumb:hover {
     background: #7e88bf;
     border-color: #C3C7E0 #5F68AA #5F68AA #C3C7E0;
 }
-input[is="mc-input"][type="range"]::-webkit-slider-thumb:disabled {
+input[minecraft][type="range"]::-webkit-slider-thumb:disabled {
     background-color: #2b2b2b;
     border-color: #434343 #373737 #373737 #434343;
     cursor: not-allowed;
 }
-input[is="mc-input"][type="range"]::-webkit-slider-thumb:active {
+input[minecraft][type="range"]::-webkit-slider-thumb:active {
     cursor: grabbing;
 }
-input[is="mc-input"][type=range]::-webkit-slider-runnable-track  {
+input[minecraft][type=range]::-webkit-slider-runnable-track  {
     appearance: none;
 }
-input[is="mc-input"][type=range]::after {
+input[minecraft][type=range]::after {
     content: attr(data-label);
     position: absolute;
     width: 100%;

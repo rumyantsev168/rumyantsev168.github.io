@@ -9,7 +9,7 @@ if (file !== "index.html" && file !== "") {
 };
 
 // Add page view counter (using GoatCounter)
-const pageHeader = document.querySelector("body > main > header > h1");
+const pageHeader = document.querySelector("header h1");
 const viewsCount = document.createElement("span");
 viewsCount.className = "views-counter";
 fetch(`https://rumyantsev168.goatcounter.com/counter/${encodeURI(location.pathname)}.json`)

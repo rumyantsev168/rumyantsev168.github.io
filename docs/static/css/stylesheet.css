@@ -123,11 +123,23 @@ button:disabled {
     cursor: not-allowed;
 }
 
+.form-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .buttons {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
 label {

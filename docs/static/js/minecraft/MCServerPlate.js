@@ -94,7 +94,7 @@ class MCServerPlate extends HTMLElement {
     render() {
         if (this._rendered) return;
 
-        const address = this.getAttribute("address");
+        const address = (this.getAttribute("address") || "").trim();
         const displayName = this.getAttribute("displayname");
 
         const server = document.createElement("div");

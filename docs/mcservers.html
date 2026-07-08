@@ -7,41 +7,74 @@
     <link rel="icon" href="static/icons/Page.png">
     <link rel="stylesheet" href="static/css/stylesheet.css">
     <script async data-goatcounter="https://rumyantsev168.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
-    <style>
-        #input {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            gap: 5px;
-            margin: 10px 0;
-        }
-        #mc-address {
-            font-family: monospace;
-            width: 100%;
-        }
-    </style>
     <title>Minecraft Server Ping</title>
 </head>
 <body>
     <main style="max-width: fit-content">
         <header>
-            <h1><a href="mcws.html" style="color: initial; text-decoration: none;">Minecraft Server Ping</a></h1>
+            <h1>Minecraft Server Ping</h1>
             <hr size="1px">
         </header>
-        <p class="text-center">This page uses <a href="https://api.mcsrvstat.us">https://api.mcsrvstat.us</a> API</p>
-        <div id="input">
-            <input type="url" id="mc-address" placeholder="Address">
-            <button type="button" id="ping-btn">Ping!</button>
-        </div>
-        <mc-server-plate id="server-plate"></mc-server-plate>
+        <p class="text-center">
+            Java servers are fetched via the <a href="https://api.mcsrvstat.us">mcsrvstat.us</a> API.<br>
+            WebSocket-based servers use direct connection.
+        </p>
+        <form class="form" id="form">
+            <div>
+                <label for="mcAddress">Server address</label>
+                <input type="text" inputmode="url" id="address" value="mineplex.com" required>
+            </div>
+            <div class="form-controls">
+                <div class="checkbox">
+                    <input type="checkbox" id="useWS">
+                    <label for="useWS">Use WebSocket</label>
+                </div>
+                <div class="buttons">
+                    <button type="button" id="refreshBtn">Refresh</button>
+                    <button type="submit" id="pingBtn">Get status</button>
+                </div>
+            </div>
+        </form>
+        <mc-server-plate id="mc-server-plate"></mc-server-plate>
+        <ws-server-plate id="ws-server-plate"></ws-server-plate>
     </main>
     <script src="static/js/main.js"></script>
     <script src="static/js/minecraft/MCServerPlate.js" localassets></script>
+    <script src="static/js/minecraft/WSServerPlate.js" localassets></script>
     <script>
-        const mcAddress = document.getElementById("mc-address");
-        const serverPlate = document.getElementById("server-plate");
-        document.getElementById("ping-btn").onclick = () => {
-            serverPlate.setAttribute("address", mcAddress.value);
+        const form = document.getElementById("form");
+        const mcPlate = document.getElementById("mc-server-plate");
+        const wsPlate = document.getElementById("ws-server-plate");
+
+        currentPlate = !form.elements.useWS.checked ? mcPlate : wsPlate;
+        otherPlate = (currentPlate == mcPlate) ? wsPlate : mcPlate;
+        otherPlate.style.display = "none";
+        
+        form.addEventListener("change", (event) => {
+            if (event.target.type === "checkbox") { 
+                let t = currentPlate;
+                currentPlate = otherPlate;
+                otherPlate = t;
+                currentPlate.style.display = "inline-block";
+                otherPlate.style.display = "none";
+            }
+        });
+
+        form.onsubmit = (event) => {
+            event.preventDefault();
+            const address = form.elements.address.value;
+            if (form.elements.useWS.checked && (!address.startsWith("ws://") && !address.startsWith("wss://")) || address == "ws://" || address == "wss://") {
+                alert("The address must start with ws:// or wss://!")
+            }
+            currentPlate.setAttribute("address", address);
+        };
+
+        form.elements.refreshBtn.onclick = () => {
+            let t = currentPlate.getAttribute("address");
+            if (t) {
+                currentPlate.setAttribute("address", "");
+                currentPlate.setAttribute("address", t);
+            }
         }
     </script>
     <noscript>

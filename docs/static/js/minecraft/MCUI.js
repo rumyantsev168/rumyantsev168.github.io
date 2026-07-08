@@ -47,12 +47,12 @@ const MCUIStyleLoader = {
 };
 MCUIStyleLoader.loadStyles();
 
-document.querySelectorAll("input[is='mc-input'][type='range']").forEach(el => {
+document.querySelectorAll("input[minecraft][type='range']").forEach(el => {
     el.dataset.label = el.hasAttribute("label") ? `${el.getAttribute("label")}: ${el.value}` : el.value;
 });
 
 document.addEventListener("input", event => {
-    if (event.target.matches("input[is='mc-input'][type='range']")) {
+    if (event.target.matches("input[minecraft][type='range']")) {
         event.target.dataset.label = event.target.hasAttribute("label") ? `${event.target.getAttribute("label")}: ${event.target.value}` : event.target.value;
     }
 });
