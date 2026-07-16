@@ -38,7 +38,6 @@
     width: fit-content;
     z-index: 9999;
     white-space: pre-wrap;
-    pointer-events: none;
     line-height: 1.1em;
     box-shadow:
         0 -0.1em 0 0 #1E0F1E,

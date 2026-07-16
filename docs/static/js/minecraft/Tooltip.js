@@ -92,7 +92,6 @@ allElements.forEach((el, i) => {
     tooltip.className = "mc-tooltip";
     tooltip.id = `mc-tooltip-${i}`;
     el.after(tooltip);
-    el.style.cursor = "default";
 
     el.dataset.tooltipTarget = tooltip.id;
 });

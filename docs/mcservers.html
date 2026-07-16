@@ -50,15 +50,13 @@
         otherPlate = (currentPlate == mcPlate) ? wsPlate : mcPlate;
         otherPlate.style.display = "none";
         
-        form.addEventListener("change", (event) => {
-            if (event.target.type === "checkbox") { 
-                let t = currentPlate;
-                currentPlate = otherPlate;
-                otherPlate = t;
-                currentPlate.style.display = "inline-block";
-                otherPlate.style.display = "none";
-            }
-        });
+        form.elements.useWS.onclick = () => { 
+            let t = currentPlate;
+            currentPlate = otherPlate;
+            otherPlate = t;
+            currentPlate.style.display = "inline-block";
+            otherPlate.style.display = "none";
+        };
 
         form.onsubmit = (event) => {
             event.preventDefault();
@@ -75,7 +73,7 @@
                 currentPlate.setAttribute("address", "");
                 currentPlate.setAttribute("address", t);
             }
-        }
+        };
     </script>
     <noscript>
         <div class="warning">

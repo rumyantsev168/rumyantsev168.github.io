@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="View index and README for GitHub repos">
+    <link rel="icon" href="static/icons/Page.png">
+    <link rel="stylesheet" href="static/css/stylesheet.css">
+    <!-- <script async data-goatcounter="https://rumyantsev168.goatcounter.com/count" src="//gc.zgo.at/count.js"></script> -->
+    <title>GitHub Viewer</title>
+    <style>
+        #index {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            height: 390px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+        #index > p {
+            width: calc(100% - 20px);
+            margin: 0;
+            padding: 0 10px;
+            line-height: 1.8em;
+            border-bottom: 1px solid gray;
+            cursor: pointer;
+        }
+        #index > p:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <main style="max-width: 400px">
+        <header>
+            <h1>GitHub repo viewer</h1>
+            <hr size="1px">
+        </header>
+        <p class="text-center">
+            GitHub API's ratelimit is 60 requests per hour.
+        </p>
+        <form class="form" id="form">
+            <div>
+                <label for="repo">Repository link</label>
+                <input type="text" id="repo" placeholder="torvalds/linux" required>
+            </div>
+            <div class="form-controls">
+                <a href="https://docs.github.com/rest">GitHub API Docs</a>
+                <div class="buttons">
+                    <small id="status"></small>
+                    <button type="submit">View</button>
+                </div>
+            </div>
+        </form>
+        <div style="display: flex; gap: 5px; align-items: center;">
+            <span id="back" style="font-family: monospace; cursor: pointer;" title="Back">&lt;</span>
+            <small id="path"></small>
+        </div>
+        <div id="index"></div>
+    </main>
+    <script src="static/js/main.js"></script>
+    <script>
+        const form = document.getElementById("form");
+        const repoNameFromSearch = decodeURIComponent(new URLSearchParams(location.search).get("repo") || "");
+        var repoName = null;
+        if (repoNameFromSearch) {
+            repoName = repoNameFromSearch;
+        } else if (form.elements.repo.value) {
+            repoName = form.elements.repo.value;
+        } else {
+            repoName = "torvalds/linux";
+        };
+        form.elements.repo.value = repoName;
+
+        const container = document.getElementById("container");
+        const index = document.getElementById("index");
+        const currentPath = document.getElementById("path");
+        currentPath.innerText = decodeURIComponent(new URLSearchParams(location.search).get("path") || "");
+        const backBtn = document.getElementById("back");
+
+        form.onsubmit = (event) => {
+            event.preventDefault();
+            repoName = form.elements.repo.value;
+            location.search = `?repo=${encodeURIComponent(repoName)}`;
+            return;
+        };
+        
+        const status = document.getElementById("status");
+        function makeList(repo, path) {
+            if (!repo) return;
+            if (path) {
+                backBtn.style.cursor = "pointer";
+                backBtn.style.color = "black";
+            } else {
+                backBtn.style.cursor = "not-allowed";
+                backBtn.style.color = "gray";
+            }
+
+            index.innerHTML = "";
+            status.innerText = "Loading...";
+            const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+            fetch(apiUrl)
+            .then(res => {
+                console.log(res.status);
+                switch (res.status) {
+                    case 200:
+                    case 302:
+                    case 304:
+                        return res.json();
+                        break;
+                    case 403:
+                        throw new Error("Access forbidden");
+                        break;
+                    case 404:
+                        throw new Error("Not found");
+                        break;
+                };
+            })
+            .then(data => {
+                console.log(data);
+                const dirs = [];
+                const files = [];
+                currentPath.innerText = path;
+                data.forEach(entry => {
+                    const entryContainer = document.createElement("p");
+                    entryContainer.dataset.type = entry.type;
+                    if (entry.type == "dir") {
+                        entryContainer.innerText = `📁 ${entry.name}`;
+                        entryContainer.onclick = () => { location.search = `?repo=${encodeURIComponent(repoName)}&path=${encodeURIComponent(entry.path)}` };
+                        dirs.push(entryContainer);
+                    } else if (entry.type == "file") {
+                        entryContainer.innerText = `📄 ${entry.name}`;
+                        entryContainer.onclick = () => { location.href = entry.download_url };
+                        files.push(entryContainer);
+                    };
+                })
+                dirs.forEach(el => index.appendChild(el));
+                files.forEach(el => index.appendChild(el));
+                return;
+            })
+            .catch(err => {
+                console.error("Error while fetching GitHub API!", err);
+                status.innerText = err;
+                return;
+            })
+            .finally(() => {
+                loading.style.display = "none";
+                return;
+            });
+            return;
+        };
+
+        backBtn.onclick = () => {
+            let path = currentPath.innerText.trim();
+            if (!path) return;
+            if (path.endsWith("/")) path = path.slice(0, -1);
+
+            const parts = path.split("/").filter(Boolean);
+            if (parts.length > 0) {
+                parts.pop();
+            }
+            const newPath = parts.join("/");
+            location.search = newPath
+                              ? `?repo=${encodeURIComponent(repoName)}&path=${encodeURIComponent(newPath)}`
+                              : `?repo=${encodeURIComponent(repoName)}`;
+            return;
+        };
+
+        makeList(repoName, currentPath.innerText);
+    </script>
+    <noscript>
+        <div class="warning">
+            <img src="static/icons/Warning.png" height="20">
+            <p>
+                Sorry, but this website won't work properly with JavaScript disabled. Please <a href="https://www.enable-javascript.com" target="_blank">enable</a> it.
+            </p>
+        </div>
+    </noscript>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="The World Map">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="icon" href="static/icons/Page.png">
+    <link rel="stylesheet" href="static/css/stylesheet.css">
+    <script async data-goatcounter="https://rumyantsev168.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+    <title>World Map</title>
+    <style>
+        #map {
+            margin: 10px 0;
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <main style="max-width: 800px">
+        <header>
+            <h1>The World Map</h1>
+            <hr size="1px">
+        </header>
+        <div id="map"></div>
+        <div class="buttons">
+            <small id="loading" style="display: none">Loading...</small>
+            <button type="button" onclick="getUserLocation()">Where am I?</button>
+        </div>
+    </main>
+    <script>
+        const map = L.map("map").setView([20, 0], 2);
+
+        L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>',
+            maxZoom: 19
+        }).addTo(map);
+
+        const customIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        let locationShown = false;
+        const loading = document.getElementById("loading");
+        function getUserLocation() {
+            if (!locationShown) {
+                if (navigator.geolocation) {
+                    loading.style.display = "";
+                    new Promise((res, rej) => {
+                        navigator.geolocation.getCurrentPosition(
+                            function(position) {
+                                const lat = position.coords.latitude;
+                                const lng = position.coords.longitude;
+                                L.marker([lat, lng], { icon: customIcon }).addTo(map).openPopup();
+                                map.setView([lat, lng], 12);
+                                locationShown = true;
+                                res();
+                            },
+                            function(error) {
+                                console.log("Geolocation error:", error.message);
+                                alert("Could not get your location. Make sure geolocation is enabled.");
+                                rej();
+                            }
+                        );
+                    }).finally(() => { loading.style.display = "none" });
+                } else {
+                    alert("Geolocation is not supported by your browser.");
+                };
+            };
+        };
+    </script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
