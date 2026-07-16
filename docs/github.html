@@ -136,6 +136,7 @@
                 })
                 dirs.forEach(el => index.appendChild(el));
                 files.forEach(el => index.appendChild(el));
+                status.innerText = "";
                 return;
             })
             .catch(err => {
@@ -143,10 +144,6 @@
                 status.innerText = err;
                 return;
             })
-            .finally(() => {
-                loading.style.display = "none";
-                return;
-            });
             return;
         };
 
