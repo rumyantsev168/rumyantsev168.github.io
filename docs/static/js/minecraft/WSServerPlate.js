@@ -80,8 +80,9 @@ class WSServerPlate extends HTMLElement {
     ];
 
     constructor() {
-        super()
+        super();
         this._rendered = false;
+        this.isLoading = false;
     }
 
     connectedCallback() {
@@ -135,7 +136,7 @@ class WSServerPlate extends HTMLElement {
     }
 
     render() {
-        if (this._rendered) return;
+        if (this._rendered || this.isLoading) return;
 
         const address = (this.getAttribute("address") || "").trim();
         const displayName = this.getAttribute("displayname");
@@ -165,8 +166,8 @@ class WSServerPlate extends HTMLElement {
         nameMotd.append(name, motd);
         server.append(icon, nameMotd, status, count, players);
 
-        if (!address || (!address.startsWith("ws://") && !address.startsWith("wss://")) || address == "ws://" || address == "wss://") {
-            console.warn("Address is invalid or unset for a <ws-server-plate> element!");
+        if (!address) {
+            console.warn("Address is or unset for a <ws-server-plate> element!");
             status.src = WSServerPlate.failureStatus;
             if (displayName) {
                 name.replaceChildren(makeColors([displayName]));
@@ -178,91 +179,115 @@ class WSServerPlate extends HTMLElement {
             count.innerText = "";
             players.style.display = "none";
             players.innerHTML = "";
-        } else {
-            try {
-                status.src = WSServerPlate.pingingStatus;
-                name.innerText = "Connecting...";
-                icon.src = WSServerPlate.defaultIcon;
-                motd.replaceChildren(makeColors(["", `&8${address}`]));
-                count.innerText = "";
-                const ws = new WebSocket(address);
-                const startTime = Date.now();
-                ws.onopen = () => {
-                    console.log("Connected to", address);
-                    ws.send("Accept: MOTD");
-                };
-                ws.onmessage = (event) => {
-                    try {
-                        const pingTime = Date.now() - startTime;
-                        console.log(pingTime);
-                        let data = JSON.parse(event.data);
-                        console.log("Received JSON data:", data);
-                        if (0 <= pingTime && pingTime <= 150) {
-                            status.src = WSServerPlate.successStatusList[4];
-                        } else if (150 < pingTime && pingTime <= 300) {
-                            status.src = WSServerPlate.successStatusList[3];
-                        } else if (300 < pingTime && pingTime <= 600) {
-                            status.src = WSServerPlate.successStatusList[2];
-                        } else if (600 < pingTime && pingTime <= 1000) {
-                            status.src = WSServerPlate.successStatusList[1];
-                        } else if (pingTime > 1000) {
-                            status.src = WSServerPlate.successStatusList[0];
-                        }
-                        if (displayName) {
-                            name.replaceChildren(makeColors([displayName]));
-                        } else {
-                            name.replaceChildren(makeColors([data.name]));
-                        }
-                        if (data.data.motd.join("\n").includes("\n")) {
-                            motd.replaceChildren(makeColors(data.data.motd));
-                        } else {
-                            motd.replaceChildren(makeColors([data.data.motd.join(), `&8${address}`]))
-                        }
-                        count.innerText = `${data.data.online}/${data.data.max}`;
-                        if (data.data.players.length > 0) {
-                            players.style.display = "";
-                            players.replaceChildren(makeColors(data.data.players));
-                        } else if (data.data.online > 0) {
-                            players.style.display = "";
-                            players.replaceChildren(makeColors(["&7&oNo player data"]))
-                        } else {
-                            players.style.display = "none";
-                            players.innerHTML = "";
-                        }
-                    } catch (err) {
-                        const blob = event.data;
-                        blob.arrayBuffer().then(buffer => {
-                            const view = new Uint8Array(buffer);
-                            const possibleSizes = [64, 128, 256, 512];
-                            for (const size of possibleSizes) {
-                                const expectedBytes = size * size * 4;
-                                if (view.length === expectedBytes) {
-                                    createImageFromRGBA(icon, view, size, size);
-                                    break;
-                                }
-                            }
-                        });
-                    };
-                };
-                ws.onerror = (err) => {
-                    console.error("WebSocket error!", err);
-                    status.src = WSServerPlate.failureStatus;
-                    name.innerText = "Failed to connect!";
-                    motd.replaceChildren(makeColors(["&7This server is offline or doesn't exist", `&8${address}`]));
-                    count.innerText = "";
+            this.appendChild(server);
+            this._rendered = true;
+            return;
+        }
+
+        this.isLoading = true;
+        status.src = WSServerPlate.pingingStatus;
+        name.innerText = "Connecting...";
+        icon.src = WSServerPlate.defaultIcon;
+        motd.replaceChildren(makeColors(["", `&8${address}`]));
+        count.innerText = "";
+
+        let ws, startTime;
+        try { ws = new WebSocket(address) }
+        catch (err) {
+            this.isLoading = false;
+            console.error("WebSocket error!", err);
+            status.src = WSServerPlate.failureStatus;
+            name.innerText = "Failed to connect!";
+            motd.replaceChildren(makeColors(["&7Error while initializing connection", `&8${address}`]));
+            count.innerText = "";
+            players.style.display = "none";
+            players.innerHTML = "";
+            this.appendChild(server);
+            this._rendered = true;
+            return;
+        }
+        
+        ws.onopen = () => {
+            console.log("Connected to", address);
+            startTime = Date.now();
+            ws.send("Accept: MOTD");
+        };
+        var dataReceived = false;
+        var iconReceived = false;
+        ws.onmessage = (event) => {
+            if (!dataReceived) {
+                const pingTime = Date.now() - startTime;
+                console.log(pingTime);
+                let data = JSON.parse(event.data);
+                console.log("Received JSON data:", data);
+                if (0 <= pingTime && pingTime <= 150) {
+                    status.src = WSServerPlate.successStatusList[4];
+                } else if (150 < pingTime && pingTime <= 300) {
+                    status.src = WSServerPlate.successStatusList[3];
+                } else if (300 < pingTime && pingTime <= 600) {
+                    status.src = WSServerPlate.successStatusList[2];
+                } else if (600 < pingTime && pingTime <= 1000) {
+                    status.src = WSServerPlate.successStatusList[1];
+                } else if (pingTime > 1000) {
+                    status.src = WSServerPlate.successStatusList[0];
+                }
+                if (displayName) {
+                    name.replaceChildren(makeColors([displayName]));
+                } else {
+                    name.replaceChildren(makeColors([data.name]));
+                }
+                if (data.data.motd.join("\n").includes("\n")) {
+                    motd.replaceChildren(makeColors(data.data.motd));
+                } else {
+                    motd.replaceChildren(makeColors([data.data.motd.join(), `&8${address}`]))
+                }
+                count.innerText = `${data.data.online}/${data.data.max}`;
+                if (data.data.players.length > 0) {
+                    players.style.display = "";
+                    players.replaceChildren(makeColors(data.data.players));
+                } else if (data.data.online > 0) {
+                    players.style.display = "";
+                    players.replaceChildren(makeColors(["&7&oNo player data"]))
+                } else {
                     players.style.display = "none";
                     players.innerHTML = "";
-                };
-                ws.onclose = () => {
-                    console.log("Connection to", address, "closed");
-                };
-            } catch (err) {
-                console.error("WebSocket error!", err);
+                }
+                dataReceived = true;
+            } else if (!iconReceived) {
+                const blob = event.data;
+                blob.arrayBuffer().then(buffer => {
+                    const view = new Uint8Array(buffer);
+                    const possibleSizes = [64, 128, 256, 512];
+                    for (const size of possibleSizes) {
+                        const expectedBytes = size * size * 4;
+                        if (view.length === expectedBytes) {
+                            createImageFromRGBA(icon, view, size, size);
+                            break;
+                        }
+                    }
+                });
+                iconReceived = true;
+                this.isLoading = false;
+                ws.close();
             };
-        }
+        };
+        ws.onerror = (err) => {
+            this.isLoading = false;
+            console.error("WebSocket error!", err);
+            status.src = WSServerPlate.failureStatus;
+            name.innerText = "Failed to connect!";
+            motd.replaceChildren(makeColors(["&7This server is offline or doesn't exist", `&8${address}`]));
+            count.innerText = "";
+            players.style.display = "none";
+            players.innerHTML = "";
+        };
+        ws.onclose = () => {
+            console.log("Connection to", address, "closed");
+        };
 
         this.appendChild(server);
         this._rendered = true;
+        return;
     }
     
     disconnectedCallback() {

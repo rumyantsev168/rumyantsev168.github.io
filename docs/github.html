@@ -6,7 +6,7 @@
     <meta name="description" content="View index and README for GitHub repos">
     <link rel="icon" href="static/icons/Page.png">
     <link rel="stylesheet" href="static/css/stylesheet.css">
-    <!-- <script async data-goatcounter="https://rumyantsev168.goatcounter.com/count" src="//gc.zgo.at/count.js"></script> -->
+    <script async data-goatcounter="https://rumyantsev168.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
     <title>GitHub Viewer</title>
     <style>
         #index {
@@ -109,7 +109,7 @@
                         return res.json();
                         break;
                     case 403:
-                        throw new Error("Access forbidden");
+                        throw new Error("Forbidden");
                         break;
                     case 404:
                         throw new Error("Not found");

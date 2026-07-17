@@ -36,9 +36,9 @@ class MCServerPlate extends HTMLElement {
     static successStatus = "https://rumyantsev168.github.io/static/minecraft/success_5.png";
 
     constructor() {
-        super()
-        this._fetching = true;
+        super();
         this._rendered = false;
+        this.isLoading = false;
     }
 
     connectedCallback() {
@@ -92,7 +92,7 @@ class MCServerPlate extends HTMLElement {
     }
 
     render() {
-        if (this._rendered) return;
+        if (this._rendered || this.isLoading) return;
 
         const address = (this.getAttribute("address") || "").trim();
         const displayName = this.getAttribute("displayname");
@@ -127,46 +127,53 @@ class MCServerPlate extends HTMLElement {
             icon.src = MCServerPlate.defaultIcon;
             motd.replaceChildren(makeColors(["&7A Minecraft Server"]));
             count.innerText = "";
-        } else {
-            status.src = MCServerPlate.pingingStatus;
-            name.innerText = "Fetching...";
-            icon.src = MCServerPlate.defaultIcon;
-            motd.replaceChildren(makeColors(["", `&8${address}`]));
-            count.innerText = "";
-            fetch(`https://api.mcsrvstat.us/3/${address}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log("Received JSON data:", data)
-                if (data.online) {
-                    status.src = MCServerPlate.successStatus;
-                    if (displayName) {
-                        name.replaceChildren(makeColors([displayName]));
-                    } else {
-                        name.innerText = "Minecraft Server";
-                    }
-                    if (data.motd.raw.join("\n").includes("\n")) {
-                        motd.replaceChildren(makeColors(data.motd.raw));
-                    } else {
-                        motd.replaceChildren(makeColors([data.motd.raw.join(), `&8${address}`]))
-                    }
-                    count.innerText = `${data.players.online}/${data.players.max}`;
-                    icon.src = data.icon;
-                } else {
-                    status.src = MCServerPlate.failureStatus;
-                    name.innerText = "Failed to connect!";
-                    motd.replaceChildren(makeColors(["&7The server is offline or doesn't exist", `&8${address}`]));
-                    count.innerText = "";
-                }
-            }).catch(err => {
-                status.src = MCServerPlate.failureStatus;
-                name.innerText = "Failed to fetch!";
-                motd.replaceChildren(makeColors(["&7The API is not available", `&8${address}`]));
-                count.innerText = "";
-            });
+            this.appendChild(server);
+            this._rendered = true;
+            return;
         }
+        
+        this.isLoading = true;
+        status.src = MCServerPlate.pingingStatus;
+        name.innerText = "Fetching...";
+        icon.src = MCServerPlate.defaultIcon;
+        motd.replaceChildren(makeColors(["", `&8${address}`]));
+        count.innerText = "";
+        
+        fetch(`https://api.mcsrvstat.us/3/${address}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log("Received JSON data:", data)
+            if (data.online) {
+                status.src = MCServerPlate.successStatus;
+                if (displayName) {
+                    name.replaceChildren(makeColors([displayName]));
+                } else {
+                    name.innerText = "Minecraft Server";
+                }
+                if (data.motd.raw.join("\n").includes("\n")) {
+                    motd.replaceChildren(makeColors(data.motd.raw));
+                } else {
+                    motd.replaceChildren(makeColors([data.motd.raw.join(), `&8${address}`]))
+                }
+                count.innerText = `${data.players.online}/${data.players.max}`;
+                icon.src = data.icon;
+            } else {
+                status.src = MCServerPlate.failureStatus;
+                name.innerText = "Failed to connect!";
+                motd.replaceChildren(makeColors(["&7The server is offline or doesn't exist", `&8${address}`]));
+                count.innerText = "";
+            }
+        }).catch(err => {
+            status.src = MCServerPlate.failureStatus;
+            name.innerText = "Failed to fetch!";
+            motd.replaceChildren(makeColors(["&7The API is not available", `&8${address}`]));
+            count.innerText = "";
+        })
+        .finally(() => { this.isLoading = false });
 
         this.appendChild(server);
         this._rendered = true;
+        return;
     }
 
     attributeChangedCallback(name, oldValue, newValue) {

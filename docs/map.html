@@ -50,29 +50,27 @@
         let locationShown = false;
         const loading = document.getElementById("loading");
         function getUserLocation() {
-            if (!locationShown) {
-                if (navigator.geolocation) {
-                    loading.style.display = "";
-                    new Promise((res, rej) => {
-                        navigator.geolocation.getCurrentPosition(
-                            function(position) {
-                                const lat = position.coords.latitude;
-                                const lng = position.coords.longitude;
-                                L.marker([lat, lng], { icon: customIcon }).addTo(map).openPopup();
-                                map.setView([lat, lng], 12);
-                                locationShown = true;
-                                res();
-                            },
-                            function(error) {
-                                console.log("Geolocation error:", error.message);
-                                alert("Could not get your location. Make sure geolocation is enabled.");
-                                rej();
-                            }
-                        );
-                    }).finally(() => { loading.style.display = "none" });
-                } else {
-                    alert("Geolocation is not supported by your browser.");
-                };
+            if (navigator.geolocation) {
+                loading.style.display = "";
+                new Promise((res, rej) => {
+                    navigator.geolocation.getCurrentPosition(
+                        function(position) {
+                            const lat = position.coords.latitude;
+                            const lng = position.coords.longitude;
+                            if (!locationShown) L.marker([lat, lng], { icon: customIcon }).addTo(map).openPopup();
+                            map.setView([lat, lng], 12);
+                            locationShown = true;
+                            res();
+                        },
+                        function(error) {
+                            console.log("Geolocation error:", error.message);
+                            alert("Could not get your location. Make sure geolocation is enabled.");
+                            rej();
+                        }
+                    );
+                }).finally(() => { loading.style.display = "none" });
+            } else {
+                alert("Geolocation is not supported by your browser.");
             };
         };
     </script>

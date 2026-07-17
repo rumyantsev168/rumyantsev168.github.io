@@ -6,7 +6,7 @@
     <meta name="description" content="Get info about Minecraft servers">
     <link rel="icon" href="static/icons/Page.png">
     <link rel="stylesheet" href="static/css/stylesheet.css">
-    <script async data-goatcounter="https://rumyantsev168.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+    <!-- <script async data-goatcounter="https://rumyantsev168.goatcounter.com/count" src="//gc.zgo.at/count.js"></script> -->
     <title>Minecraft Server Ping</title>
 </head>
 <body>
@@ -64,7 +64,9 @@
             if (form.elements.useWS.checked && (!address.startsWith("ws://") && !address.startsWith("wss://")) || address == "ws://" || address == "wss://") {
                 alert("The address must start with ws:// or wss://!")
             }
+            console.log(currentPlate.isLoading);
             currentPlate.setAttribute("address", address);
+            console.log(currentPlate.isLoading);
         };
 
         form.elements.refreshBtn.onclick = () => {
