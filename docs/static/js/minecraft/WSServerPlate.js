@@ -1,5 +1,5 @@
 /* WSServerPlate.js */
-// Custom HTML element, that displays server info via WebSocket.
+// Custom HTML element, that displays Minecraft server info via WebSocket.
 // Author: rumyantsev168 (https://github.com/rumyantsev168)
 // Source: https://rumyantsev168.github.io/static/js/minecraft/WSServerPlate.js
 
