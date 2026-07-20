@@ -87,7 +87,8 @@ class LetterBoard extends HTMLElement {
                     const letterSpan = document.createElement("span");
                     if (letter !== " ") {
                         letterSpan.className = "letter-board-letter";
-                        letterSpan.innerText = letter;
+                        letterSpan.innerText = letter.toUpperCase();
+                        if ("0123456789.,!?@#$%&+*".includes(letter)) { letterSpan.style.color = "#b22222" }
                     } else {
                         letterSpan.className = "letter-board-space";
                     }
