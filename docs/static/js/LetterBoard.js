@@ -1,5 +1,5 @@
 /* LetterBoard.js */
-// Custom HTML Letter Letter Board.
+// Custom HTML Letter Board.
 // Author: rumyantsev168 (https://github.com/rumyantsev168)
 // Source: https://rumyantsev168.github.io/static/js/LetterBoard.js
 

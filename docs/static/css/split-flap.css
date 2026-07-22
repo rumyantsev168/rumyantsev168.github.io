@@ -1,0 +1,58 @@
+split-flap {
+    display: inline-block;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.split-flap {
+    position: relative;
+    width: 1ch;
+    height: 1em;
+    border-radius: 0.1em;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.split-flap::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 0.05em);
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    background-color: #303030;
+}
+
+.split-flap-char {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 1em;
+    overflow: hidden;
+    background-color: #000000;
+}
+
+.split-flap-char.top {
+    top: 0;
+    clip-path: inset(0 0 50% 0);
+    border-radius: 0.1em 0.1em 0 0;
+    z-index: 2;
+}
+
+.split-flap-char.bottom {
+    bottom: 0;
+    clip-path: inset(50% 0 0 0);
+    border-radius: 0 0 0.1em 0.1em;
+    z-index: 1;
+}
+
+.split-flap-char.flip {
+    animation: flip-top 0.1s ease-in-out;
+}
+
+@keyframes flip-top {
+    from { transform: rotateX(0deg) }
+    to { transform: rotateX(-180deg) }
+}

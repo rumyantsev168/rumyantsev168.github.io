@@ -18,6 +18,16 @@
         </header>
         <center style="margin-bottom: 8px">
             <letter-board content="|   HELLO STRANGER !   |  THIS IS MY WEBSITE  |" style="font-size: 18px; border: 3px solid black"></letter-board>
+            <div style="font-size: 35px">
+                <split-flap id="time-h1"></split-flap>
+                <split-flap id="time-h2"></split-flap>
+                :
+                <split-flap id="time-m1"></split-flap>
+                <split-flap id="time-m2"></split-flap>
+                :
+                <split-flap id="time-s1"></split-flap>
+                <split-flap id="time-s2"></split-flap>
+            </div>
         </center>
         <div style="display: grid; grid-template-columns: 50% 50%">
             <div>
@@ -76,9 +86,11 @@
         </footer>
     </main>
     <script src="static/js/main.js"></script>
+    <script src="static/js/SplitFlap.js" localassets></script>
     <script src="static/js/LetterBoard.js" localassets></script>
     <script src="static/js/minecraft/ItemSlot.js" localassets></script>
     <script>
+        // Add the version badge
         fetch("static/data/version.json")
         .then(obj => obj.text())
         .then(res => displayVersion(JSON.parse(res)));
@@ -86,6 +98,26 @@
             document.getElementById("version").setAttribute("src", `https://img.shields.io/badge/version-${ver.version}-green`);
             document.getElementById("version").setAttribute("alt", `v${ver.version}`);
         };
+
+        // Update the timer
+        const timeH1 = document.getElementById("time-h1");
+        const timeH2 = document.getElementById("time-h2");
+        const timeM1 = document.getElementById("time-m1");
+        const timeM2 = document.getElementById("time-m2");
+        const timeS1 = document.getElementById("time-s1");
+        const timeS2 = document.getElementById("time-s2");
+        setInterval(() => {
+            const date = new Date();
+            const hours = date.getHours().toString().padStart(2, "0");
+            const minutes = date.getMinutes().toString().padStart(2, "0");
+            const seconds = date.getSeconds().toString().padStart(2, "0");
+            timeH1.setAttribute("char", hours[0]);
+            timeH2.setAttribute("char", hours[1]);
+            timeM1.setAttribute("char", minutes[0]);
+            timeM2.setAttribute("char", minutes[1]);
+            timeS1.setAttribute("char", seconds[0]);
+            timeS2.setAttribute("char", seconds[1]);
+        }, 1000);
     </script>
     <noscript>
         <div class="warning">

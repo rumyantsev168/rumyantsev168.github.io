@@ -30,6 +30,7 @@ button[minecraft] {
     vertical-align: middle;
     font-family: Minecraft;
     font-size: 16px;
+    line-height: 1.1em;
     color: #ffffff;
     text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
     background-color: #6f6f6f;
@@ -89,6 +90,7 @@ input[minecraft] {
     vertical-align: middle;
     font-family: Minecraft;
     font-size: 16px;
+    line-height: 1.1em;
     color: #ffffff;
     text-shadow: 0.1em 0.1em 0 color-mix(in srgb, 32% currentColor, black);
     background-color: black;
