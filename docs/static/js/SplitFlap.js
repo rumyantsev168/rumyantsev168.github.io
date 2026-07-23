@@ -91,6 +91,8 @@ class SplitFlap extends HTMLElement {
     }
 
     flip(toChar) {
+        if (!this._topSpan || !this._bottomSpan) return;
+        
         this._topSpan.className = "split-flap-char top flip";
         setTimeout(() => {
             this._topSpan.className = "split-flap-char top";

@@ -15,7 +15,6 @@ letter-board {
     box-shadow: 0 0 0.1em #000000;
     width: fit-content;
     height: fit-content;
-    line-height: 1em;
 }
 
 .letter-board-line {
