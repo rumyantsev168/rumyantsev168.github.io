@@ -8,6 +8,7 @@ split-flap {
     position: relative;
     width: 1ch;
     height: 1em;
+    border: none;
     border-radius: 0.1em;
     background-color: #000000;
     color: #ffffff;

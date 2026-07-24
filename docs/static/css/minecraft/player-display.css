@@ -45,6 +45,9 @@ player-display {
     transform: translateX(-50%);
     background: #00000080;
     color: #ffffff;
+    word-break: keep-all;
+    text-align: center;
+    width: fit-content;
 }
 .player-display-avatar-canvas {
     image-rendering: pixelated;

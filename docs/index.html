@@ -16,19 +16,27 @@
             <img src="static/catwalk.gif" style="width: 100%">
             <hr size="1px" style="margin-top: 0px">
         </header>
-        <center style="margin-bottom: 8px">
-            <letter-board content="|   HELLO STRANGER !   |  THIS IS MY WEBSITE  |" style="font-size: 18px; border: 3px solid black"></letter-board>
-            <div style="font-size: 35px">
-                <split-flap id="time-h1"></split-flap>
-                <split-flap id="time-h2"></split-flap>
-                :
-                <split-flap id="time-m1"></split-flap>
-                <split-flap id="time-m2"></split-flap>
-                :
-                <split-flap id="time-s1"></split-flap>
-                <split-flap id="time-s2"></split-flap>
+        <div style="display: flex; gap: 20px; width: fit-content; justify-self: center;">
+            <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                <letter-board content="|   HELLO STRANGER !   |  THIS IS MY WEBSITE  |" style="font-size: 18px; border: 3px solid black"></letter-board>
+                <div style="font-size: 35px; background-color: #202020; padding: 5px; color: #ffffff; line-height: 0.8em; border-radius: 5px;">
+                    <split-flap id="time-h1"></split-flap>
+                    <split-flap id="time-h2"></split-flap>
+                    :
+                    <split-flap id="time-m1"></split-flap>
+                    <split-flap id="time-m2"></split-flap>
+                    :
+                    <split-flap id="time-s1"></split-flap>
+                    <split-flap id="time-s2"></split-flap>
+                </div>
             </div>
-        </center>
+            <div>
+                <player-display skinsrc="static/minecraft/Cool_Bear_Skin.png"></player-display>
+            </div>
+        </div>
+        <p class="text-center">
+            <i><b>Note</b>: If you're on your phone, please enable the Desktop Mode.</i>
+        </p>
         <div style="display: grid; grid-template-columns: 50% 50%">
             <div>
                 <h3>Useful Tools</h3>
@@ -74,10 +82,12 @@
             <a href="https://codepen.io/rumyantsev168" target="_blank">My Codepen</a>
             <a href="https://github.com/rumyantsev168" target="_blank">My Github</a>
         </div>
+        <!--
         <div style="display: flex; align-items: center; gap: 5px;">
             <item-slot item="https://minecraft.wiki/images/Invicon_Enchanted_Golden_Apple.gif" count="999" tooltip="&bEnchanted Golden Apple"></item-slot>
             <p>&lt;= take some gapples</p>
         </div>
+        -->
         <footer>
             <div style="margin-top: 5px; display: flex; flex-direction: row; align-items: center">
                 <img src="" alt="v" id="version">
@@ -89,7 +99,7 @@
     <script src="static/js/main.js"></script>
     <script src="static/js/SplitFlap.js" localassets></script>
     <script src="static/js/LetterBoard.js" localassets></script>
-    <script src="static/js/minecraft/ItemSlot.js" localassets></script>
+    <script src="static/js/minecraft/PlayerDisplay.js" localassets></script>
     <script>
         // Add the version badge
         fetch("static/data/version.json")
